@@ -50,6 +50,7 @@ public class UserDB {
 		return null;
 	}
 
+	//id重複確認用
 	public User getUser(String id) {
 
 		String sql = "SELECT * FROM user WHERE id = ?";
