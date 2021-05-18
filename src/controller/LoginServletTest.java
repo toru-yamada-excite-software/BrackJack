@@ -1,6 +1,4 @@
-package test;
-
-import controller.LoginServlet;
+package controller;
 
 public class LoginServletTest {
 
