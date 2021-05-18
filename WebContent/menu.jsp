@@ -15,7 +15,7 @@
 		<% User user = (User)session.getAttribute("user"); %>
 		<h1><%= user.getName() %>でログイン中</h1>
 
-		<a href="changename.jsp">ニックネーム変更</a>
+		<a href="accountmanagement.jsp">ニックネーム変更</a>
 
 		<form action="LoginServlet" method="get">
 			<input type="submit" value="ログアウト">

@@ -16,7 +16,7 @@
 		<h1><%= user.getName() %>でログイン中</h1>
 
 		<h2>ニックネーム変更</h2>
-		<form action="ControlAccountServlet" method="post">
+		<form action="UpdateAccountServlet" method="post">
 			<dl>
 				<dt>新しいニックネーム：</dt>
 				<dd><input type="text" name="name"></dd>

@@ -113,6 +113,30 @@ public class UserDB {
 
 	}
 
+	public void updateUser(User user) {
+
+		String sql = "INSERT INTO user set id = ?, password = ?, name = ?";
+
+		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+
+			ps.setString(1, user.getId());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+
+			ps.executeUpdate();
+
+		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void deleteUser(String id) {
 
 		String sql = "DELETE FROM user WHERE id = ?";
