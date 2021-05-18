@@ -39,8 +39,26 @@ public class LoginServletTest {
 			e.printStackTrace();
 		}
 
-		assertEquals("user", nullValue(), session.getAttribute("user"));
-		assertEquals("message", "ログアウトしました", request.getAttribute("message"));
+		assertEquals(nullValue(), session.getAttribute("user"));
+		assertEquals("ログアウトしました", request.getAttribute("message"));
+
+	}
+
+	@Test
+	public void doPostLogin() {
+
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		MockHttpServletResponse response = new MockHttpServletResponse();
+		request.setAttribute("id", "2");
+		request.setAttribute("password", "p");
+
+		try {
+			login.doPost(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		assertEquals("ログインできませんでした", request.getAttribute("message"));
 
 	}
 
