@@ -11,6 +11,7 @@ public class UserDB {
 
 	private static final DBConnect dbc = new DBConnect();
 
+	//ログイン時ユーザー検索
 	public User getUser(String id, String password) {
 
 		String sql = "SELECT * FROM user WHERE id = ? AND password = ?";
@@ -89,6 +90,7 @@ public class UserDB {
 		return null;
 	}
 
+	//アカウント追加
 	public void insertUser(User user) {
 
 		String sql = "INSERT INTO user set id = ?, password = ?, name = ?";
@@ -113,15 +115,19 @@ public class UserDB {
 
 	}
 
+	//ユーザー情報更新
 	public void updateUser(User user) {
 
-		String sql = "INSERT INTO user set id = ?, password = ?, name = ?";
+		String sql = "UPDATE user set name = ?, play = ?, win = ?, draw = ?, win_rate = ? where id = ?";
 
 		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
-			ps.setString(1, user.getId());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
+			ps.setString(1, user.getName());
+			ps.setInt(2, user.getPlay());
+			ps.setInt(3, user.getWin());
+			ps.setInt(4, user.getDraw());
+			ps.setDouble(5, user.getWinLate());
+			ps.setString(6, user.getId());
 
 			ps.executeUpdate();
 
@@ -137,6 +143,7 @@ public class UserDB {
 
 	}
 
+	//アカウント削除
 	public void deleteUser(String id) {
 
 		String sql = "DELETE FROM user WHERE id = ?";

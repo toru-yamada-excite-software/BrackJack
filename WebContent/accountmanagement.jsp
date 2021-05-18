@@ -12,8 +12,12 @@
 
 	<body>
 		<h1>BrackJack</h1>
-		<% User user = (User)session.getAttribute("user"); %>
+		<% User user = (User)session.getAttribute("user");
+		   String message = (String)request.getAttribute("message");%>
 		<h1><%= user.getName() %>でログイン中</h1>
+		<% if(message != null) {  %>
+			<h2><%= message %></h2>
+		<% } %>
 
 		<h2>ニックネーム変更</h2>
 		<form action="UpdateAccountServlet" method="post">
@@ -21,7 +25,7 @@
 				<dt>新しいニックネーム：</dt>
 				<dd><input type="text" name="name"></dd>
 			</dl>
-			<input type="submit" value="送信">
+			<input type="submit" value="変更">
 		</form>
 
 		<h2>退会</h2>
@@ -29,6 +33,7 @@
 			<input type="submit" value="退会">
 		</form>
 
+		<h2>ログアウト</h2>
 		<form action="LoginServlet" method="get">
 			<input type="submit" value="ログアウト">
 		</form>
