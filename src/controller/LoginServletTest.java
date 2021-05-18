@@ -1,12 +1,11 @@
 package controller;
 
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpSession;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
@@ -24,6 +23,7 @@ public class LoginServletTest {
 		udb = new UserDB();
 	}
 
+	//ログアウト、セッション削除
 	@Test
 	public void doGetTest() {
 
@@ -39,13 +39,60 @@ public class LoginServletTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(nullValue(), session.getAttribute("user"));
-		assertEquals("ログアウトしました", request.getAttribute("message"));
+		String expected = "ログアウトしました";
+		String actual = (String) request.getAttribute("message");
+
+		assertNull(session.getAttribute("user"));
+		assertEquals(expected, actual);
 
 	}
 
+	//ログイン成功
 	@Test
-	public void doPostLogin() {
+	public void doPostLoginTest() {
+
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		MockHttpServletResponse response = new MockHttpServletResponse();
+		HttpSession session = request.getSession();
+		request.setParameter("id", "1");
+		request.setParameter("password", "p");
+
+		try {
+			login.doPost(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String expectedId = "1";
+		String expectedPassword = "p";
+		String expectedName = "n";
+		int expectedPlay = 0;
+		int expectedWin = 0;
+		int expectedDraw = 0;
+		double expectedWinRate = 0;
+
+		User actual = (User) session.getAttribute("user");
+		String actualId = actual.getId();
+		String actualPassword = actual.getPassword();
+		String actualName = actual.getName();
+		int actualPlay = actual.getPlay();
+		int actualWin = actual.getWin();
+		int actualDraw = actual.getDraw();
+		double actualWinRate = actual.getWinLate();
+
+		assertEquals(expectedId, actualId);
+		assertEquals(expectedPassword, actualPassword);
+		assertEquals(expectedName, actualName);
+		assertEquals(expectedPlay, actualPlay);
+		assertEquals(expectedWin, actualWin);
+		assertEquals(expectedDraw, actualDraw);
+		assertEquals(expectedWinRate, actualWinRate, 0);
+
+	}
+
+	//ID不一致
+	@Test
+	public void doPostFailTest1() {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -58,7 +105,32 @@ public class LoginServletTest {
 			e.printStackTrace();
 		}
 
-		assertEquals("ログインできませんでした", request.getAttribute("message"));
+		String expected = "ログインできませんでした";
+		String actual = (String) request.getAttribute("message");
+
+		assertEquals(expected, actual);
+
+	}
+
+	//パスワード不一致
+	@Test
+	public void doPostFailTest2() {
+
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		MockHttpServletResponse response = new MockHttpServletResponse();
+		request.setAttribute("id", "1");
+		request.setAttribute("password", "d");
+
+		try {
+			login.doPost(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String expected = "ログインできませんでした";
+		String actual = (String) request.getAttribute("message");
+
+		assertEquals(expected, actual);
 
 	}
 

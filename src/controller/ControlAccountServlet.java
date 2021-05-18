@@ -48,7 +48,7 @@ public class ControlAccountServlet extends HttpServlet {
 
 		//アカウント作成可能か判定
 		CreateAccountCheck cac = new CreateAccountCheck();
-		if (cac.check(id, password1, password2)) {
+		if (cac.check(id, password1, password2, name)) {
 
 			user.setId(id);
 			user.setPassword(password1);

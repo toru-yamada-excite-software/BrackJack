@@ -40,14 +40,18 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 
+		//userテーブル検索
 		UserDB udb = new UserDB();
 		User user = udb.getUser(id, password);
 
+		//ログイン成功
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 			rd.forward(request, response);
+
+			//ログイン失敗
 		} else {
 			request.setAttribute("message", "ログインできませんでした");
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

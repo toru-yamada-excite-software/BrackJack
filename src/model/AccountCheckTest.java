@@ -1,6 +1,5 @@
 package model;
 
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,53 +14,69 @@ public class AccountCheckTest {
 		cac = new CreateAccountCheck();
 	}
 
+	//確認用パスワードとの不一致
 	@Test
 	public void passMachTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("2", "p", "a");
+		boolean actual = cac.check("2", "p", "a", "n2");
 
-		assertThat(actual, is(expected));
+		assertEquals(actual, expected);
 
 	}
 
+	//ID未入力
 	@Test
-	public void charVoidTest1() {
+	public void idVoidTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("", "p", "p");
+		boolean actual = cac.check("", "p", "p", "n2");
 
-		assertThat(actual, is(expected));
+		assertEquals(actual, expected);
 
 	}
 
+	//パスワード未入力
 	@Test
-	public void charVoidTest2() {
+	public void passVoidTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("2", "", "");
+		boolean actual = cac.check("2", "", "", "n2");
 
-		assertThat(actual, is(expected));
+		assertEquals(actual, expected);
 
 	}
 
+	//名前未入力
+	@Test
+	public void nameVoidTest() {
+
+		boolean expected = false;
+		boolean actual = cac.check("2", "p", "p", "");
+
+		assertEquals(actual, expected);
+
+	}
+
+	//ID重複
 	@Test
 	public void idDuplicate() {
 
 		boolean expected = false;
-		boolean actual = cac.check("1", "p", "p");
+		boolean actual = cac.check("1", "p", "p", "n2");
 
-		assertThat(actual, is(expected));
+		assertEquals(actual, expected);
 
 	}
 
+	//アカウント追加成功
 	@Test
 	public void createSuccessTest() {
 
 		boolean expected = true;
-		boolean actual = cac.check("2", "p", "p");
+		boolean actual = cac.check("2", "p", "p", "n2");
 
-		assertThat(actual, is(expected));
+		assertEquals(actual, expected);
 
 	}
 
