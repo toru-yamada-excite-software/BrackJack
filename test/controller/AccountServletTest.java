@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,9 +14,9 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import dbmodel.UserDB;
+import model.CreateAccountCheck;
 import model.User;
 
-@ExtendWith(value = { MockitoExtension.class })
 public class AccountServletTest {
 
 	@InjectMocks
@@ -26,19 +25,26 @@ public class AccountServletTest {
 	@Mock
 	private UserDB udb;
 
+	@Mock
+	private CreateAccountCheck cac;
+
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 	}
 
+	//アカウント削除
 	@Test
 	public void doGetTest() {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		HttpSession session = request.getSession();
+		User user = new User();
+		user.setId("1");
+		session.setAttribute("user", user);
 
-		doNothing().when(udb).getUser("1");
+		doNothing().when(udb).deleteUser("1");
 
 		try {
 			cas.doGet(request, response);
@@ -56,10 +62,43 @@ public class AccountServletTest {
 
 	}
 
-	//	public void createSuccessTest() {
-	//
-	//	}
-	//
+	//アカウント作成成功
+	@Test
+	public void createSuccessTest() {
+
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		MockHttpServletResponse response = new MockHttpServletResponse();
+
+		String id = "1";
+		String password = "p";
+		String name = "nn";
+
+		request.setParameter("id", id);
+		request.setParameter("password1", password);
+		request.setParameter("password2", password);
+		request.setParameter("name", name);
+
+		User user = new User();
+		user.setId(id);
+		user.setPassword(password);
+		user.setName(name);
+
+		doReturn(true).when(cac).check("1", "p", "p", "nn");
+		doNothing().when(udb).insertUser(user);
+
+		try {
+			cas.doPost(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String expected = "アカウントを作成しました";
+		String actual = (String) request.getAttribute("message");
+
+		assertEquals(expected, actual);
+
+	}
+
 	//	public void createFalseTest() {
 	//
 	//	}
