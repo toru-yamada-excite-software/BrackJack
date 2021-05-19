@@ -17,6 +17,8 @@ import model.User;
 public class UpdateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 715640114755191650L;
 
+	UserDB udb = new UserDB();
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -34,7 +36,6 @@ public class UpdateAccountServlet extends HttpServlet {
 
 		//		if (name.equals(user.getName())) {
 		user.setName(name);
-		UserDB udb = new UserDB();
 		udb.updateUser(user);
 
 		request.setAttribute("message", "ニックネームを変更しました");

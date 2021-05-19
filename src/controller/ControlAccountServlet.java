@@ -18,6 +18,9 @@ import model.User;
 public class ControlAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 6364871625137530566L;
 
+	UserDB udb = new UserDB();
+	CreateAccountCheck cac = new CreateAccountCheck();
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -26,7 +29,6 @@ public class ControlAccountServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		String id = user.getId();
 
-		UserDB udb = new UserDB();
 		udb.deleteUser(id);
 
 		request.setAttribute("message", "退会しました");
@@ -44,16 +46,13 @@ public class ControlAccountServlet extends HttpServlet {
 		String password2 = request.getParameter("password2");
 		String name = request.getParameter("name");
 
-		User user = new User();
-
 		//アカウント作成可能か判定
-		CreateAccountCheck cac = new CreateAccountCheck();
 		if (cac.check(id, password1, password2, name)) {
 
+			User user = new User();
 			user.setId(id);
 			user.setPassword(password1);
 			user.setName(name);
-			UserDB udb = new UserDB();
 			udb.insertUser(user);
 
 			request.setAttribute("message", "アカウントを作成しました");

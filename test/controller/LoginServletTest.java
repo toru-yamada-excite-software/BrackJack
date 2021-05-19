@@ -1,26 +1,41 @@
 package controller;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import dbmodel.UserDB;
 import model.User;
 
+//@ExtendWith(MockitoExtension.class)
 public class LoginServletTest {
 
-	private LoginServlet login;
+	//	private LoginServlet login;
+
+	@InjectMocks
+	private LoginServlet login = new LoginServlet();
+
+	@Mock
 	private UserDB udb;
 
+	//	@BeforeEach
+	//	public void name() {
+	//		login = new LoginServlet();
+	//		udb = new UserDB();
+	//	}
+
 	@BeforeEach
-	public void name() {
-		login = new LoginServlet();
-		udb = new UserDB();
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
 	}
 
 	//ログアウト、セッション削除
@@ -30,7 +45,7 @@ public class LoginServletTest {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		HttpSession session = request.getSession();
-		User user = udb.getUser("1", "p");
+		User user = new User();
 		session.setAttribute("user", user);
 
 		try {
@@ -56,6 +71,8 @@ public class LoginServletTest {
 		HttpSession session = request.getSession();
 		request.setParameter("id", "1");
 		request.setParameter("password", "p");
+		User user = new User();
+		doReturn(user).when(udb).getUser("1", "p");
 
 		try {
 			login.doPost(request, response);
@@ -63,34 +80,13 @@ public class LoginServletTest {
 			e.printStackTrace();
 		}
 
-		String expectedId = "1";
-		String expectedPassword = "p";
-		String expectedName = "n";
-		int expectedPlay = 0;
-		int expectedWin = 0;
-		int expectedDraw = 0;
-		double expectedWinRate = 0;
-
 		User actual = (User) session.getAttribute("user");
-		String actualId = actual.getId();
-		String actualPassword = actual.getPassword();
-		String actualName = actual.getName();
-		int actualPlay = actual.getPlay();
-		int actualWin = actual.getWin();
-		int actualDraw = actual.getDraw();
-		double actualWinRate = actual.getWinLate();
 
-		assertEquals(expectedId, actualId);
-		assertEquals(expectedPassword, actualPassword);
-		assertEquals(expectedName, actualName);
-		assertEquals(expectedPlay, actualPlay);
-		assertEquals(expectedWin, actualWin);
-		assertEquals(expectedDraw, actualDraw);
-		assertEquals(expectedWinRate, actualWinRate, 0);
+		assertEquals(user, actual);
 
 	}
 
-	//ID不一致
+	//ログイン失敗
 	@Test
 	public void doPostFailTest1() {
 
@@ -98,6 +94,8 @@ public class LoginServletTest {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		request.setAttribute("id", "2");
 		request.setAttribute("password", "p");
+
+		doReturn(null).when(udb).getUser("2", "p");
 
 		try {
 			login.doPost(request, response);
@@ -113,25 +111,27 @@ public class LoginServletTest {
 	}
 
 	//パスワード不一致
-	@Test
-	public void doPostFailTest2() {
-
-		MockHttpServletRequest request = new MockHttpServletRequest();
-		MockHttpServletResponse response = new MockHttpServletResponse();
-		request.setAttribute("id", "1");
-		request.setAttribute("password", "d");
-
-		try {
-			login.doPost(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		String expected = "ログインできませんでした";
-		String actual = (String) request.getAttribute("message");
-
-		assertEquals(expected, actual);
-
-	}
+	//	@Test
+	//	public void doPostFailTest2() {
+	//
+	//		MockHttpServletRequest request = new MockHttpServletRequest();
+	//		MockHttpServletResponse response = new MockHttpServletResponse();
+	//		request.setAttribute("id", "1");
+	//		request.setAttribute("password", "d");
+	//
+	//		doReturn(null).when(udb).getUser("1", "a");
+	//
+	//		try {
+	//			login.doPost(request, response);
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//		}
+	//
+	//		String expected = "ログインできませんでした";
+	//		String actual = (String) request.getAttribute("message");
+	//
+	//		assertEquals(expected, actual);
+	//
+	//	}
 
 }

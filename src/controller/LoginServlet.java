@@ -17,6 +17,8 @@ import model.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 5876378905741836199L;
 
+	private UserDB udb = new UserDB();
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		//userテーブル検索
-		UserDB udb = new UserDB();
 		User user = udb.getUser(id, password);
 
 		//ログイン成功
