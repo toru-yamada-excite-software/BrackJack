@@ -16,22 +16,13 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import dbmodel.UserDB;
 import model.User;
 
-//@ExtendWith(MockitoExtension.class)
 public class LoginServletTest {
-
-	//	private LoginServlet login;
 
 	@InjectMocks
 	private LoginServlet login = new LoginServlet();
 
 	@Mock
 	private UserDB udb;
-
-	//	@BeforeEach
-	//	public void name() {
-	//		login = new LoginServlet();
-	//		udb = new UserDB();
-	//	}
 
 	@BeforeEach
 	public void setup() {
@@ -72,6 +63,7 @@ public class LoginServletTest {
 		request.setParameter("id", "1");
 		request.setParameter("password", "p");
 		User user = new User();
+
 		doReturn(user).when(udb).getUser("1", "p");
 
 		try {

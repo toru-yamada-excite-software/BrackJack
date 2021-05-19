@@ -32,6 +32,7 @@ public class ControlAccountServlet extends HttpServlet {
 		udb.deleteUser(id);
 
 		request.setAttribute("message", "退会しました");
+		session.invalidate();
 		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 		rd.forward(request, response);
 
