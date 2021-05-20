@@ -15,7 +15,7 @@
 		   if(message != null) {%>
 				<h2><%= message %></h2>
 		<% } %>
-		<form action="ControlAccountServlet" method="post">
+		<form action="CreateAccountServlet" method="post">
 			<dl>
 				<dt>ID：</dt>
 				<dd><input type="text" name="id"></dd>

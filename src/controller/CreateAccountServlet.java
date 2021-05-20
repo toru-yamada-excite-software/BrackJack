@@ -14,8 +14,8 @@ import dbmodel.UserDB;
 import model.CreateAccountCheck;
 import model.User;
 
-@WebServlet("/ControlAccountServlet")
-public class ControlAccountServlet extends HttpServlet {
+@WebServlet("/CreateAccountServlet")
+public class CreateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 6364871625137530566L;
 
 	UserDB udb = new UserDB();

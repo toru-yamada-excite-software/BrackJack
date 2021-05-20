@@ -17,10 +17,10 @@ import dbmodel.UserDB;
 import model.CreateAccountCheck;
 import model.User;
 
-public class AccountServletTest {
+public class CreateAccountServletTest {
 
 	@InjectMocks
-	private ControlAccountServlet cas = new ControlAccountServlet();
+	private CreateAccountServlet cas = new CreateAccountServlet();
 
 	@Mock
 	private UserDB udb;
