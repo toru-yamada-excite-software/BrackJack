@@ -19,9 +19,9 @@
 		<form action="LoginServlet" method="post">
 			<dl>
 				<dt>ID：</dt>
-				<dd><input type="text" name="id" pattern="^[0-9A-Za-z]+$" title="半角英数字"></dd>
+				<dd><input type="text" name="id" value="1" pattern="^[0-9A-Za-z]+$" title="半角英数字"></dd>
 				<dt>パスワード：</dt>
-				<dd><input type="text" name="password" pattern="^[0-9A-Za-z]+$" title="半角英数字"></dd>
+				<dd><input type="text" name="password" value="p" pattern="^[0-9A-Za-z]+$" title="半角英数字"></dd>
 			</dl>
 
 			<input type="submit" value="ログイン">

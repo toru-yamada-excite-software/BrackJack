@@ -28,8 +28,10 @@ public class GameLogServlet extends HttpServlet {
 		String id = user.getId();
 
 		GameDB gdb = new GameDB();
-		ArrayList<Game> gameList = new ArrayList<>();
-		gameList = gdb.getGame(id);
+		ArrayList<Game> gameList = gdb.getGame(id);
+
+		Game game = gameList.get(0);
+		System.out.println(game.getId());
 
 		request.setAttribute("gameList", gameList);
 

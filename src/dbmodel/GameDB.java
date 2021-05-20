@@ -15,6 +15,7 @@ public class GameDB {
 	public ArrayList<Game> getGame(String userId) {
 
 		String sql = "SELECT * FROM game WHERE user_id = ?";
+		ArrayList<Game> gameList = new ArrayList<Game>();
 
 		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
@@ -22,16 +23,17 @@ public class GameDB {
 
 			try (ResultSet rs = ps.executeQuery()) {
 
-				ArrayList<Game> gameList = new ArrayList<Game>();
-				Game game = new Game();
-
 				while (rs.next()) {
+					Game game = new Game();
 					game.setId(rs.getInt("id"));
-					game.setUserId(rs.getString("user_name"));
+					game.setUserId(rs.getString("user_id"));
 					game.setWinLose(rs.getInt("win_lose"));
 					game.setPlayTime(rs.getDate("play_time"));
 					gameList.add(game);
 				}
+
+				//				game = gameList.get(0);
+				//				System.out.println(game.getId());
 
 				return gameList;
 			}
