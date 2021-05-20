@@ -18,13 +18,13 @@
 		<form action="CreateAccountServlet" method="post">
 			<dl>
 				<dt>ID：</dt>
-				<dd><input type="text" name="id"></dd>
+				<dd><input type="text" name="id" pattern="^[0-9A-Za-z]+$" title="半角英数字"></dd>
 				<dt>ニックネーム：</dt>
 				<dd><input type="text" name="name"></dd>
 				<dt>パスワード：</dt>
-				<dd><input type="text" name="password1"></dd>
+				<dd><input type="text" name="password1" pattern="^[0-9A-Za-z]+$" title="半角英数字"></dd>
 				<dt>パスワード再確認：</dt>
-				<dd><input type="text" name="password2"></dd>
+				<dd><input type="text" name="password2" pattern="^[0-9A-Za-z]+$" title="半角英数字"></dd>
 			</dl>
 
 				<input type="submit" value="登録">
