@@ -83,7 +83,7 @@ public class AccountServletTest {
 		user.setPassword(password);
 		user.setName(name);
 
-		doReturn(true).when(cac).check("1", "p", "p", "nn");
+		doReturn(true).when(cac).check(id, password, password, name);
 		doNothing().when(udb).insertUser(user);
 
 		try {
@@ -99,8 +99,36 @@ public class AccountServletTest {
 
 	}
 
-	//	public void createFalseTest() {
-	//
-	//	}
+	//アカウント作成失敗
+	@Test
+	public void createFalseTest() {
+
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		MockHttpServletResponse response = new MockHttpServletResponse();
+
+		String id = "1";
+		String password1 = "p";
+		String password2 = "l";
+		String name = "nn";
+
+		request.setParameter("id", id);
+		request.setParameter("password1", password1);
+		request.setParameter("password2", password2);
+		request.setParameter("name", name);
+
+		doReturn(false).when(cac).check(id, password1, password2, name);
+
+		try {
+			cas.doPost(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String expected = "アカウントを作成できませんでした";
+		String actual = (String) request.getAttribute("message");
+
+		assertEquals(expected, actual);
+
+	}
 
 }
