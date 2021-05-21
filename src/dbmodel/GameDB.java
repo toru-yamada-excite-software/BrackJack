@@ -48,4 +48,28 @@ public class GameDB {
 		return null;
 	}
 
+	public void insertGame(Game game) {
+
+		String sql = "INSERT INTO game SET user_id = ?, win_lose = ?, play_time = ?";
+
+		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+
+			ps.setString(1, game.getUserId());
+			ps.setInt(2, game.getWinLose());
+			ps.setTimestamp(3, game.getPlayTime());
+
+			ps.executeUpdate();
+
+		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }
