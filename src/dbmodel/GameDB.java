@@ -72,4 +72,26 @@ public class GameDB {
 
 	}
 
+	public void deleteGame(String userId) {
+
+		String sql = "DELETE FROM game WHERE user_id = ?";
+
+		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+
+			ps.setString(1, userId);
+
+			ps.executeUpdate();
+
+		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }
