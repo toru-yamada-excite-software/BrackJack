@@ -30,9 +30,6 @@ public class GameLogServlet extends HttpServlet {
 		GameDB gdb = new GameDB();
 		ArrayList<Game> gameList = gdb.getGame(id);
 
-		Game game = gameList.get(0);
-		System.out.println(game.getId());
-
 		request.setAttribute("gameList", gameList);
 
 		RequestDispatcher rd = request.getRequestDispatcher("gamelog.jsp");

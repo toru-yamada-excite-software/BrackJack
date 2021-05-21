@@ -1,13 +1,13 @@
 package model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Game {
 
 	private int id;
 	private String userId;
 	private int winLose;
-	private Date playTime;
+	private Timestamp playTime;
 
 	public void setId(int id) {
 		this.id = id;
@@ -33,11 +33,11 @@ public class Game {
 		return winLose;
 	}
 
-	public void setPlayTime(Date playTime) {
+	public void setPlayTime(Timestamp playTime) {
 		this.playTime = playTime;
 	}
 
-	public Date getPlayTime() {
+	public Timestamp getPlayTime() {
 		return playTime;
 	}
 

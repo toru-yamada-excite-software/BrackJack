@@ -28,12 +28,9 @@ public class GameDB {
 					game.setId(rs.getInt("id"));
 					game.setUserId(rs.getString("user_id"));
 					game.setWinLose(rs.getInt("win_lose"));
-					game.setPlayTime(rs.getDate("play_time"));
+					game.setPlayTime(rs.getTimestamp("play_time"));
 					gameList.add(game);
 				}
-
-				//				game = gameList.get(0);
-				//				System.out.println(game.getId());
 
 				return gameList;
 			}
