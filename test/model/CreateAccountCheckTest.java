@@ -60,10 +60,32 @@ public class CreateAccountCheckTest {
 
 	//ID重複
 	@Test
-	public void idDuplicate() {
+	public void idDuplicateTest() {
 
 		boolean expected = false;
 		boolean actual = cac.check("1", "p", "p", "n2");
+
+		assertEquals(actual, expected);
+
+	}
+
+	//ID文字コード
+	@Test
+	public void idCharCodeTest() {
+
+		boolean expected = false;
+		boolean actual = cac.check("あ", "p", "p", "n2");
+
+		assertEquals(actual, expected);
+
+	}
+
+	//パスワード文字コード
+	@Test
+	public void passwordCharCodeTest() {
+
+		boolean expected = false;
+		boolean actual = cac.check("1", "あ", "あ", "n2");
 
 		assertEquals(actual, expected);
 

@@ -1,5 +1,8 @@
 package model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import dbmodel.UserDB;
 
 public class CreateAccountCheck {
@@ -18,7 +21,16 @@ public class CreateAccountCheck {
 				return false;
 			}
 
-			return true;
+			//文字コード判定
+			Pattern p = Pattern.compile("^[0-9A-Za-z!-/:-@^_]+$");
+			Matcher m1 = p.matcher(id);
+			Matcher m2 = p.matcher(password1);
+
+			if (m1.matches() && m2.matches()) {
+				return true;
+			}
+
+			return false;
 		}
 
 		return false;

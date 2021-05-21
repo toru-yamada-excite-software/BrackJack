@@ -29,10 +29,20 @@ public class WinLoseConvertTest {
 	}
 
 	@Test
-	public void winLose() {
+	public void LoseTest() {
 
 		String expected = "負け";
 		String actual = wlc.convert(2);
+
+		assertEquals(expected, actual);
+
+	}
+
+	@Test
+	public void errorTest() {
+
+		String expected = "エラー";
+		String actual = wlc.convert(3);
 
 		assertEquals(expected, actual);
 
