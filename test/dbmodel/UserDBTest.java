@@ -18,7 +18,6 @@ public class UserDBTest {
 	private String id = "2";
 	private String password = "pass";
 	private String name = "name";
-	private int winRate = 1;
 
 	@BeforeEach
 	public void setup() {

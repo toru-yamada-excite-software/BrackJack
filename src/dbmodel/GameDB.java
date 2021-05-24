@@ -48,50 +48,50 @@ public class GameDB {
 		return null;
 	}
 
-	public void insertGame(Game game) {
-
-		String sql = "INSERT INTO game SET user_id = ?, win_lose = ?, play_time = ?";
-
-		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
-
-			ps.setString(1, game.getUserId());
-			ps.setInt(2, game.getWinLose());
-			ps.setTimestamp(3, game.getPlayTime());
-
-			ps.executeUpdate();
-
-		}
-
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void deleteGame(String userId) {
-
-		String sql = "DELETE FROM game WHERE user_id = ?";
-
-		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
-
-			ps.setString(1, userId);
-
-			ps.executeUpdate();
-
-		}
-
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
+	//	public void insertGame(Game game) {
+	//
+	//		String sql = "INSERT INTO game SET user_id = ?, win_lose = ?, play_time = ?";
+	//
+	//		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+	//
+	//			ps.setString(1, game.getUserId());
+	//			ps.setInt(2, game.getWinLose());
+	//			ps.setTimestamp(3, game.getPlayTime());
+	//
+	//			ps.executeUpdate();
+	//
+	//		}
+	//
+	//		catch (ClassNotFoundException e) {
+	//			e.printStackTrace();
+	//		}
+	//
+	//		catch (SQLException e) {
+	//			e.printStackTrace();
+	//		}
+	//
+	//	}
+	//
+	//	public void deleteGame(String userId) {
+	//
+	//		String sql = "DELETE FROM game WHERE user_id = ?";
+	//
+	//		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+	//
+	//			ps.setString(1, userId);
+	//
+	//			ps.executeUpdate();
+	//
+	//		}
+	//
+	//		catch (ClassNotFoundException e) {
+	//			e.printStackTrace();
+	//		}
+	//
+	//		catch (SQLException e) {
+	//			e.printStackTrace();
+	//		}
+	//
+	//	}
 
 }
