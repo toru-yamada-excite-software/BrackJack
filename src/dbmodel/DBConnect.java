@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnect {
 
-	public Connection Connect() throws ClassNotFoundException, SQLException {
+	public Connection connect() throws ClassNotFoundException, SQLException {
 
 		Connection con;
 
