@@ -61,11 +61,11 @@ public class User implements Serializable {
 		return draw;
 	}
 
-	public void setWinLate(double winLate) {
+	public void setWinRate(double winLate) {
 		this.winLate = winLate;
 	}
 
-	public double getWinLate() {
+	public double getWinRate() {
 		return winLate;
 	}
 

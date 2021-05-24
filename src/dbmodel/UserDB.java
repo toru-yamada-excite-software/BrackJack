@@ -32,7 +32,7 @@ public class UserDB {
 					u.setPlay(rs.getInt("play"));
 					u.setWin(rs.getInt("win"));
 					u.setDraw(rs.getInt("draw"));
-					u.setWinLate(rs.getDouble("win_rate"));
+					u.setWinRate(rs.getDouble("win_rate"));
 
 					return u;
 				}
@@ -71,7 +71,7 @@ public class UserDB {
 					u.setPlay(rs.getInt("play"));
 					u.setWin(rs.getInt("win"));
 					u.setDraw(rs.getInt("draw"));
-					u.setWinLate(rs.getDouble("win_rate"));
+					u.setWinRate(rs.getDouble("win_rate"));
 
 					return u;
 				}
@@ -100,16 +100,15 @@ public class UserDB {
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();) {
 
-			User u = new User();
-
 			while (rs.next()) {
+				User u = new User();
 				u.setId(rs.getString("id"));
 				u.setPassword(rs.getString("password"));
 				u.setName(rs.getString("name"));
 				u.setPlay(rs.getInt("play"));
 				u.setWin(rs.getInt("win"));
 				u.setDraw(rs.getInt("draw"));
-				u.setWinLate(rs.getDouble("win_rate"));
+				u.setWinRate(rs.getDouble("win_rate"));
 				userList.add(u);
 			}
 
@@ -125,6 +124,37 @@ public class UserDB {
 		}
 
 		return null;
+	}
+
+	public int getMyRanking(String id) {
+
+		String sql = "SELECT *,(SELECT COUNT(*)+1 FROM user B WHERE B.win_rate > A.win_rate) AS rank FROM user A WHERE id = ?";
+
+		try (Connection con = dbc.Connect();
+				PreparedStatement ps = con.prepareStatement(sql);) {
+
+			ps.setString(1, id);
+
+			try (ResultSet rs = ps.executeQuery()) {
+
+				while (rs.next()) {
+					int rank = rs.getInt("rank");
+					return rank;
+				}
+
+			}
+
+		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
 	}
 
 	//アカウント追加
@@ -163,7 +193,7 @@ public class UserDB {
 			ps.setInt(2, user.getPlay());
 			ps.setInt(3, user.getWin());
 			ps.setInt(4, user.getDraw());
-			ps.setDouble(5, user.getWinLate());
+			ps.setDouble(5, user.getWinRate());
 			ps.setString(6, user.getId());
 
 			ps.executeUpdate();
