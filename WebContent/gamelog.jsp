@@ -41,6 +41,8 @@
 		<% } %>
 		</table>
 
+		<h3>勝率：<%= user.getWinLate() * 100 %>%</h3>
+
 		<a href="GameLogServlet">戦績表示</a>
 
 	</body>

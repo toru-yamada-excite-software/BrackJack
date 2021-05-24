@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.User;
 
@@ -77,6 +78,42 @@ public class UserDB {
 
 			}
 
+		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public ArrayList<User> getRanking() {
+
+		String sql = "SELECT * FROM user ORDER BY win_rate DESC LIMIT 10";
+		ArrayList<User> userList = new ArrayList<User>();
+
+		try (Connection con = dbc.Connect();
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();) {
+
+			User u = new User();
+
+			while (rs.next()) {
+				u.setId(rs.getString("id"));
+				u.setPassword(rs.getString("password"));
+				u.setName(rs.getString("name"));
+				u.setPlay(rs.getInt("play"));
+				u.setWin(rs.getInt("win"));
+				u.setDraw(rs.getInt("draw"));
+				u.setWinLate(rs.getDouble("win_rate"));
+				userList.add(u);
+			}
+
+			return userList;
 		}
 
 		catch (ClassNotFoundException e) {
