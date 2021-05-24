@@ -1,5 +1,6 @@
 package model;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +22,7 @@ public class CreateAccountCheckTest {
 		boolean expected = false;
 		boolean actual = cac.check("2", "p", "a", "n2");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -32,7 +33,7 @@ public class CreateAccountCheckTest {
 		boolean expected = false;
 		boolean actual = cac.check("", "p", "p", "n2");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -43,7 +44,7 @@ public class CreateAccountCheckTest {
 		boolean expected = false;
 		boolean actual = cac.check("2", "", "", "n2");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -54,7 +55,7 @@ public class CreateAccountCheckTest {
 		boolean expected = false;
 		boolean actual = cac.check("2", "p", "p", "");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -65,7 +66,7 @@ public class CreateAccountCheckTest {
 		boolean expected = false;
 		boolean actual = cac.check("1", "p", "p", "n2");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -76,7 +77,7 @@ public class CreateAccountCheckTest {
 		boolean expected = false;
 		boolean actual = cac.check("あ", "p", "p", "n2");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -87,7 +88,7 @@ public class CreateAccountCheckTest {
 		boolean expected = false;
 		boolean actual = cac.check("1", "あ", "あ", "n2");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -98,7 +99,7 @@ public class CreateAccountCheckTest {
 		boolean expected = true;
 		boolean actual = cac.check("2", "p", "p", "n2");
 
-		assertEquals(actual, expected);
+		assertThat(actual, is(expected));
 
 	}
 
