@@ -29,7 +29,7 @@
 		</form>
 
 		<h2>退会</h2>
-		<form action="CreateAccountServlet" method="get">
+		<form action="DeleteAccountServlet" method="post">
 			<input type="submit" value="退会">
 		</form>
 

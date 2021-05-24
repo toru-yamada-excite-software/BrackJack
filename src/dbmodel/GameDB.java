@@ -17,7 +17,7 @@ public class GameDB {
 		String sql = "SELECT * FROM game WHERE user_id = ?";
 		ArrayList<Game> gameList = new ArrayList<Game>();
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userId);
 
@@ -52,7 +52,7 @@ public class GameDB {
 
 		String sql = "INSERT INTO game SET user_id = ?, win_lose = ?, play_time = ?";
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, game.getUserId());
 			ps.setInt(2, game.getWinLose());
@@ -76,7 +76,7 @@ public class GameDB {
 
 		String sql = "DELETE FROM game WHERE user_id = ?";
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, userId);
 

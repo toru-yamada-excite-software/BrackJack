@@ -17,7 +17,7 @@ public class UserDB {
 
 		String sql = "SELECT * FROM user WHERE id = ? AND password = ?";
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, id);
 			ps.setString(2, password);
@@ -57,7 +57,7 @@ public class UserDB {
 
 		String sql = "SELECT * FROM user WHERE id = ?";
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, id);
 
@@ -96,7 +96,7 @@ public class UserDB {
 		String sql = "SELECT * FROM user ORDER BY win_rate DESC LIMIT 10";
 		ArrayList<User> userList = new ArrayList<User>();
 
-		try (Connection con = dbc.Connect();
+		try (Connection con = dbc.connect();
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery();) {
 
@@ -130,7 +130,7 @@ public class UserDB {
 
 		String sql = "SELECT *,(SELECT COUNT(*)+1 FROM user B WHERE B.win_rate > A.win_rate) AS rank FROM user A WHERE id = ?";
 
-		try (Connection con = dbc.Connect();
+		try (Connection con = dbc.connect();
 				PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, id);
@@ -162,7 +162,7 @@ public class UserDB {
 
 		String sql = "INSERT INTO user set id = ?, password = ?, name = ?";
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, user.getId());
 			ps.setString(2, user.getPassword());
@@ -187,7 +187,7 @@ public class UserDB {
 
 		String sql = "UPDATE user set name = ?, play = ?, win = ?, draw = ?, win_rate = ? where id = ?";
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, user.getName());
 			ps.setInt(2, user.getPlay());
@@ -215,7 +215,7 @@ public class UserDB {
 
 		String sql = "DELETE FROM user WHERE id = ?";
 
-		try (Connection con = dbc.Connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, id);
 
