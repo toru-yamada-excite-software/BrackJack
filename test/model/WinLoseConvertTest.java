@@ -1,6 +1,7 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ public class WinLoseConvertTest {
 		String expected = "勝ち";
 		String actual = wlc.convert(0);
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -24,7 +25,7 @@ public class WinLoseConvertTest {
 		String expected = "引き分け";
 		String actual = wlc.convert(1);
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -34,7 +35,7 @@ public class WinLoseConvertTest {
 		String expected = "負け";
 		String actual = wlc.convert(2);
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 
@@ -44,7 +45,7 @@ public class WinLoseConvertTest {
 		String expected = "エラー";
 		String actual = wlc.convert(3);
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 

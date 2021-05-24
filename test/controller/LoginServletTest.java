@@ -1,5 +1,7 @@
 package controller;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -31,7 +33,7 @@ public class LoginServletTest {
 
 	//ログアウト、セッション削除
 	@Test
-	public void doGetTest() {
+	public void doGetTest() throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -39,23 +41,19 @@ public class LoginServletTest {
 		User user = new User();
 		session.setAttribute("user", user);
 
-		try {
-			login.doGet(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		login.doGet(request, response);
 
 		String expected = "ログアウトしました";
 		String actual = (String) request.getAttribute("message");
 
 		assertNull(session.getAttribute("user"));
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 
 	//ログイン成功
 	@Test
-	public void doPostLoginTest() {
+	public void doPostLoginTest() throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -66,21 +64,17 @@ public class LoginServletTest {
 
 		doReturn(user).when(udb).getUser("1", "p");
 
-		try {
-			login.doPost(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		login.doPost(request, response);
 
 		User actual = (User) session.getAttribute("user");
 
-		assertEquals(user, actual);
+		assertThat(actual, is(user));
 
 	}
 
 	//ログイン失敗
 	@Test
-	public void doPostFailTest1() {
+	public void doPostFailTest1() throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -89,16 +83,12 @@ public class LoginServletTest {
 
 		doReturn(null).when(udb).getUser("2", "p");
 
-		try {
-			login.doPost(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		login.doPost(request, response);
 
 		String expected = "ログインできませんでした";
 		String actual = (String) request.getAttribute("message");
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 

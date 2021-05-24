@@ -1,6 +1,7 @@
 package controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Mockito.*;
 
 import javax.servlet.http.HttpSession;
@@ -30,7 +31,7 @@ public class UpdateAccountServletTest {
 	}
 
 	@Test
-	public void doPostTest() {
+	public void doPostTest() throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -44,11 +45,7 @@ public class UpdateAccountServletTest {
 
 		doNothing().when(udb).updateUser(user);
 
-		try {
-			uas.doPost(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		uas.doPost(request, response);
 
 		String expectedMessage = "ニックネームを変更しました";
 		String expectedName = "n";
@@ -56,8 +53,8 @@ public class UpdateAccountServletTest {
 		user = (User) session.getAttribute("user");
 		String actualName = user.getName();
 
-		assertEquals(expectedMessage, actualMessage);
-		assertEquals(expectedName, actualName);
+		assertThat(actualMessage, is(expectedMessage));
+		assertThat(actualName, is(expectedName));
 
 	}
 

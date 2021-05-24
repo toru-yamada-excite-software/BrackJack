@@ -1,6 +1,7 @@
 package controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class GameLogServletTest {
 	}
 
 	@Test
-	public void doGetTest() {
+	public void doGetTest() throws Exception {
 
 		int id = 1;
 		String userId = "id";
@@ -52,18 +53,14 @@ public class GameLogServletTest {
 
 		doReturn(gameList).when(gdb).getGame(userId);
 
-		try {
-			gls.doGet(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		gls.doGet(request, response);
 
 		ArrayList<Game> getList = (ArrayList<Game>) request.getAttribute("gameList");
 
 		String expected = userId;
 		String actual = getList.get(0).getUserId();
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 

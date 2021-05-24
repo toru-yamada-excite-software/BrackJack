@@ -1,6 +1,7 @@
 package dbmodel;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,9 +45,9 @@ public class UserDBTest {
 		String actualPassword = actualuser.getPassword();
 		String actualName = actualuser.getName();
 
-		assertEquals(expectedId, actualId);
-		assertEquals(expectedPassword, actualPassword);
-		assertEquals(expectedName, actualName);
+		assertThat(actualId, is(expectedId));
+		assertThat(actualPassword, is(expectedPassword));
+		assertThat(actualName, is(expectedName));
 
 	}
 
@@ -63,9 +64,9 @@ public class UserDBTest {
 		String actualPassword = actualuser.getPassword();
 		String actualName = actualuser.getName();
 
-		assertEquals(expectedId, actualId);
-		assertEquals(expectedPassword, actualPassword);
-		assertEquals(expectedName, actualName);
+		assertThat(actualId, is(expectedId));
+		assertThat(actualPassword, is(expectedPassword));
+		assertThat(actualName, is(expectedName));
 
 	}
 
@@ -84,7 +85,7 @@ public class UserDBTest {
 		String expected = "name2";
 		String actual = getUser.getName();
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 
