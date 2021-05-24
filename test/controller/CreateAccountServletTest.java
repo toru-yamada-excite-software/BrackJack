@@ -1,9 +1,8 @@
 package controller;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Mockito.*;
-
-import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,38 +32,9 @@ public class CreateAccountServletTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	//アカウント削除
-	@Test
-	public void doGetTest() {
-
-		MockHttpServletRequest request = new MockHttpServletRequest();
-		MockHttpServletResponse response = new MockHttpServletResponse();
-		HttpSession session = request.getSession();
-		User user = new User();
-		user.setId("1");
-		session.setAttribute("user", user);
-
-		doNothing().when(udb).deleteUser("1");
-
-		try {
-			cas.doGet(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		String expectedMessage = "退会しました";
-
-		String actualMessage = (String) request.getAttribute("message");
-		User actualUser = (User) session.getAttribute("user");
-
-		assertEquals(expectedMessage, actualMessage);
-		assertNull(actualUser);
-
-	}
-
 	//アカウント作成成功
 	@Test
-	public void createSuccessTest() {
+	public void createSuccessTest() throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -86,22 +56,18 @@ public class CreateAccountServletTest {
 		doReturn(true).when(cac).check(id, password, password, name);
 		doNothing().when(udb).insertUser(user);
 
-		try {
-			cas.doPost(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		cas.doPost(request, response);
 
 		String expected = "アカウントを作成しました";
 		String actual = (String) request.getAttribute("message");
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 
 	//アカウント作成失敗
 	@Test
-	public void createFalseTest() {
+	public void createFalseTest() throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -118,16 +84,12 @@ public class CreateAccountServletTest {
 
 		doReturn(false).when(cac).check(id, password1, password2, name);
 
-		try {
-			cas.doPost(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		cas.doPost(request, response);
 
 		String expected = "アカウントを作成できませんでした";
 		String actual = (String) request.getAttribute("message");
 
-		assertEquals(expected, actual);
+		assertThat(actual, is(expected));
 
 	}
 
