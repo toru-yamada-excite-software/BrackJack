@@ -11,7 +11,7 @@ public class User implements Serializable {
 	private int play;
 	private int win;
 	private int draw;
-	private double winLate;
+	private double winRate;
 
 	public void setId(String id) {
 		this.id = id;
@@ -61,12 +61,12 @@ public class User implements Serializable {
 		return draw;
 	}
 
-	public void setWinRate(double winLate) {
-		this.winLate = winLate;
+	public void setWinRate(double winRate) {
+		this.winRate = winRate;
 	}
 
 	public double getWinRate() {
-		return winLate;
+		return winRate;
 	}
 
 }

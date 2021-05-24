@@ -3,6 +3,8 @@ package dbmodel;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ public class UserDBTest {
 	private String id = "2";
 	private String password = "pass";
 	private String name = "name";
+	private int winRate = 1;
 
 	@BeforeEach
 	public void setup() {
@@ -67,6 +70,32 @@ public class UserDBTest {
 		assertThat(actualId, is(expectedId));
 		assertThat(actualPassword, is(expectedPassword));
 		assertThat(actualName, is(expectedName));
+
+	}
+
+	//getRankingテスト
+	@Test
+	public void getRankingTest() {
+
+		double expected = 0;
+
+		ArrayList<User> ranking = udb.getRanking();
+
+		double actual = ranking.get(3).getWinRate();
+
+		assertThat(actual, is(expected));
+
+	}
+
+	//getMyRankingテスト
+	@Test
+	public void getMyRankingTest() {
+
+		int expected = 4;
+
+		int actual = udb.getMyRanking(id);
+
+		assertThat(actual, is(expected));
 
 	}
 
