@@ -34,15 +34,21 @@ public class UpdateAccountServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		User user = (User) session.getAttribute("user");
 
-		//		if (name.equals(user.getName())) {
-		user.setName(name);
-		udb.updateUser(user);
+		if (name.equals(user.getName()) || !name.equals("")) {
+			user.setName(name);
+			udb.updateUser(user);
 
-		request.setAttribute("message", "ニックネームを変更しました");
-		session.setAttribute("user", user);
-		RequestDispatcher rd = request.getRequestDispatcher("accountmanagement.jsp");
-		rd.forward(request, response);
-		//		}
+			request.setAttribute("message", "ニックネームを変更しました");
+			session.setAttribute("user", user);
+			RequestDispatcher rd = request.getRequestDispatcher("accountmanagement.jsp");
+			rd.forward(request, response);
+		}
+
+		else {
+			request.setAttribute("message", "ニックネームを変更出来ませんでした");
+			RequestDispatcher rd = request.getRequestDispatcher("accountmanagement.jsp");
+			rd.forward(request, response);
+		}
 
 	}
 
