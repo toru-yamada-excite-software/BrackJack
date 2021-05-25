@@ -21,7 +21,7 @@
 				<dt>ID：</dt>
 				<dd><input type="text" name="id" value="1" pattern="^[0-9A-Za-z!-/:-@^_]+$" title="半角英数字記号"></dd>
 				<dt>パスワード：</dt>
-				<dd><input type="text" name="password" value="p" pattern="^[0-9A-Za-z!-/:-@^_]+$" title="半角英数字記号"></dd>
+				<dd><input type="password" name="password" value="p" pattern="^[0-9A-Za-z!-/:-@^_]+$" title="半角英数字記号"></dd>
 			</dl>
 
 			<input type="submit" value="ログイン">
