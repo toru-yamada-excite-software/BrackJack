@@ -2,8 +2,16 @@ package model;
 
 public class Card {
 
+	//0:スペード、1:クラブ、2:ダイヤ、3:ハート
+	private int suite;
 	private int number;
-	private String suit;
+
+	public Card(int suite, int number) {
+
+		this.suite = suite;
+		this.number = number;
+
+	}
 
 	public void setNumber(int number) {
 		this.number = number;
@@ -13,11 +21,11 @@ public class Card {
 		return number;
 	}
 
-	public void setSuit(String suit) {
-		this.suit = suit;
+	public void setSuite(int suite) {
+		this.suite = suite;
 	}
 
-	public String getSuit() {
-		return suit;
+	public int getSuite() {
+		return suite;
 	}
 }
