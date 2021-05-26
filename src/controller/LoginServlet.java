@@ -20,21 +20,6 @@ public class LoginServlet extends HttpServlet {
 	private UserDB udb = new UserDB();
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		//セッション削除
-		HttpSession session = request.getSession();
-		session.invalidate();
-
-		request.setAttribute("message", "ログアウトしました");
-
-		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-		rd.forward(request, response);
-
-	}
-
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

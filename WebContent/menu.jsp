@@ -19,7 +19,7 @@
 		<a href="RankingServlet">ランキング表示</a>
 		<a href="accountmanagement.jsp">ニックネーム変更</a>
 
-		<form action="./" method="get">
+		<form action="LogoutServlet" method="get">
 			<input type="submit" value="ログアウト">
 		</form>
 
