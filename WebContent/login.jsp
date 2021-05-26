@@ -16,7 +16,7 @@
 		   if(message != null) {%>
 				<h2><%= message %></h2>
 		<% } %>
-		<form action="LoginServlet" method="post">
+		<form action="./" method="post">
 			<dl>
 				<dt>ID：</dt>
 				<dd><input type="text" name="id" value="1" pattern="^[0-9A-Za-z!-/:-@^_]+$" title="半角英数字記号"></dd>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import dbmodel.UserDB;
 import model.User;
 
-@WebServlet("/")
+@WebServlet("")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 5876378905741836199L;
 

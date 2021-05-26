@@ -34,7 +34,7 @@
 		</form>
 
 		<h2>ログアウト</h2>
-		<form action="LoginServlet" method="get">
+		<form action="./" method="get">
 			<input type="submit" value="ログアウト">
 		</form>
 
