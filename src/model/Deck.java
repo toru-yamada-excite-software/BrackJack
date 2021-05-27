@@ -24,7 +24,7 @@ public class Deck {
 		return index;
 	}
 
-	public ArrayList<Card> createDeck() {
+	public void createDeck() {
 
 		for (int i = 0; i < 4; i++) {
 
@@ -37,7 +37,6 @@ public class Deck {
 
 		Collections.shuffle(deck);
 
-		return deck;
 	}
 
 }

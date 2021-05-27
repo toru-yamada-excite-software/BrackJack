@@ -10,6 +10,7 @@ public class Player extends PlayerBase {
 		int index = decks.getIndex();
 		Card card = deck.get(index);
 		super.hand.add(card);
+		scoreCalc();
 		decks.setIndex(index + 1);
 
 		return decks;
