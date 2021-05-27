@@ -8,7 +8,7 @@ public abstract class PlayerBase {
 	protected int score = 0;
 	private boolean bust = false;
 
-	public abstract Deck draw(Deck decks);
+	public abstract Deck draw(Deck deckInf);
 
 	public void scoreCalc() {
 

@@ -4,21 +4,40 @@ import java.util.ArrayList;
 
 public class Dealer extends PlayerBase {
 
-	public Deck draw(Deck decks) {
+	@Override
+	public Deck draw(Deck deckInf) {
 
-		ArrayList<Card> deck = decks.getDeck();
+		ArrayList<Card> deck = deckInf.getDeck();
 
 		while (score < 17) {
 
-			int index = decks.getIndex();
+			int index = deckInf.getIndex();
 			Card card = deck.get(index);
 			super.hand.add(card);
 			scoreCalc();
-			decks.setIndex(index + 1);
+			bustJudge();
+			deckInf.setIndex(index + 1);
 
 		}
 
-		return decks;
+		return deckInf;
+	}
+
+	public Deck firstDraw(Deck deckInf) {
+
+		ArrayList<Card> deck = deckInf.getDeck();
+
+		for (int i = 0; i < 2; i++) {
+
+			int index = deckInf.getIndex();
+			Card card = deck.get(index);
+			super.hand.add(card);
+			scoreCalc();
+			deckInf.setIndex(index + 1);
+
+		}
+
+		return deckInf;
 	}
 
 }
