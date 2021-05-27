@@ -5,7 +5,24 @@ import java.util.Collections;
 
 public class Deck {
 
-	ArrayList<Card> deck = new ArrayList<Card>();
+	private ArrayList<Card> deck = new ArrayList<Card>();
+	private int index = 0;
+
+	public void setDeck(ArrayList<Card> deck) {
+		this.deck = deck;
+	}
+
+	public ArrayList<Card> getDeck() {
+		return deck;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public int getIndex() {
+		return index;
+	}
 
 	public ArrayList<Card> createDeck() {
 

@@ -4,11 +4,42 @@ import java.util.ArrayList;
 
 public class PlayerBase {
 
-	private ArrayList<Card> hand;
-	private int score;
+	public ArrayList<Card> hand;
+	protected int score;
+	private boolean bust;
 
-	public void draw() {
+	public void scoreCalc() {
 
+		for (int i = 0; i < hand.size(); i++) {
+			int number = hand.get(i).getNumber();
+
+			if (number > 10) {
+				number = 10;
+			}
+
+			score += number;
+		}
+
+		bustJudge();
+
+	}
+
+	public void bustJudge() {
+
+		if (score > 21) {
+			bust = true;
+		} else {
+			bust = false;
+		}
+
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public boolean getBust() {
+		return bust;
 	}
 
 }
