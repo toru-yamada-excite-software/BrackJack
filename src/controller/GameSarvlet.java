@@ -15,7 +15,7 @@ import model.Deck;
 import model.Player;
 import model.User;
 
-@WebServlet("/GameSarvlet")
+@WebServlet("/GameServlet")
 public class GameSarvlet extends HttpServlet {
 	private static final long serialVersionUID = -359485711102746206L;
 
@@ -23,8 +23,37 @@ public class GameSarvlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+
 		Player player = new Player();
 		Dealer dealer = new Dealer();
+		Deck deckInf = new Deck();
+		deckInf.createDeck();
+
+		deckInf = dealer.firstDraw(deckInf);
+		deckInf = player.firstDraw(deckInf);
+
+		if (dealer.getScore() == 21) {
+			if (player.getScore() == 21) {
+				request.setAttribute("message", "Draw");
+				session.setAttribute("player", player);
+				session.setAttribute("dealer", dealer);
+				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+				rd.forward(request, response);
+
+			} else {
+				request.setAttribute("message", "Lose");
+				session.setAttribute("player", player);
+				session.setAttribute("dealer", dealer);
+				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+				rd.forward(request, response);
+			}
+		}
+
+		session.setAttribute("player", player);
+		session.setAttribute("dealer", dealer);
+		RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+		rd.forward(request, response);
 
 	}
 
@@ -40,7 +69,7 @@ public class GameSarvlet extends HttpServlet {
 		int command = Integer.parseInt(request.getParameter("command")); //command 0:hit 1:stand
 
 		if (command == 0) {
-			player.draw(deckInf);
+			deckInf = player.draw(deckInf);
 
 			if (player.getBust()) {
 				request.setAttribute("message", "Lose");
@@ -49,6 +78,7 @@ public class GameSarvlet extends HttpServlet {
 				rd.forward(request, response);
 			} else {
 				session.setAttribute("player", player);
+				session.setAttribute("deckInf", deckInf);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 			}
@@ -57,7 +87,7 @@ public class GameSarvlet extends HttpServlet {
 
 		else if (command == 1) {
 
-			dealer.draw(deckInf);
+			deckInf = dealer.draw(deckInf);
 
 			if (dealer.getBust()) {
 				request.setAttribute("message", "Win");
