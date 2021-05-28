@@ -43,7 +43,7 @@
 
 		<h3>勝率：<%= user.getWinRate() * 100 %>%</h3>
 
-		<a href="GameLogServlet">戦績表示</a>
+		<a href="menu.jsp">戻る</a>
 
 	</body>
 

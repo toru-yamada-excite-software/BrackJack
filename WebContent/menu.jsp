@@ -29,16 +29,24 @@
 		<% if(player != null) {
 	 		ArrayList<Card> playerHand = player.getHand();
 			ArrayList<Card> dealerHand = dealer.getHand();%>
+
 			<h2>Dealer</h2>
-			<% for(int i = 0; i < dealerHand.size(); i++) {%>
-			<h3><%= dealerHand.get(i).getSuite() %>-<%= dealerHand.get(i).getNumber() %></h3>
+			<% if(message != null) { %>
+				<% for(int i = 0; i < dealerHand.size(); i++) {%>
+					<h3><%= dealerHand.get(i).getSuite() %>-<%= dealerHand.get(i).getNumber() %></h3>
+				<% } %>
+
+				<h3>スコア：<%= dealer.getScore() %></h3>
+			<% } else { %>
+				<h3><%= dealerHand.get(0).getSuite() %>-<%= dealerHand.get(0).getNumber() %></h3>
 			<% } %>
-			<h3>スコア：<%= dealer.getScore() %></h3>
+
 			<h2>Player</h2>
 			<% for(int i = 0; i < playerHand.size(); i++) {%>
-			<h3><%= playerHand.get(i).getSuite() %>-<%= playerHand.get(i).getNumber() %></h3>
+				<h3><%= playerHand.get(i).getSuite() %>-<%= playerHand.get(i).getNumber() %></h3>
 			<% } %>
 			<h3>スコア：<%= player.getScore() %></h3>
+
 			<% if(message == null) { %>
 				<form action="GameServlet" method="post">
 					<button type='submit' name='command' value='0'>hit</button>
@@ -49,6 +57,7 @@
 					<input type="submit" value="再戦">
 				</form>
 			<% } %>
+
 		<% } else { %>
 			<form action="GameServlet" method="get">
 				<input type="submit" value="start">

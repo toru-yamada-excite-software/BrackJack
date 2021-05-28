@@ -33,6 +33,8 @@
 			<input type="submit" value="退会">
 		</form>
 
+		<a href="menu.jsp">戻る</a>
+
 		<h2>ログアウト</h2>
 		<form action="LogoutServlet" method="get">
 			<input type="submit" value="ログアウト">
