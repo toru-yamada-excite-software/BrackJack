@@ -31,11 +31,11 @@
 			ArrayList<Card> dealerHand = dealer.getHand();%>
 			<h2>Dealer</h2>
 			<% for(int i = 0; i < dealerHand.size(); i++) {%>
-			<h3><%= dealerHand.get(i).getSuite() %>+<%= dealerHand.get(i).getNumber() %></h3>
+			<h3><%= dealerHand.get(i).getSuite() %>-<%= dealerHand.get(i).getNumber() %></h3>
 			<% } %>
 			<h2>Player</h2>
 			<% for(int i = 0; i < playerHand.size(); i++) {%>
-			<h3><%= playerHand.get(i).getSuite() %>+<%= playerHand.get(i).getNumber() %></h3>
+			<h3><%= playerHand.get(i).getSuite() %>-<%= playerHand.get(i).getNumber() %></h3>
 			<% } %>
 			<form action="GameServlet" method="post">
 				<button type='submit' name='command' value='0'>hit</button>

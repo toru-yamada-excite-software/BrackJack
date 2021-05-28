@@ -13,6 +13,37 @@ public class Card {
 
 	}
 
+	public enum Suite {
+
+		SPADE("スペード", 0), CLUB("クラブ", 1), DIAMOID("ダイヤ", 2), HEART("ハート", 3);
+
+		private String label;
+		private int id;
+
+		private Suite(String label, int id) {
+			this.label = label;
+			this.id = id;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public static Suite getById(int id) {
+
+			for (Suite flt : Suite.values()) { //拡張for文による走査
+				if (flt.getId() == id) {
+					return flt; //条件に一致するインスタンスを返す
+				}
+			}
+			return null;
+		}
+	}
+
 	public void setNumber(int number) {
 		this.number = number;
 	}
@@ -25,7 +56,8 @@ public class Card {
 		this.suite = suite;
 	}
 
-	public int getSuite() {
-		return suite;
+	public String getSuite() {
+		Suite flt = Suite.getById(suite);
+		return flt.getLabel();
 	}
 }

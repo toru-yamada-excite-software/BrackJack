@@ -52,6 +52,7 @@ public class GameSarvlet extends HttpServlet {
 
 		session.setAttribute("player", player);
 		session.setAttribute("dealer", dealer);
+		session.setAttribute("deckInf", deckInf);
 		RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 		rd.forward(request, response);
 
