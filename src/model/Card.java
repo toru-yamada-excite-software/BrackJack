@@ -35,9 +35,9 @@ public class Card {
 
 		public static Suite getById(int id) {
 
-			for (Suite flt : Suite.values()) { //拡張for文による走査
+			for (Suite flt : Suite.values()) {
 				if (flt.getId() == id) {
-					return flt; //条件に一致するインスタンスを返す
+					return flt;
 				}
 			}
 			return null;

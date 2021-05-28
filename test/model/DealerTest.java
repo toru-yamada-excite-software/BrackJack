@@ -37,10 +37,10 @@ public class DealerTest {
 	@Test
 	public void drawTest() {
 
-		int expectedSuite = 0;
+		String expectedSuite = "♠";
 		int expectedNumber = 6;
 
-		int actualSuite = dealer.getHand().get(5).getSuite();
+		String actualSuite = dealer.getHand().get(5).getSuite();
 		int actualNumber = dealer.getHand().get(5).getNumber();
 
 		assertThat(actualSuite, is(expectedSuite));

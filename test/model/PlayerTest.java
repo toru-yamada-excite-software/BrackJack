@@ -37,10 +37,10 @@ public class PlayerTest {
 	@Test
 	public void drawTest() {
 
-		int expectedSuite = 0;
+		String expectedSuite = "♠";
 		int expectedNumber = 1;
 
-		int actualSuite = player.getHand().get(0).getSuite();
+		String actualSuite = player.getHand().get(0).getSuite();
 		int actualNumber = player.getHand().get(0).getNumber();
 
 		assertThat(actualSuite, is(expectedSuite));

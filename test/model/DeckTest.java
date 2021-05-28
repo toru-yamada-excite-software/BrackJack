@@ -25,10 +25,10 @@ public class DeckTest {
 		d.createDeck();
 		ArrayList<Card> deck = d.getDeck();
 
-		int actualSuite = deck.get(0).getSuite();
+		String actualSuite = deck.get(0).getSuite();
 		int actualNumber = deck.get(0).getNumber();
 
-		assertThat(actualSuite, not(0));
+		assertThat(actualSuite, not("♠"));
 		assertThat(actualNumber, not(1));
 
 	}
