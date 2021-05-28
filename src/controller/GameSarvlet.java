@@ -28,6 +28,7 @@ public class GameSarvlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 		session.setAttribute("message", null);
 
 		Player player = new Player();
@@ -38,11 +39,23 @@ public class GameSarvlet extends HttpServlet {
 		deckInf = dealer.firstDraw(deckInf);
 		deckInf = player.firstDraw(deckInf);
 
-		if (dealer.getScore() == 21) {
-			if (player.getScore() == 21) {
+		if (dealer.getAscore() == 21) {
+			if (player.getAscore() == 21) {
 				session.setAttribute("message", "Draw");
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
+				Timestamp playTime = new Timestamp(System.currentTimeMillis());
+				Game game = new Game();
+				game.setUserId(user.getId());
+				game.setWinLose(1);
+				game.setPlayTime(playTime);
+				GameDB gdb = new GameDB();
+				gdb.insertGame(game);
+				user.setPlay(user.getPlay() + 1);
+				user.setWinRate((double) user.getWin() / user.getPlay());
+				UserDB udb = new UserDB();
+				udb.updateUserRecord(user);
+				session.setAttribute("user", user);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 
@@ -50,6 +63,18 @@ public class GameSarvlet extends HttpServlet {
 				session.setAttribute("message", "Lose");
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
+				Timestamp playTime = new Timestamp(System.currentTimeMillis());
+				Game game = new Game();
+				game.setUserId(user.getId());
+				game.setWinLose(2);
+				game.setPlayTime(playTime);
+				GameDB gdb = new GameDB();
+				gdb.insertGame(game);
+				user.setPlay(user.getPlay() + 1);
+				user.setWinRate((double) user.getWin() / user.getPlay());
+				UserDB udb = new UserDB();
+				udb.updateUserRecord(user);
+				session.setAttribute("user", user);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 			}

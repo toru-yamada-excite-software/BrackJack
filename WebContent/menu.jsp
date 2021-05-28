@@ -47,6 +47,11 @@
 			<% } %>
 			<h3>スコア：<%= player.getScore() %></h3>
 
+			<% if(player.getAscore() != 0) { %>
+				<h3>or</h3>
+				<h3><%= player.getAscore() %></h3>
+			<% } %>
+
 			<% if(message == null) { %>
 				<form action="GameServlet" method="post">
 					<button type='submit' name='command' value='0'>hit</button>

@@ -14,7 +14,7 @@ public class GameDB {
 
 	public ArrayList<Game> getGame(String userId) {
 
-		String sql = "SELECT * FROM game WHERE user_id = ?";
+		String sql = "SELECT * FROM game WHERE user_id = ? LIMIT 30";
 		ArrayList<Game> gameList = new ArrayList<Game>();
 
 		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
@@ -48,50 +48,50 @@ public class GameDB {
 		return null;
 	}
 
-		public void insertGame(Game game) {
+	public void insertGame(Game game) {
 
-			String sql = "INSERT INTO game SET user_id = ?, win_lose = ?, play_time = ?";
+		String sql = "INSERT INTO game SET user_id = ?, win_lose = ?, play_time = ?";
 
-			try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
-				ps.setString(1, game.getUserId());
-				ps.setInt(2, game.getWinLose());
-				ps.setTimestamp(3, game.getPlayTime());
+			ps.setString(1, game.getUserId());
+			ps.setInt(2, game.getWinLose());
+			ps.setTimestamp(3, game.getPlayTime());
 
-				ps.executeUpdate();
-
-			}
-
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
+			ps.executeUpdate();
 
 		}
 
-		public void deleteGame(String userId) {
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
-			String sql = "DELETE FROM game WHERE user_id = ?";
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-			try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+	}
 
-				ps.setString(1, userId);
+	public void deleteGame(String userId) {
 
-				ps.executeUpdate();
+		String sql = "DELETE FROM game WHERE user_id = ?";
 
-			}
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+			ps.setString(1, userId);
 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
+			ps.executeUpdate();
 
 		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 }
