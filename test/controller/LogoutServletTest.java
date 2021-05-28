@@ -18,7 +18,7 @@ public class LogoutServletTest {
 
 	//ログアウト、セッション削除
 	@Test
-	public void doGetTest() throws Exception {
+	public void doPostTest() throws Exception {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -26,7 +26,7 @@ public class LogoutServletTest {
 		User user = new User();
 		session.setAttribute("user", user);
 
-		logout.doGet(request, response);
+		logout.doPost(request, response);
 
 		String expected = "ログアウトしました";
 		String actual = (String) request.getAttribute("message");

@@ -7,7 +7,7 @@ import dbmodel.UserDB;
 
 public class CreateAccountCheck {
 
-	private static final String CODE = "^[0-9A-Za-z!-/:-@^_]+$";
+	private static final Pattern PATTERN = Pattern.compile("^[0-9A-Za-z!-/:-@^_]+$");
 
 	public boolean check(String id, String password1, String password2, String name) {
 
@@ -26,9 +26,8 @@ public class CreateAccountCheck {
 		}
 
 		//文字コード判定
-		Pattern p = Pattern.compile(CODE);
-		Matcher m1 = p.matcher(id);
-		Matcher m2 = p.matcher(password1);
+		Matcher m1 = PATTERN.matcher(id);
+		Matcher m2 = PATTERN.matcher(password1);
 
 		if (m1.matches() && m2.matches()) {
 			return true;
