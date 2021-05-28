@@ -39,8 +39,10 @@ public class GameSarvlet extends HttpServlet {
 		deckInf = dealer.firstDraw(deckInf);
 		deckInf = player.firstDraw(deckInf);
 
-		if (dealer.getAscore() == 21) {
-			if (player.getAscore() == 21) {
+		if (dealer.getAscore() == 21 || player.getAscore() == 21) {
+
+			if (dealer.getAscore() == 21 && player.getAscore() == 21) {
+
 				session.setAttribute("message", "Draw");
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
@@ -52,14 +54,15 @@ public class GameSarvlet extends HttpServlet {
 				GameDB gdb = new GameDB();
 				gdb.insertGame(game);
 				user.setPlay(user.getPlay() + 1);
-				user.setWinRate((double) user.getWin() / user.getPlay());
+				user.setDraw(user.getDraw() + 1);
 				UserDB udb = new UserDB();
 				udb.updateUserRecord(user);
 				session.setAttribute("user", user);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 
-			} else {
+			} else if (dealer.getAscore() == 21) {
+
 				session.setAttribute("message", "Lose");
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
@@ -71,13 +74,34 @@ public class GameSarvlet extends HttpServlet {
 				GameDB gdb = new GameDB();
 				gdb.insertGame(game);
 				user.setPlay(user.getPlay() + 1);
+				UserDB udb = new UserDB();
+				udb.updateUserRecord(user);
+				session.setAttribute("user", user);
+				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+				rd.forward(request, response);
+
+			} else {
+
+				session.setAttribute("message", "Win");
+				session.setAttribute("dealer", dealer);
+				Timestamp playTime = new Timestamp(System.currentTimeMillis());
+				Game game = new Game();
+				game.setUserId(user.getId());
+				game.setWinLose(0);
+				game.setPlayTime(playTime);
+				GameDB gdb = new GameDB();
+				gdb.insertGame(game);
+				user.setPlay(user.getPlay() + 1);
+				user.setWin(user.getWin() + 1);
 				user.setWinRate((double) user.getWin() / user.getPlay());
 				UserDB udb = new UserDB();
 				udb.updateUserRecord(user);
 				session.setAttribute("user", user);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
+
 			}
+
 		}
 
 		session.setAttribute("player", player);
@@ -153,6 +177,16 @@ public class GameSarvlet extends HttpServlet {
 				rd.forward(request, response);
 
 			} else {
+
+				if (player.getAscore() > player.getScore()) {
+					player.setScore(player.getAscore());
+					player.setAscore(0);
+				}
+
+				if (dealer.getAscore() > dealer.getScore()) {
+					dealer.setScore(dealer.getAscore());
+					dealer.setAscore(0);
+				}
 
 				if (player.getScore() > dealer.getScore()) {
 					session.setAttribute("message", "Win");

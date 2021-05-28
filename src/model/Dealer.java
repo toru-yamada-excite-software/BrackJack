@@ -9,14 +9,31 @@ public class Dealer extends PlayerBase {
 
 		ArrayList<Card> deck = deckInf.getDeck();
 
-		while (score < 17) {
+		if (Ascore == 0) {
 
-			int index = deckInf.getIndex();
-			Card card = deck.get(index);
-			super.hand.add(card);
-			scoreCalc();
-			bustJudge();
-			deckInf.setIndex(index + 1);
+			while (score < 17) {
+
+				int index = deckInf.getIndex();
+				Card card = deck.get(index);
+				super.hand.add(card);
+				scoreCalc();
+				bustJudge();
+				deckInf.setIndex(index + 1);
+
+			}
+
+		} else {
+
+			while (Ascore < 17 && score < 17) {
+
+				int index = deckInf.getIndex();
+				Card card = deck.get(index);
+				super.hand.add(card);
+				scoreCalc();
+				bustJudge();
+				deckInf.setIndex(index + 1);
+
+			}
 
 		}
 

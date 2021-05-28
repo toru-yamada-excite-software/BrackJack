@@ -72,8 +72,16 @@ public abstract class PlayerBase {
 
 	}
 
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	public int getScore() {
 		return score;
+	}
+
+	public void setAscore(int Ascore) {
+		this.Ascore = Ascore;
 	}
 
 	public int getAscore() {
