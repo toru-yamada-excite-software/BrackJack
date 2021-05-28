@@ -19,7 +19,7 @@
 		<% User user = (User)session.getAttribute("user");
 		   Player player = (Player)session.getAttribute("player");
 		   Dealer dealer = (Dealer)session.getAttribute("dealer");
-		   String message = (String)request.getAttribute("message");%>
+		   String message = (String)session.getAttribute("message");%>
 		<h1><%= user.getName() %>でログイン中</h1>
 
 		<% if(message != null) {%>

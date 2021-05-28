@@ -24,6 +24,7 @@ public class GameSarvlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		session.setAttribute("message", null);
 
 		Player player = new Player();
 		Dealer dealer = new Dealer();
@@ -35,14 +36,14 @@ public class GameSarvlet extends HttpServlet {
 
 		if (dealer.getScore() == 21) {
 			if (player.getScore() == 21) {
-				request.setAttribute("message", "Draw");
+				session.setAttribute("message", "Draw");
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 
 			} else {
-				request.setAttribute("message", "Lose");
+				session.setAttribute("message", "Lose");
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
@@ -73,7 +74,7 @@ public class GameSarvlet extends HttpServlet {
 			deckInf = player.draw(deckInf);
 
 			if (player.getBust()) {
-				request.setAttribute("message", "Lose");
+				session.setAttribute("message", "Lose");
 				session.setAttribute("player", player);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
@@ -91,7 +92,7 @@ public class GameSarvlet extends HttpServlet {
 			deckInf = dealer.draw(deckInf);
 
 			if (dealer.getBust()) {
-				request.setAttribute("message", "Win");
+				session.setAttribute("message", "Win");
 				session.setAttribute("dealer", dealer);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
@@ -99,17 +100,17 @@ public class GameSarvlet extends HttpServlet {
 			} else {
 
 				if (player.getScore() > dealer.getScore()) {
-					request.setAttribute("message", "Win");
+					session.setAttribute("message", "Win");
 					session.setAttribute("dealer", dealer);
 					RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 					rd.forward(request, response);
 				} else if (player.getScore() == dealer.getScore()) {
-					request.setAttribute("message", "Draw");
+					session.setAttribute("message", "Draw");
 					session.setAttribute("dealer", dealer);
 					RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 					rd.forward(request, response);
 				} else if (player.getScore() < dealer.getScore()) {
-					request.setAttribute("message", "Lose");
+					session.setAttribute("message", "Lose");
 					session.setAttribute("dealer", dealer);
 					RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 					rd.forward(request, response);

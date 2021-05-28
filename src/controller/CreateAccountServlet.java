@@ -24,6 +24,7 @@ public class CreateAccountServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String password1 = request.getParameter("password1");
 		String password2 = request.getParameter("password2");
