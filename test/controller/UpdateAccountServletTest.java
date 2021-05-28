@@ -43,7 +43,7 @@ public class UpdateAccountServletTest {
 		request.setParameter("name", name);
 		session.setAttribute("user", user);
 
-		doNothing().when(udb).updateUser(user);
+		doNothing().when(udb).updateUserName(user);
 
 		uas.doPost(request, response);
 

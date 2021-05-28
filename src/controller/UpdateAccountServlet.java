@@ -36,7 +36,7 @@ public class UpdateAccountServlet extends HttpServlet {
 
 		if (name.equals(user.getName()) || !name.equals("")) {
 			user.setName(name);
-			udb.updateUser(user);
+			udb.updateUserName(user);
 
 			request.setAttribute("message", "ニックネームを変更しました");
 			session.setAttribute("user", user);

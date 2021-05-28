@@ -107,7 +107,7 @@ public class UserDBTest {
 		setUser.setPassword(password);
 		setUser.setName("name2");
 
-		udb.updateUser(setUser);
+		udb.updateUserName(setUser);
 		User getUser = udb.getUser(id);
 
 		String expected = "name2";

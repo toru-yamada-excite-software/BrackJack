@@ -182,19 +182,42 @@ public class UserDB {
 
 	}
 
-	//ユーザー情報更新
-	public void updateUser(User user) {
+	//ユーザーニックネーム更新
+	public void updateUserName(User user) {
 
-		String sql = "UPDATE user set name = ?, play = ?, win = ?, draw = ?, win_rate = ? where id = ?";
+		String sql = "UPDATE user set name = ? where id = ?";
 
 		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, user.getName());
-			ps.setInt(2, user.getPlay());
-			ps.setInt(3, user.getWin());
-			ps.setInt(4, user.getDraw());
-			ps.setDouble(5, user.getWinRate());
 			ps.setString(6, user.getId());
+
+			ps.executeUpdate();
+
+		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	//ユーザー戦績更新
+	public void updateUserRecord(User user) {
+
+		String sql = "UPDATE user set play = ?, win = ?, draw = ?, win_rate = ? where id = ?";
+
+		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
+
+			ps.setInt(1, user.getPlay());
+			ps.setInt(2, user.getWin());
+			ps.setInt(3, user.getDraw());
+			ps.setDouble(4, user.getWinRate());
+			ps.setString(5, user.getId());
 
 			ps.executeUpdate();
 
