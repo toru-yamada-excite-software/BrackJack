@@ -36,7 +36,7 @@
 		<a href="menu.jsp">戻る</a>
 
 		<h2>ログアウト</h2>
-		<form action="LogoutServlet" method="get">
+		<form action="LogoutServlet" method="post">
 			<input type="submit" value="ログアウト">
 		</form>
 
