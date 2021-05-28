@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dbmodel.GameDB;
 import model.Dealer;
 import model.Deck;
+import model.Game;
 import model.Player;
 import model.User;
 
@@ -76,6 +79,13 @@ public class GameSarvlet extends HttpServlet {
 			if (player.getBust()) {
 				session.setAttribute("message", "Lose");
 				session.setAttribute("player", player);
+				Timestamp playTime = new Timestamp(System.currentTimeMillis());
+				Game game = new Game();
+				game.setUserId(user.getId());
+				game.setWinLose(2);
+				game.setPlayTime(playTime);
+				GameDB gdb = new GameDB();
+				gdb.insertGame(game);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 			} else {
