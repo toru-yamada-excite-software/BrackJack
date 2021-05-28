@@ -15,7 +15,7 @@ public class Card {
 
 	public enum Suite {
 
-		SPADE("スペード", 0), CLUB("クラブ", 1), DIAMOID("ダイヤ", 2), HEART("ハート", 3);
+		SPADE("♠", 0), CLUB("♣", 1), DIAMOID("♢", 2), HEART("♡", 3);
 
 		private String label;
 		private int id;
