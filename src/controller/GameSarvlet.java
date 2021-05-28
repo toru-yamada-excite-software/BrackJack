@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dbmodel.GameDB;
+import dbmodel.UserDB;
 import model.Dealer;
 import model.Deck;
 import model.Game;
@@ -86,6 +87,11 @@ public class GameSarvlet extends HttpServlet {
 				game.setPlayTime(playTime);
 				GameDB gdb = new GameDB();
 				gdb.insertGame(game);
+				user.setPlay(user.getPlay() + 1);
+				user.setWinRate((double) user.getWin() / user.getPlay());
+				UserDB udb = new UserDB();
+				udb.updateUserRecord(user);
+				session.setAttribute("user", user);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 			} else {
@@ -102,8 +108,22 @@ public class GameSarvlet extends HttpServlet {
 			deckInf = dealer.draw(deckInf);
 
 			if (dealer.getBust()) {
+
 				session.setAttribute("message", "Win");
 				session.setAttribute("dealer", dealer);
+				Timestamp playTime = new Timestamp(System.currentTimeMillis());
+				Game game = new Game();
+				game.setUserId(user.getId());
+				game.setWinLose(0);
+				game.setPlayTime(playTime);
+				GameDB gdb = new GameDB();
+				gdb.insertGame(game);
+				user.setPlay(user.getPlay() + 1);
+				user.setWin(user.getWin() + 1);
+				user.setWinRate((double) user.getWin() / user.getPlay());
+				UserDB udb = new UserDB();
+				udb.updateUserRecord(user);
+				session.setAttribute("user", user);
 				RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 				rd.forward(request, response);
 
@@ -112,16 +132,54 @@ public class GameSarvlet extends HttpServlet {
 				if (player.getScore() > dealer.getScore()) {
 					session.setAttribute("message", "Win");
 					session.setAttribute("dealer", dealer);
+					Timestamp playTime = new Timestamp(System.currentTimeMillis());
+					Game game = new Game();
+					game.setUserId(user.getId());
+					game.setWinLose(0);
+					game.setPlayTime(playTime);
+					GameDB gdb = new GameDB();
+					gdb.insertGame(game);
+					user.setPlay(user.getPlay() + 1);
+					user.setWin(user.getWin() + 1);
+					user.setWinRate((double) user.getWin() / user.getPlay());
+					UserDB udb = new UserDB();
+					udb.updateUserRecord(user);
+					session.setAttribute("user", user);
 					RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 					rd.forward(request, response);
 				} else if (player.getScore() == dealer.getScore()) {
 					session.setAttribute("message", "Draw");
 					session.setAttribute("dealer", dealer);
+					Timestamp playTime = new Timestamp(System.currentTimeMillis());
+					Game game = new Game();
+					game.setUserId(user.getId());
+					game.setWinLose(1);
+					game.setPlayTime(playTime);
+					GameDB gdb = new GameDB();
+					gdb.insertGame(game);
+					user.setPlay(user.getPlay() + 1);
+					user.setDraw(user.getDraw() + 1);
+					user.setWinRate((double) user.getWin() / user.getPlay());
+					UserDB udb = new UserDB();
+					udb.updateUserRecord(user);
+					session.setAttribute("user", user);
 					RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 					rd.forward(request, response);
 				} else if (player.getScore() < dealer.getScore()) {
 					session.setAttribute("message", "Lose");
 					session.setAttribute("dealer", dealer);
+					Timestamp playTime = new Timestamp(System.currentTimeMillis());
+					Game game = new Game();
+					game.setUserId(user.getId());
+					game.setWinLose(2);
+					game.setPlayTime(playTime);
+					GameDB gdb = new GameDB();
+					gdb.insertGame(game);
+					user.setPlay(user.getPlay() + 1);
+					user.setWinRate((double) user.getWin() / user.getPlay());
+					UserDB udb = new UserDB();
+					udb.updateUserRecord(user);
+					session.setAttribute("user", user);
 					RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 					rd.forward(request, response);
 				}
