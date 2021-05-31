@@ -48,10 +48,7 @@ public class GameSarvlet extends HttpServlet {
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
 				Timestamp playTime = new Timestamp(System.currentTimeMillis());
-				Game game = new Game();
-				game.setUserId(user.getId());
-				game.setWinLose(1);
-				game.setPlayTime(playTime);
+				Game game = new Game(user.getId(), 1, playTime);
 				GameDB gdb = new GameDB();
 				gdb.insertGame(game);
 				user.setPlay(user.getPlay() + 1);
@@ -68,10 +65,7 @@ public class GameSarvlet extends HttpServlet {
 				session.setAttribute("player", player);
 				session.setAttribute("dealer", dealer);
 				Timestamp playTime = new Timestamp(System.currentTimeMillis());
-				Game game = new Game();
-				game.setUserId(user.getId());
-				game.setWinLose(2);
-				game.setPlayTime(playTime);
+				Game game = new Game(user.getId(), 2, playTime);
 				GameDB gdb = new GameDB();
 				gdb.insertGame(game);
 				user.setPlay(user.getPlay() + 1);
@@ -86,10 +80,7 @@ public class GameSarvlet extends HttpServlet {
 				session.setAttribute("message", "Win");
 				session.setAttribute("dealer", dealer);
 				Timestamp playTime = new Timestamp(System.currentTimeMillis());
-				Game game = new Game();
-				game.setUserId(user.getId());
-				game.setWinLose(0);
-				game.setPlayTime(playTime);
+				Game game = new Game(user.getId(), 0, playTime);
 				GameDB gdb = new GameDB();
 				gdb.insertGame(game);
 				user.setPlay(user.getPlay() + 1);
@@ -117,8 +108,8 @@ public class GameSarvlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		GameManager gm = new GameManager();
-		request = gm.GameManagement(request);
+		GameManager gm = new GameManager(request);
+		request = gm.GameManagement();
 
 		RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 		rd.forward(request, response);

@@ -9,6 +9,12 @@ public class Game {
 	private int winLose;
 	private Timestamp playTime;
 
+	public Game(String userId, int WinLose, Timestamp playTime) {
+		this.userId = userId;
+		this.winLose = WinLose;
+		this.playTime = playTime;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}

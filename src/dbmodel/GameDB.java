@@ -24,11 +24,8 @@ public class GameDB {
 			try (ResultSet rs = ps.executeQuery()) {
 
 				while (rs.next()) {
-					Game game = new Game();
+					Game game = new Game(rs.getString("user_id"), rs.getInt("win_lose"), rs.getTimestamp("play_time"));
 					game.setId(rs.getInt("id"));
-					game.setUserId(rs.getString("user_id"));
-					game.setWinLose(rs.getInt("win_lose"));
-					game.setPlayTime(rs.getTimestamp("play_time"));
 					gameList.add(game);
 				}
 

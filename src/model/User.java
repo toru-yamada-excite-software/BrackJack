@@ -69,4 +69,11 @@ public class User implements Serializable {
 		return winRate;
 	}
 
+	public void setGameRecord(int play, int win, int draw, double winRate) {
+		this.play += play;
+		this.win += win;
+		this.draw += draw;
+		this.winRate = winRate;
+	}
+
 }

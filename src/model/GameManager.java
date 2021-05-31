@@ -10,39 +10,40 @@ import dbmodel.UserDB;
 
 public class GameManager {
 
-	public HttpServletRequest GameManagement(HttpServletRequest request) {
+	HttpServletRequest request;
+	HttpSession session;
 
-		HttpSession session = request.getSession();
+	public GameManager(HttpServletRequest request) {
+		this.request = request;
+		session = request.getSession();
+	}
+
+	public HttpServletRequest GameManagement() {
+
 		User user = (User) session.getAttribute("user");
 		Player player = (Player) session.getAttribute("player");
 		Dealer dealer = (Dealer) session.getAttribute("dealer");
 		Deck deckInf = (Deck) session.getAttribute("deckInf");
 		int command = Integer.parseInt(request.getParameter("command"));
+		GameInf gi = new GameInf(player, dealer, deckInf, null);
 
 		if (command == 0) {
 
 			deckInf = player.draw(deckInf);
 
 			if (player.getBust()) {
-				session.setAttribute("message", "Lose");
-				session.setAttribute("player", player);
-				Timestamp playTime = new Timestamp(System.currentTimeMillis());
-				Game game = new Game();
-				game.setUserId(user.getId());
-				game.setWinLose(2);
-				game.setPlayTime(playTime);
-				GameDB gdb = new GameDB();
-				gdb.insertGame(game);
-				user.setPlay(user.getPlay() + 1);
-				user.setWinRate((double) user.getWin() / user.getPlay());
-				UserDB udb = new UserDB();
-				udb.updateUserRecord(user);
-				session.setAttribute("user", user);
+
+				user = setDB(2, user);
+				gi = new GameInf(player, dealer, deckInf, "Lose");
+				setSession(gi, user);
 				return request;
+
 			} else {
-				session.setAttribute("player", player);
-				session.setAttribute("deckInf", deckInf);
+
+				gi = new GameInf(player, dealer, deckInf, null);
+				setSession(gi, user);
 				return request;
+
 			}
 
 		}
@@ -53,21 +54,9 @@ public class GameManager {
 
 			if (dealer.getBust()) {
 
-				session.setAttribute("message", "Win");
-				session.setAttribute("dealer", dealer);
-				Timestamp playTime = new Timestamp(System.currentTimeMillis());
-				Game game = new Game();
-				game.setUserId(user.getId());
-				game.setWinLose(0);
-				game.setPlayTime(playTime);
-				GameDB gdb = new GameDB();
-				gdb.insertGame(game);
-				user.setPlay(user.getPlay() + 1);
-				user.setWin(user.getWin() + 1);
-				user.setWinRate((double) user.getWin() / user.getPlay());
-				UserDB udb = new UserDB();
-				udb.updateUserRecord(user);
-				session.setAttribute("user", user);
+				user = setDB(0, user);
+				gi = new GameInf(player, dealer, deckInf, "Win");
+				setSession(gi, user);
 				return request;
 
 			} else {
@@ -83,55 +72,26 @@ public class GameManager {
 				}
 
 				if (player.getScore() > dealer.getScore()) {
-					session.setAttribute("message", "Win");
-					session.setAttribute("dealer", dealer);
-					Timestamp playTime = new Timestamp(System.currentTimeMillis());
-					Game game = new Game();
-					game.setUserId(user.getId());
-					game.setWinLose(0);
-					game.setPlayTime(playTime);
-					GameDB gdb = new GameDB();
-					gdb.insertGame(game);
-					user.setPlay(user.getPlay() + 1);
-					user.setWin(user.getWin() + 1);
-					user.setWinRate((double) user.getWin() / user.getPlay());
-					UserDB udb = new UserDB();
-					udb.updateUserRecord(user);
-					session.setAttribute("user", user);
+
+					user = setDB(0, user);
+					gi = new GameInf(player, dealer, deckInf, "Win");
+					setSession(gi, user);
 					return request;
+
 				} else if (player.getScore() == dealer.getScore()) {
-					session.setAttribute("message", "Draw");
-					session.setAttribute("dealer", dealer);
-					Timestamp playTime = new Timestamp(System.currentTimeMillis());
-					Game game = new Game();
-					game.setUserId(user.getId());
-					game.setWinLose(1);
-					game.setPlayTime(playTime);
-					GameDB gdb = new GameDB();
-					gdb.insertGame(game);
-					user.setPlay(user.getPlay() + 1);
-					user.setDraw(user.getDraw() + 1);
-					user.setWinRate((double) user.getWin() / user.getPlay());
-					UserDB udb = new UserDB();
-					udb.updateUserRecord(user);
-					session.setAttribute("user", user);
+
+					user = setDB(1, user);
+					gi = new GameInf(player, dealer, deckInf, "Draw");
+					setSession(gi, user);
 					return request;
+
 				} else if (player.getScore() < dealer.getScore()) {
-					session.setAttribute("message", "Lose");
-					session.setAttribute("dealer", dealer);
-					Timestamp playTime = new Timestamp(System.currentTimeMillis());
-					Game game = new Game();
-					game.setUserId(user.getId());
-					game.setWinLose(2);
-					game.setPlayTime(playTime);
-					GameDB gdb = new GameDB();
-					gdb.insertGame(game);
-					user.setPlay(user.getPlay() + 1);
-					user.setWinRate((double) user.getWin() / user.getPlay());
-					UserDB udb = new UserDB();
-					udb.updateUserRecord(user);
-					session.setAttribute("user", user);
+
+					user = setDB(2, user);
+					gi = new GameInf(player, dealer, deckInf, "Lose");
+					setSession(gi, user);
 					return request;
+
 				}
 
 			}
@@ -139,6 +99,37 @@ public class GameManager {
 		}
 
 		return null;
+	}
+
+	public void setSession(GameInf gi, User user) {
+
+		session.setAttribute("player", gi.getPlayer());
+		session.setAttribute("dealer", gi.getDealer());
+		session.setAttribute("deckInf", gi.getDeck());
+		session.setAttribute("message", gi.getMessage());
+		session.setAttribute("user", user);
+
+	}
+
+	public User setDB(int judge, User user) {
+
+		Timestamp playTime = new Timestamp(System.currentTimeMillis());
+		GameDB gdb = new GameDB();
+		UserDB udb = new UserDB();
+		Game game = new Game(user.getId(), judge, playTime);
+
+		if (judge == 0) {
+			user.setGameRecord(1, 1, 0, (double) user.getWin() / user.getPlay());
+		} else if (judge == 1) {
+			user.setGameRecord(1, 0, 1, (double) user.getWin() / user.getPlay());
+		} else if (judge == 2) {
+			user.setGameRecord(1, 0, 0, (double) user.getWin() / user.getPlay());
+		}
+
+		gdb.insertGame(game);
+		udb.updateUserRecord(user);
+
+		return user;
 	}
 
 }
