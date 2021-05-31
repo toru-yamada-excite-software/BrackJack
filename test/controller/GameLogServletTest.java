@@ -44,7 +44,7 @@ public class GameLogServletTest {
 		User user = new User();
 		user.setId(userId);
 		session.setAttribute("user", user);
-		Game game = new Game();
+		Game game = new Game(userId, 0, null);
 		game.setId(id);
 		game.setUserId(userId);
 
@@ -55,6 +55,7 @@ public class GameLogServletTest {
 
 		gls.doGet(request, response);
 
+		@SuppressWarnings("unchecked")
 		ArrayList<Game> getList = (ArrayList<Game>) request.getAttribute("gameList");
 
 		String expected = userId;

@@ -18,6 +18,7 @@
 		<h1>BrackJack</h1>
 		<h1>戦績</h1>
 		<% User user = (User)session.getAttribute("user");
+		   @SuppressWarnings("unchecked")
 		   ArrayList<Game> gameList = (ArrayList<Game>)request.getAttribute("gameList");
 		   Game game;
 		   WinLoseConvert wlc = new WinLoseConvert();

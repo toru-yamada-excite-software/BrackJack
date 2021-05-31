@@ -16,6 +16,7 @@
 		<h1>ランキング</h1>
 		<% String message = (String)request.getAttribute("message");
 		   User user = (User)session.getAttribute("user");
+		   @SuppressWarnings("unchecked")
 		   ArrayList<User> ranking = (ArrayList<User>)request.getAttribute("ranking");
 		   int myRank = (int)request.getAttribute("myRank");
 		   if(message != null) {%>
