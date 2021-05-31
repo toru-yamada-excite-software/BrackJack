@@ -24,7 +24,7 @@
 				<dd><input type="password" name="password" value="p" pattern="^[0-9A-Za-z!-/:-@^_]+$" title="半角英数字記号"></dd>
 			</dl>
 
-			<input type="submit" value="ログイン">
+			<button type="submit" name="start" value="1">ログイン</button>
 		</form>
 
 		<a href="createaccount.jsp">新規登録</a>

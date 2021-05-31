@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 		if (user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("GameServlet");
 			rd.forward(request, response);
 
 			//ログイン失敗

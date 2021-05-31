@@ -20,6 +20,16 @@ public class GameManager {
 
 	public HttpServletRequest GameManagement() {
 
+		int start = Integer.parseInt(request.getParameter("start"));
+		System.out.println(start);
+
+		if ((start == 0)) {
+			boolean naturalbj = startGame();
+			if (naturalbj) {
+				return request;
+			}
+		}
+
 		User user = (User) session.getAttribute("user");
 		Player player = (Player) session.getAttribute("player");
 		Dealer dealer = (Dealer) session.getAttribute("dealer");
@@ -99,6 +109,46 @@ public class GameManager {
 		}
 
 		return null;
+	}
+
+	public boolean startGame() {
+
+		User user = (User) session.getAttribute("user");
+		session.setAttribute("message", null);
+
+		Player player = new Player();
+		Dealer dealer = new Dealer();
+		Deck deckInf = new Deck();
+		deckInf.createDeck();
+
+		deckInf = dealer.firstDraw(deckInf);
+		deckInf = player.firstDraw(deckInf);
+
+		GameInf gi = new GameInf(player, dealer, deckInf, null);
+
+		if (dealer.getAscore() == 21 || player.getAscore() == 21) {
+
+			if (dealer.getAscore() == 21 && player.getAscore() == 21) {
+				setDB(1, user);
+				gi = new GameInf(player, dealer, deckInf, "Draw");
+				setSession(gi, user);
+
+			} else if (dealer.getAscore() == 21) {
+				setDB(2, user);
+				gi = new GameInf(player, dealer, deckInf, "Lose");
+				setSession(gi, user);
+			} else {
+				setDB(0, user);
+				gi = new GameInf(player, dealer, deckInf, "Win");
+				setSession(gi, user);
+			}
+
+			return true;
+		}
+
+		setSession(gi, user);
+
+		return false;
 	}
 
 	public void setSession(GameInf gi, User user) {
