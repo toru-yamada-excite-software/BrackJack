@@ -32,8 +32,8 @@ public class GameSarvlet extends HttpServlet {
 		GameManager gm = new GameManager(gi, command);
 		gi = gm.GameManagement();
 
-		SetGameDate sd = new SetGameDate();
-		user = sd.setDate(user, gi.getMessage());
+		SetGameDate sgd = new SetGameDate();
+		user = sgd.setDate(user, gi.getMessage());
 
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);

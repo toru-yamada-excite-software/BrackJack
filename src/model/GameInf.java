@@ -1,6 +1,9 @@
 package model;
 
-public class GameInf {
+import java.io.Serializable;
+
+public class GameInf implements Serializable {
+	private static final long serialVersionUID = 9002538034053600564L;
 
 	private Player player;
 	private Dealer dealer;
