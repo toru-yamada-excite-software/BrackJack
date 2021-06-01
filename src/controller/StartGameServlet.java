@@ -16,6 +16,7 @@ import dbmodel.UserDB;
 import model.Dealer;
 import model.Deck;
 import model.Game;
+import model.GameInf;
 import model.Player;
 import model.User;
 
@@ -95,9 +96,9 @@ public class StartGameServlet extends HttpServlet {
 
 		}
 
-		session.setAttribute("player", player);
-		session.setAttribute("dealer", dealer);
-		session.setAttribute("deckInf", deckInf);
+		GameInf gi = new GameInf(player, dealer, deckInf, null);
+
+		session.setAttribute("gameInf", gi);
 		RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 		rd.forward(request, response);
 

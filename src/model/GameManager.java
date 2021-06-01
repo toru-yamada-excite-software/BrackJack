@@ -2,30 +2,24 @@ package model;
 
 import java.sql.Timestamp;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import dbmodel.GameDB;
 import dbmodel.UserDB;
 
 public class GameManager {
 
-	HttpServletRequest request;
-	HttpSession session;
+	GameInf gi;
+	int command;
 
-	public GameManager(HttpServletRequest request) {
-		this.request = request;
-		session = request.getSession();
+	public GameManager(GameInf gi, int command) {
+		this.gi = gi;
+		this.command = command;
 	}
 
-	public HttpServletRequest GameManagement() {
+	public GameInf GameManagement() {
 
-		User user = (User) session.getAttribute("user");
-		Player player = (Player) session.getAttribute("player");
-		Dealer dealer = (Dealer) session.getAttribute("dealer");
-		Deck deckInf = (Deck) session.getAttribute("deckInf");
-		int command = Integer.parseInt(request.getParameter("command"));
-		GameInf gi = new GameInf(player, dealer, deckInf, null);
+		Player player = gi.getPlayer();
+		Dealer dealer = gi.getDealer();
+		Deck deckInf = gi.getDeck();
 
 		if (command == 0) {
 
@@ -33,16 +27,16 @@ public class GameManager {
 
 			if (player.getBust()) {
 
-				user = setDB(2, user);
+				//user = setDB(2, user);
 				gi = new GameInf(player, dealer, deckInf, "Lose");
-				setSession(gi, user);
-				return request;
+				//setSession(gi, user);
+				return gi;
 
 			} else {
 
 				gi = new GameInf(player, dealer, deckInf, null);
-				setSession(gi, user);
-				return request;
+				//setSession(gi, user);
+				return gi;
 
 			}
 
@@ -54,43 +48,35 @@ public class GameManager {
 
 			if (dealer.getBust()) {
 
-				user = setDB(0, user);
+				//user = setDB(0, user);
 				gi = new GameInf(player, dealer, deckInf, "Win");
-				setSession(gi, user);
-				return request;
+				//setSession(gi, user);
+				return gi;
 
 			} else {
 
-				if (player.getAscore() > player.getScore()) {
-					player.setScore(player.getAscore());
-					player.setAscore(0);
-				}
-
-				if (dealer.getAscore() > dealer.getScore()) {
-					dealer.setScore(dealer.getAscore());
-					dealer.setAscore(0);
-				}
+				//A
 
 				if (player.getScore() > dealer.getScore()) {
 
-					user = setDB(0, user);
+					//user = setDB(0, user);
 					gi = new GameInf(player, dealer, deckInf, "Win");
-					setSession(gi, user);
-					return request;
+					//setSession(gi, user);
+					return gi;
 
 				} else if (player.getScore() == dealer.getScore()) {
 
-					user = setDB(1, user);
+					//user = setDB(1, user);
 					gi = new GameInf(player, dealer, deckInf, "Draw");
-					setSession(gi, user);
-					return request;
+					//setSession(gi, user);
+					return gi;
 
 				} else if (player.getScore() < dealer.getScore()) {
 
-					user = setDB(2, user);
+					//user = setDB(2, user);
 					gi = new GameInf(player, dealer, deckInf, "Lose");
-					setSession(gi, user);
-					return request;
+					//setSession(gi, user);
+					return gi;
 
 				}
 
@@ -99,16 +85,6 @@ public class GameManager {
 		}
 
 		return null;
-	}
-
-	public void setSession(GameInf gi, User user) {
-
-		session.setAttribute("player", gi.getPlayer());
-		session.setAttribute("dealer", gi.getDealer());
-		session.setAttribute("deckInf", gi.getDeck());
-		session.setAttribute("message", gi.getMessage());
-		session.setAttribute("user", user);
-
 	}
 
 	public User setDB(int judge, User user) {
@@ -131,5 +107,15 @@ public class GameManager {
 
 		return user;
 	}
+
+	//	if (player.getAscore() > player.getScore()) {
+	//	player.setScore(player.getAscore());
+	//	player.setAscore(0);
+	//}
+	//
+	//if (dealer.getAscore() > dealer.getScore()) {
+	//	dealer.setScore(dealer.getAscore());
+	//	dealer.setAscore(0);
+	//}
 
 }
