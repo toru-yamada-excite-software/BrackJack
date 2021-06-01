@@ -14,7 +14,7 @@ public class SetGameDate {
 			Timestamp playTime = new Timestamp(System.currentTimeMillis());
 			GameDB gdb = new GameDB();
 			UserDB udb = new UserDB();
-			Game game = null;
+			Game game = new Game(null, 0, null);
 
 			if (judge.equals("Win")) {
 				user.setGameRecord(1, 1, 0, (double) user.getWin() / user.getPlay());

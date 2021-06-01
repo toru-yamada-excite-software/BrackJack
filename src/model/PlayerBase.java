@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class PlayerBase {
+public abstract class PlayerBase implements Serializable {
+	private static final long serialVersionUID = 6054095141575886689L;
 
 	public ArrayList<Card> hand = new ArrayList<Card>();
 	protected int score = 0;

@@ -1,6 +1,9 @@
 package model;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
+	private static final long serialVersionUID = 3314780953415621490L;
 
 	//0:スペード、1:クラブ、2:ダイヤ、3:ハート
 	private int suite;
