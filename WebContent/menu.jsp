@@ -58,7 +58,7 @@
 	  				<button type='submit' name='command' value='1'>stand</button>
 				</form>
 			<% } else { %>
-				<form action="GameServlet" method="post">
+				<form action="GameServlet" method="get">
 					<button type="submit" name="start" value="0">再戦</button>
 				</form>
 			<% } %>

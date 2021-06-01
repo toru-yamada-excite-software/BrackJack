@@ -13,9 +13,9 @@ public abstract class PlayerBase {
 
 	public void scoreCalc() {
 
-		boolean existA = false;
-
+		int j = 0;
 		score = 0; //scoreリセット後再計算
+		Ascore = 0;
 		for (int i = 0; i < hand.size(); i++) {
 			int number = hand.get(i).getNumber();
 
@@ -24,39 +24,19 @@ public abstract class PlayerBase {
 				number = 10;
 			}
 
-			if (number == 1) {
-				existA = true;
+			Ascore += number;
+
+			if (number == 1 && j == 0) {
+				Ascore += 10;
+				j++;
 			}
 
 			score += number;
 		}
 
-		if (existA) {
-
-			int j = 0;
-			Ascore = 0; //Ascoreリセット後再計算
-			for (int i = 0; i < hand.size(); i++) {
-				int number = hand.get(i).getNumber();
-
-				//11以上は10に
-				if (number > 10) {
-					number = 10;
-				}
-
-				if (number == 1 && j == 0) {
-					number = 11;
-					j++;
-				}
-
-				Ascore += number;
-			}
-
-			if (Ascore > 21) {
-				Ascore = 0;
-			}
-
+		if (score == Ascore) {
+			Ascore = 0;
 		}
-
 		//score計算後bust判定
 		bustJudge();
 

@@ -20,16 +20,6 @@ public class GameManager {
 
 	public HttpServletRequest GameManagement() {
 
-		int start = Integer.parseInt(request.getParameter("start"));
-		System.out.println(start);
-
-		if ((start == 0)) {
-			boolean naturalbj = startGame();
-			if (naturalbj) {
-				return request;
-			}
-		}
-
 		User user = (User) session.getAttribute("user");
 		Player player = (Player) session.getAttribute("player");
 		Dealer dealer = (Dealer) session.getAttribute("dealer");
