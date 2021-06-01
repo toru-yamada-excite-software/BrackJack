@@ -190,7 +190,7 @@ public class UserDB {
 		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, user.getName());
-			ps.setString(6, user.getId());
+			ps.setString(2, user.getId());
 
 			ps.executeUpdate();
 
