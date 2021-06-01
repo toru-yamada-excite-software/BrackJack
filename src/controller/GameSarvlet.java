@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Dealer;
-import model.Deck;
 import model.GameInf;
 import model.GameManager;
-import model.Player;
+import model.SetGameDate;
 import model.User;
 
 @WebServlet("/GameServlet")
@@ -28,16 +26,16 @@ public class GameSarvlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("user");
-		Player player = (Player) session.getAttribute("player");
-		Dealer dealer = (Dealer) session.getAttribute("dealer");
-		Deck deckInf = (Deck) session.getAttribute("deckInf");
+		GameInf gi = (GameInf) session.getAttribute("gameInf");
 		int command = Integer.parseInt(request.getParameter("command"));
-
-		GameInf gi = new GameInf(player, dealer, deckInf, null);
 
 		GameManager gm = new GameManager(gi, command);
 		gi = gm.GameManagement();
 
+		SetGameDate sd = new SetGameDate();
+		user = sd.setDate(user, gi.getMessage());
+
+		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
 
 		RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");

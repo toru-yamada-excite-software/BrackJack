@@ -34,7 +34,7 @@ public abstract class PlayerBase {
 			score += number;
 		}
 
-		if (score == Ascore) {
+		if (score == Ascore || Ascore > 21) {
 			Ascore = 0;
 		}
 		//score計算後bust判定

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dbmodel.UserDB;
+import model.GameInf;
 import model.User;
 
 @WebServlet("")
@@ -42,7 +43,9 @@ public class LoginServlet extends HttpServlet {
 		//ログイン成功
 		if (user != null) {
 			HttpSession session = request.getSession();
+			GameInf gi = new GameInf(null, null, null, null);
 			session.setAttribute("user", user);
+			session.setAttribute("gameInf", gi);
 			RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
 			rd.forward(request, response);
 

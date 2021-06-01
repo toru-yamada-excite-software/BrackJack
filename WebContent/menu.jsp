@@ -1,3 +1,4 @@
+<%@page import="model.GameInf"%>
 <%@page import="model.Card"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Player"%>
@@ -17,26 +18,24 @@
 	<body>
 		<h1>BrackJack</h1>
 		<% User user = (User)session.getAttribute("user");
-		   Player player = (Player)session.getAttribute("player");
-		   Dealer dealer = (Dealer)session.getAttribute("dealer");
-		   String message = (String)session.getAttribute("message");%>
+		   GameInf gi = (GameInf)session.getAttribute("gameInf");%>
 		<h1><%= user.getName() %>でログイン中</h1>
 
-		<% if(message != null) {%>
-			<h1><%= message %></h1>
+		<% if(gi.getMessage() != null) {%>
+			<h1><%= gi.getMessage() %></h1>
 		<% } %>
 
-		<% if(player != null) {
-	 		ArrayList<Card> playerHand = player.getHand();
-			ArrayList<Card> dealerHand = dealer.getHand();%>
+		<% if(gi.getPlayer() != null) {
+	 		ArrayList<Card> playerHand = gi.getPlayer().getHand();
+			ArrayList<Card> dealerHand = gi.getDealer().getHand();%>
 
 			<h2>Dealer</h2>
-			<% if(message != null) { %>
+			<% if(gi.getMessage() != null) { %>
 				<% for(int i = 0; i < dealerHand.size(); i++) {%>
 					<h3><%= dealerHand.get(i).getSuite() %>-<%= dealerHand.get(i).getNumber() %></h3>
 				<% } %>
 
-				<h3>スコア：<%= dealer.getScore() %></h3>
+				<h3>スコア：<%= gi.getDealer().getScore() %></h3>
 			<% } else { %>
 				<h3><%= dealerHand.get(0).getSuite() %>-<%= dealerHand.get(0).getNumber() %></h3>
 			<% } %>
@@ -45,14 +44,14 @@
 			<% for(int i = 0; i < playerHand.size(); i++) {%>
 				<h3><%= playerHand.get(i).getSuite() %>-<%= playerHand.get(i).getNumber() %></h3>
 			<% } %>
-			<h3>スコア：<%= player.getScore() %></h3>
+			<h3>スコア：<%= gi.getPlayer().getScore() %></h3>
 
-			<% if(player.getAscore() != 0) { %>
+			<% if(gi.getPlayer().getAscore() != 0) { %>
 				<h3>or</h3>
-				<h3><%= player.getAscore() %></h3>
+				<h3><%= gi.getPlayer().getAscore() %></h3>
 			<% } %>
 
-			<% if(message == null) { %>
+			<% if(gi.getMessage() == null) { %>
 				<form action="GameServlet" method="post">
 					<button type='submit' name='command' value='0'>hit</button>
 	  				<button type='submit' name='command' value='1'>stand</button>

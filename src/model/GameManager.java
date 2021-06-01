@@ -1,10 +1,5 @@
 package model;
 
-import java.sql.Timestamp;
-
-import dbmodel.GameDB;
-import dbmodel.UserDB;
-
 public class GameManager {
 
 	GameInf gi;
@@ -27,15 +22,12 @@ public class GameManager {
 
 			if (player.getBust()) {
 
-				//user = setDB(2, user);
 				gi = new GameInf(player, dealer, deckInf, "Lose");
-				//setSession(gi, user);
 				return gi;
 
 			} else {
 
 				gi = new GameInf(player, dealer, deckInf, null);
-				//setSession(gi, user);
 				return gi;
 
 			}
@@ -48,34 +40,27 @@ public class GameManager {
 
 			if (dealer.getBust()) {
 
-				//user = setDB(0, user);
 				gi = new GameInf(player, dealer, deckInf, "Win");
-				//setSession(gi, user);
 				return gi;
 
 			} else {
 
-				//A
+				player = changePlayerAscore(player);
+				dealer = changeDealerAscore(dealer);
 
 				if (player.getScore() > dealer.getScore()) {
 
-					//user = setDB(0, user);
 					gi = new GameInf(player, dealer, deckInf, "Win");
-					//setSession(gi, user);
 					return gi;
 
 				} else if (player.getScore() == dealer.getScore()) {
 
-					//user = setDB(1, user);
 					gi = new GameInf(player, dealer, deckInf, "Draw");
-					//setSession(gi, user);
 					return gi;
 
 				} else if (player.getScore() < dealer.getScore()) {
 
-					//user = setDB(2, user);
 					gi = new GameInf(player, dealer, deckInf, "Lose");
-					//setSession(gi, user);
 					return gi;
 
 				}
@@ -87,35 +72,24 @@ public class GameManager {
 		return null;
 	}
 
-	public User setDB(int judge, User user) {
+	public Player changePlayerAscore(Player player) {
 
-		Timestamp playTime = new Timestamp(System.currentTimeMillis());
-		GameDB gdb = new GameDB();
-		UserDB udb = new UserDB();
-		Game game = new Game(user.getId(), judge, playTime);
-
-		if (judge == 0) {
-			user.setGameRecord(1, 1, 0, (double) user.getWin() / user.getPlay());
-		} else if (judge == 1) {
-			user.setGameRecord(1, 0, 1, (double) user.getWin() / user.getPlay());
-		} else if (judge == 2) {
-			user.setGameRecord(1, 0, 0, (double) user.getWin() / user.getPlay());
+		if (player.getAscore() > player.getScore()) {
+			player.setScore(player.getAscore());
+			player.setAscore(0);
 		}
 
-		gdb.insertGame(game);
-		udb.updateUserRecord(user);
-
-		return user;
+		return player;
 	}
 
-	//	if (player.getAscore() > player.getScore()) {
-	//	player.setScore(player.getAscore());
-	//	player.setAscore(0);
-	//}
-	//
-	//if (dealer.getAscore() > dealer.getScore()) {
-	//	dealer.setScore(dealer.getAscore());
-	//	dealer.setAscore(0);
-	//}
+	public Dealer changeDealerAscore(Dealer dealer) {
+
+		if (dealer.getAscore() > dealer.getScore()) {
+			dealer.setScore(dealer.getAscore());
+			dealer.setAscore(0);
+		}
+
+		return dealer;
+	}
 
 }
