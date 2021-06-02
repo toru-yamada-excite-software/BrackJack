@@ -4,64 +4,35 @@ public class GameManager {
 
 	GameInf gi;
 	int command;
+	Player player;
+	Dealer dealer;
+	Deck deckInf;
 
 	public GameManager(GameInf gi, int command) {
 		this.gi = gi;
 		this.command = command;
+		player = gi.getPlayer();
+		dealer = gi.getDealer();
+		deckInf = gi.getDeck();
 	}
 
 	public GameInf GameManagement() {
 
-		Player player = gi.getPlayer();
-		Dealer dealer = gi.getDealer();
-		Deck deckInf = gi.getDeck();
-
 		if (command == 0) {
 
-			deckInf = player.draw(deckInf);
-
-			if (player.getBust()) {
-				gi = new GameInf(player, dealer, deckInf, "Lose");
-				return gi;
-			} else {
-				gi = new GameInf(player, dealer, deckInf, null);
-				return gi;
-			}
+			doHit();
+			return gi;
 
 		} else if (command == 1) {
 
-			deckInf = dealer.draw(deckInf);
-
-			if (dealer.getBust()) {
-				gi = new GameInf(player, dealer, deckInf, "Win");
-				return gi;
-			} else {
-
-				player = changePlayerAscore(player);
-				dealer = changeDealerAscore(dealer);
-
-				if (player.getScore() > dealer.getScore()) {
-					gi = new GameInf(player, dealer, deckInf, "Win");
-					return gi;
-				} else if (player.getScore() == dealer.getScore()) {
-					gi = new GameInf(player, dealer, deckInf, "Draw");
-					return gi;
-				} else if (player.getScore() < dealer.getScore()) {
-					gi = new GameInf(player, dealer, deckInf, "Lose");
-					return gi;
-				}
-
-			}
+			doStand();
+			return gi;
 		}
 
 		return null;
 	}
 
 	public GameInf naturalBJ() {
-
-		Player player = gi.getPlayer();
-		Dealer dealer = gi.getDealer();
-		Deck deckInf = gi.getDeck();
 
 		if (dealer.getAscore() == 21 || player.getAscore() == 21) {
 
@@ -80,6 +51,41 @@ public class GameManager {
 		}
 
 		return gi;
+	}
+
+	public void doHit() {
+
+		deckInf = player.draw(deckInf);
+
+		if (player.getBust()) {
+			gi = new GameInf(player, dealer, deckInf, "Lose");
+		} else {
+			gi = new GameInf(player, dealer, deckInf, null);
+		}
+
+	}
+
+	public void doStand() {
+
+		deckInf = dealer.draw(deckInf);
+
+		if (dealer.getBust()) {
+			gi = new GameInf(player, dealer, deckInf, "Win");
+		} else {
+
+			player = changePlayerAscore(player);
+			dealer = changeDealerAscore(dealer);
+
+			if (player.getScore() > dealer.getScore()) {
+				gi = new GameInf(player, dealer, deckInf, "Win");
+			} else if (player.getScore() == dealer.getScore()) {
+				gi = new GameInf(player, dealer, deckInf, "Draw");
+			} else if (player.getScore() < dealer.getScore()) {
+				gi = new GameInf(player, dealer, deckInf, "Lose");
+			}
+
+		}
+
 	}
 
 	public Player changePlayerAscore(Player player) {

@@ -14,8 +14,10 @@ import org.mockito.MockitoAnnotations;
 public class GameManagerTest {
 
 	Deck deck = new Deck();
+
 	@Mock
 	private Player player;
+
 	Dealer dealer = new Dealer();
 	int command = 0;
 	GameInf gi = new GameInf(player, dealer, deck, null);
