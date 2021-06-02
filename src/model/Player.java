@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Player extends PlayerBase {
+	private static final long serialVersionUID = -1993110647316686215L;
 
 	@Override
 	public Deck draw(Deck deckInf) {

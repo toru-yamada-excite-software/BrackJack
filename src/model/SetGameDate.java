@@ -17,13 +17,13 @@ public class SetGameDate {
 			Game game = new Game(null, 0, null);
 
 			if (judge.equals("Win")) {
-				user.setGameRecord(1, 1, 0, (double) user.getWin() / user.getPlay());
+				user.setGameRecord(1, 1, 0, (double) (user.getWin() + 1) / (user.getPlay() + 1));
 				game = new Game(user.getId(), 0, playTime);
 			} else if (judge.equals("Draw")) {
-				user.setGameRecord(1, 0, 1, (double) user.getWin() / user.getPlay());
+				user.setGameRecord(1, 0, 1, (double) user.getWin() / (user.getPlay() + 1));
 				game = new Game(user.getId(), 1, playTime);
 			} else if (judge.equals("Lose")) {
-				user.setGameRecord(1, 0, 0, (double) user.getWin() / user.getPlay());
+				user.setGameRecord(1, 0, 0, (double) user.getWin() / (user.getPlay() + 1));
 				game = new Game(user.getId(), 2, playTime);
 			}
 

@@ -18,7 +18,7 @@ public class Card implements Serializable {
 
 	public enum Suite {
 
-		SPADE("♠", 0), CLUB("♣", 1), DIAMOID("♢", 2), HEART("♡", 3);
+		SPADE("♠", 0), CLUB("♣", 1), DIAMOND("♢", 2), HEART("♡", 3);
 
 		private String label;
 		private int id;
@@ -47,16 +47,8 @@ public class Card implements Serializable {
 		}
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
 	public int getNumber() {
 		return number;
-	}
-
-	public void setSuite(int suite) {
-		this.suite = suite;
 	}
 
 	public String getSuite() {
