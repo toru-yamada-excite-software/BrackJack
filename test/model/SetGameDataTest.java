@@ -13,14 +13,14 @@ import org.mockito.MockitoAnnotations;
 import dbmodel.GameDB;
 import dbmodel.UserDB;
 
-public class SetGameDateTest {
+public class SetGameDataTest {
 
 	private User user;
 	private String judge;
 	private Game game;
 
 	@InjectMocks
-	private SetGameDate sgd = new SetGameDate();
+	private SetGameData sgd = new SetGameData();
 
 	@Mock
 	private GameDB gdb;
@@ -48,7 +48,7 @@ public class SetGameDateTest {
 	public void setDateTestNull() {
 
 		judge = null;
-		user = sgd.setDate(user, judge);
+		user = sgd.setData(user, judge);
 
 		int expectedPlay = 9;
 		int expectedWin = 9;
@@ -75,7 +75,7 @@ public class SetGameDateTest {
 		doNothing().when(gdb).insertGame(game);
 		doNothing().when(udb).updateUserRecord(user);
 
-		user = sgd.setDate(user, judge);
+		user = sgd.setData(user, judge);
 
 		int expectedPlay = 10;
 		int expectedWin = 10;
@@ -102,7 +102,7 @@ public class SetGameDateTest {
 		doNothing().when(gdb).insertGame(game);
 		doNothing().when(udb).updateUserRecord(user);
 
-		user = sgd.setDate(user, judge);
+		user = sgd.setData(user, judge);
 
 		int expectedPlay = 10;
 		int expectedWin = 9;
@@ -129,7 +129,7 @@ public class SetGameDateTest {
 		doNothing().when(gdb).insertGame(game);
 		doNothing().when(udb).updateUserRecord(user);
 
-		user = sgd.setDate(user, judge);
+		user = sgd.setData(user, judge);
 
 		int expectedPlay = 10;
 		int expectedWin = 9;

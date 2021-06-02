@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import model.GameInf;
 import model.GameManager;
-import model.SetGameDate;
+import model.SetGameData;
 import model.User;
 
 @WebServlet("/GameServlet")
@@ -32,8 +32,8 @@ public class GameSarvlet extends HttpServlet {
 		GameManager gm = new GameManager(gi, command);
 		gi = gm.GameManagement();
 
-		SetGameDate sgd = new SetGameDate();
-		user = sgd.setDate(user, gi.getMessage());
+		SetGameData sgd = new SetGameData();
+		user = sgd.setData(user, gi.getMessage());
 
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);

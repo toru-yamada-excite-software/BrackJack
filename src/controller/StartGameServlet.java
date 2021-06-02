@@ -15,7 +15,7 @@ import model.Deck;
 import model.GameInf;
 import model.GameManager;
 import model.Player;
-import model.SetGameDate;
+import model.SetGameData;
 import model.User;
 
 @WebServlet("/StartGameServlet")
@@ -42,8 +42,8 @@ public class StartGameServlet extends HttpServlet {
 
 		GameManager gm = new GameManager(gi, 0);
 		gi = gm.naturalBJ();
-		SetGameDate sgd = new SetGameDate();
-		user = sgd.setDate(user, gi.getMessage());
+		SetGameData sgd = new SetGameData();
+		user = sgd.setData(user, gi.getMessage());
 
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("user", user);

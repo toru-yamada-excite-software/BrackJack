@@ -49,6 +49,30 @@ public class PlayerTest {
 	}
 
 	@Test
+	public void firstDrawTest() {
+
+		decks.setDeck(deck);
+		decks = player.firstDraw(decks);
+
+		String expectedSuite = "♠";
+		int expectedNumber = 1;
+		String expectedSuite2 = "♠";
+		int expectedNumber2 = 2;
+
+		String actualSuite = player.getHand().get(0).getSuite();
+		int actualNumber = player.getHand().get(0).getNumber();
+
+		String actualSuite2 = player.getHand().get(1).getSuite();
+		int actualNumber2 = player.getHand().get(1).getNumber();
+
+		assertThat(actualSuite, is(expectedSuite));
+		assertThat(actualNumber, is(expectedNumber));
+		assertThat(actualSuite2, is(expectedSuite2));
+		assertThat(actualNumber2, is(expectedNumber2));
+
+	}
+
+	@Test
 	public void scoreCalcTest() {
 
 		int expected = 1;

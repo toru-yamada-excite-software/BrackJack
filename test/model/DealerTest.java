@@ -29,13 +29,13 @@ public class DealerTest {
 
 		}
 
-		decks.setDeck(deck);
-		decks = dealer.draw(decks);
-
 	}
 
 	@Test
 	public void drawTest() {
+
+		decks.setDeck(deck);
+		decks = dealer.draw(decks);
 
 		String expectedSuite = "♠";
 		int expectedNumber = 6;
@@ -49,7 +49,34 @@ public class DealerTest {
 	}
 
 	@Test
+	public void firstDrawTest() {
+
+		decks.setDeck(deck);
+		decks = dealer.firstDraw(decks);
+
+		String expectedSuite = "♠";
+		int expectedNumber = 1;
+		String expectedSuite2 = "♠";
+		int expectedNumber2 = 2;
+
+		String actualSuite = dealer.getHand().get(0).getSuite();
+		int actualNumber = dealer.getHand().get(0).getNumber();
+
+		String actualSuite2 = dealer.getHand().get(1).getSuite();
+		int actualNumber2 = dealer.getHand().get(1).getNumber();
+
+		assertThat(actualSuite, is(expectedSuite));
+		assertThat(actualNumber, is(expectedNumber));
+		assertThat(actualSuite2, is(expectedSuite2));
+		assertThat(actualNumber2, is(expectedNumber2));
+
+	}
+
+	@Test
 	public void scoreCalcTest() {
+
+		decks.setDeck(deck);
+		decks = dealer.draw(decks);
 
 		int expected = 21;
 
@@ -61,6 +88,9 @@ public class DealerTest {
 
 	@Test
 	public void bustJudgeTest() {
+
+		decks.setDeck(deck);
+		decks = dealer.draw(decks);
 
 		dealer.bustJudge();
 

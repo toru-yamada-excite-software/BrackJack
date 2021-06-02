@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 import dbmodel.GameDB;
 import dbmodel.UserDB;
 
-public class SetGameDate {
+public class SetGameData {
 
-	public User setDate(User user, String judge) {
+	public User setData(User user, String judge) {
 
 		if (judge != null) {
 
