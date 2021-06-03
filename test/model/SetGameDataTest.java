@@ -68,7 +68,7 @@ public class SetGameDataTest {
 	}
 
 	@Test
-	public void setDateTestWin() {
+	public void setDateTest() {
 
 		judge = "Win";
 
@@ -81,60 +81,6 @@ public class SetGameDataTest {
 		int expectedWin = 10;
 		int expectedDraw = 0;
 		double expectedWinRate = 1;
-
-		int actualPlay = user.getPlay();
-		int actualWin = user.getWin();
-		int actualDraw = user.getDraw();
-		double actualWinRate = user.getWinRate();
-
-		assertThat(actualPlay, is(expectedPlay));
-		assertThat(actualWin, is(expectedWin));
-		assertThat(actualDraw, is(expectedDraw));
-		assertThat(actualWinRate, is(expectedWinRate));
-
-	}
-
-	@Test
-	public void setDateTestDraw() {
-
-		judge = "Draw";
-
-		doNothing().when(gdb).insertGame(game);
-		doNothing().when(udb).updateUserRecord(user);
-
-		user = sgd.setData(user, judge);
-
-		int expectedPlay = 10;
-		int expectedWin = 9;
-		int expectedDraw = 1;
-		double expectedWinRate = 0.9;
-
-		int actualPlay = user.getPlay();
-		int actualWin = user.getWin();
-		int actualDraw = user.getDraw();
-		double actualWinRate = user.getWinRate();
-
-		assertThat(actualPlay, is(expectedPlay));
-		assertThat(actualWin, is(expectedWin));
-		assertThat(actualDraw, is(expectedDraw));
-		assertThat(actualWinRate, is(expectedWinRate));
-
-	}
-
-	@Test
-	public void setDateTestLose() {
-
-		judge = "Lose";
-
-		doNothing().when(gdb).insertGame(game);
-		doNothing().when(udb).updateUserRecord(user);
-
-		user = sgd.setData(user, judge);
-
-		int expectedPlay = 10;
-		int expectedWin = 9;
-		int expectedDraw = 0;
-		double expectedWinRate = 0.9;
 
 		int actualPlay = user.getPlay();
 		int actualWin = user.getWin();

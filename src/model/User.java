@@ -69,11 +69,16 @@ public class User implements Serializable {
 		return winRate;
 	}
 
-	public void calcGameRecord(int play, int win, int draw, double winRate) {
-		this.play += play;
-		this.win += win;
-		this.draw += draw;
-		this.winRate = winRate;
+	public void calcGameRecord(String judge) {
+
+		play++;
+		if (judge.equals("Win")) {
+			win++;
+		} else if (judge.equals("Draw")) {
+			draw++;
+		}
+
+		winRate = win / play;
 	}
 
 }
