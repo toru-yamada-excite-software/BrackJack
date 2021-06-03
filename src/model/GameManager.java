@@ -3,7 +3,6 @@ package model;
 public class GameManager {
 
 	private HitOrStand hos = new HitOrStand();
-	private ChangeAscore ca = new ChangeAscore();
 
 	public GameInf GameManagement(GameInf gi, int command) {
 
@@ -23,15 +22,14 @@ public class GameManager {
 
 		if (dealer.getAscore() == 21 || player.getAscore() == 21) {
 
-			if (dealer.getAscore() == 21 && player.getAscore() == 21) {
-				player = ca.changePlayerAscore(player);
-				dealer = ca.changeDealerAscore(dealer);
+			player.changeAscore();
+			dealer.changeAscore();
+
+			if (dealer.getScore() == 21 && player.getScore() == 21) {
 				gi = new GameInf(player, dealer, deckInf, "Draw");
-			} else if (dealer.getAscore() == 21) {
-				dealer = ca.changeDealerAscore(dealer);
+			} else if (dealer.getScore() == 21) {
 				gi = new GameInf(player, dealer, deckInf, "Lose");
 			} else {
-				player = ca.changePlayerAscore(player);
 				gi = new GameInf(player, dealer, deckInf, "Win");
 			}
 

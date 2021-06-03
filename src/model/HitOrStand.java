@@ -2,7 +2,6 @@ package model;
 
 public class HitOrStand {
 
-	private ChangeAscore ca = new ChangeAscore();
 	Player player;
 	Dealer dealer;
 	Deck deckInf;
@@ -36,8 +35,8 @@ public class HitOrStand {
 			gi = new GameInf(player, dealer, deckInf, "Win");
 		} else {
 
-			player = ca.changePlayerAscore(player);
-			dealer = ca.changeDealerAscore(dealer);
+			player.changeAscore();
+			dealer.changeAscore();
 
 			if (player.getScore() > dealer.getScore()) {
 				gi = new GameInf(player, dealer, deckInf, "Win");
