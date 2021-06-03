@@ -19,6 +19,8 @@ import model.User;
 public class GameLogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1896139184869454421L;
 
+	GameDB gdb = new GameDB();
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -27,19 +29,12 @@ public class GameLogServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		String id = user.getId();
 
-		GameDB gdb = new GameDB();
 		ArrayList<Game> gameList = gdb.getGame(id);
 
 		request.setAttribute("gameList", gameList);
 
 		RequestDispatcher rd = request.getRequestDispatcher("gamelog.jsp");
 		rd.forward(request, response);
-
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
 	}
 
