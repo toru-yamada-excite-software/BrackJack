@@ -18,7 +18,7 @@ public class SetGameData {
 			Timestamp playTime = new Timestamp(System.currentTimeMillis());
 
 			user.calcGameRecord(judge);
-			Game game = new Game(user.getId(), wlc.StrConvert(judge), playTime);
+			Game game = new Game(user.getId(), wlc.strConvert(judge), playTime);
 
 			gdb.insertGame(game);
 			udb.updateUserRecord(user);

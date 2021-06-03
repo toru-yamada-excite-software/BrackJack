@@ -43,7 +43,7 @@ public class WinLoseConvertTest {
 	public void winStrTest() {
 
 		int expected = 0;
-		int actual = wlc.StrConvert("Win");
+		int actual = wlc.strConvert("Win");
 
 		assertThat(actual, is(expected));
 
@@ -53,7 +53,7 @@ public class WinLoseConvertTest {
 	public void drawStrTest() {
 
 		int expected = 1;
-		int actual = wlc.StrConvert("Draw");
+		int actual = wlc.strConvert("Draw");
 
 		assertThat(actual, is(expected));
 
@@ -63,7 +63,7 @@ public class WinLoseConvertTest {
 	public void LoseStrTest() {
 
 		int expected = 2;
-		int actual = wlc.StrConvert("Lose");
+		int actual = wlc.strConvert("Lose");
 
 		assertThat(actual, is(expected));
 

@@ -14,7 +14,7 @@ public class WinLoseConvert {
 
 	}
 
-	public int StrConvert(String str) {
+	public int strConvert(String str) {
 
 		if (str.equals("Win")) {
 			return 0;

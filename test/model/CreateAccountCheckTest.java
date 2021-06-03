@@ -3,16 +3,32 @@ package model;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import dbmodel.UserDB;
+
 public class CreateAccountCheckTest {
 
-	private CreateAccountCheck cac;
+	private CreateAccountCheck cac = new CreateAccountCheck();;
+	private UserDB udb = new UserDB();
+	private User user;
+	private String id = "test";
+	private String password = "test";
+	private String name = "test";
 
 	@BeforeEach
-	public void name() {
-		cac = new CreateAccountCheck();
+	public void setup() {
+		user.setId(id);
+		user.setPassword(password);
+		user.setName(name);
+		udb.insertUser(user);
+	}
+
+	@AfterEach
+	public void delete() {
+		udb.deleteUser(id);
 	}
 
 	//確認用パスワードとの不一致
@@ -20,7 +36,7 @@ public class CreateAccountCheckTest {
 	public void passMachTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("2", "p", "a", "n2");
+		boolean actual = cac.check(id, password, "tes", name);
 
 		assertThat(actual, is(expected));
 
@@ -31,7 +47,7 @@ public class CreateAccountCheckTest {
 	public void idVoidTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("", "p", "p", "n2");
+		boolean actual = cac.check("", password, password, name);
 
 		assertThat(actual, is(expected));
 
