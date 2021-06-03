@@ -54,6 +54,15 @@ public abstract class PlayerBase implements Serializable {
 
 	}
 
+	public void changeAscore() {
+
+		if (Ascore > score) {
+			score = Ascore;
+			Ascore = 0;
+		}
+
+	}
+
 	public void setScore(int score) {
 		this.score = score;
 	}
