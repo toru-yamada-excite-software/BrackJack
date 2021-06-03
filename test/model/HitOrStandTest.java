@@ -1,7 +1,7 @@
 package model;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 

@@ -36,7 +36,7 @@
 
 		    <tr>
 		    	<th><%= game.getId() %></th>
-				<th><%= wlc.convert(game.getWinLose()) %></th>
+				<th><%= wlc.numConvert(game.getWinLose()) %></th>
 				<th><%= sdf.format(game.getPlayTime()) %></th>
 			</tr>
 		<% } %>
