@@ -16,7 +16,7 @@ import model.SetGameData;
 import model.User;
 
 @WebServlet("/GameServlet")
-public class GameSarvlet extends HttpServlet {
+public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = -359485711102746206L;
 
 	GameManager gm = new GameManager();

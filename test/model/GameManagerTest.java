@@ -2,7 +2,7 @@ package model;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,17 +13,14 @@ import org.mockito.MockitoAnnotations;
 
 public class GameManagerTest {
 
-	Deck deck = new Deck();
+	@InjectMocks
+	private GameManager gm = new GameManager();
 
 	@Mock
-	private Player player;
+	private HitOrStand hos = new HitOrStand();
 
-	Dealer dealer = new Dealer();
-	int command = 0;
-	GameInf gi = new GameInf(player, dealer, deck, null);
-
-	@InjectMocks
-	private GameManager gm = new GameManager(gi, command);
+	@Mock
+	private ChangeAscore ca = new ChangeAscore();
 
 	@BeforeEach
 	public void setup() {
@@ -31,15 +28,16 @@ public class GameManagerTest {
 	}
 
 	@Test
-	public void GameManagementTest1() {
+	public void GameManagementTest() {
 
-		doReturn(deck).when(player).draw(any());
-		doReturn(true).when(player).getBust();
+		GameInf gi = new GameInf(null, null, null, "Win");
 
-		gi = gm.GameManagement();
+		doReturn(gi).when(hos).doHit(anyObject());
 
-		String expected = "Lose";
-		String actual = gi.getMessage();
+		GameInf actualGi = gm.GameManagement(gi, 0);
+
+		String expected = "Win";
+		String actual = actualGi.getMessage();
 
 		assertThat(actual, is(expected));
 
