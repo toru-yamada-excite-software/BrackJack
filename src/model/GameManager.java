@@ -2,23 +2,15 @@ package model;
 
 public class GameManager {
 
-	int command;
-
-	public GameManager(int command) {
-		this.command = command;
-	}
-
-	public GameInf GameManagement(GameInf gi) {
+	public GameInf GameManagement(GameInf gi, int command) {
 
 		if (command == 0) {
 
-			doHit(gi);
-			return gi;
+			return doHit(gi);
 
 		} else if (command == 1) {
 
-			doStand(gi);
-			return gi;
+			return doStand(gi);
 		}
 
 		return null;
@@ -49,7 +41,7 @@ public class GameManager {
 		return gi;
 	}
 
-	public void doHit(GameInf gi) {
+	public GameInf doHit(GameInf gi) {
 
 		Player player = gi.getPlayer();
 		Dealer dealer = gi.getDealer();
@@ -63,9 +55,10 @@ public class GameManager {
 			gi = new GameInf(player, dealer, deckInf, null);
 		}
 
+		return gi;
 	}
 
-	public void doStand(GameInf gi) {
+	public GameInf doStand(GameInf gi) {
 
 		Player player = gi.getPlayer();
 		Dealer dealer = gi.getDealer();
@@ -90,6 +83,7 @@ public class GameManager {
 
 		}
 
+		return gi;
 	}
 
 	public Player changePlayerAscore(Player player) {

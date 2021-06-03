@@ -19,6 +19,9 @@ import model.User;
 public class GameSarvlet extends HttpServlet {
 	private static final long serialVersionUID = -359485711102746206L;
 
+	GameManager gm = new GameManager();
+	SetGameData sgd = new SetGameData();
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,10 +32,8 @@ public class GameSarvlet extends HttpServlet {
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 		int command = Integer.parseInt(request.getParameter("command"));
 
-		GameManager gm = new GameManager(gi, command);
-		gi = gm.GameManagement();
+		gi = gm.GameManagement(gi, command);
 
-		SetGameData sgd = new SetGameData();
 		user = sgd.setData(user, gi.getMessage());
 
 		session.setAttribute("user", user);
