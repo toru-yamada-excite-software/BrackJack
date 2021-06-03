@@ -15,9 +15,9 @@ public class UserDBTest {
 
 	private UserDB udb = new UserDB();
 	private User user = new User();
-	private String id = "2";
-	private String password = "pass";
-	private String name = "name";
+	private String id = "test";
+	private String password = "test";
+	private String name = "test";
 
 	@BeforeEach
 	public void setup() {
@@ -25,6 +25,7 @@ public class UserDBTest {
 		user.setId(id);
 		user.setPassword(password);
 		user.setName(name);
+		user.setWinRate(1);
 		udb.insertUser(user);
 
 	}
@@ -76,11 +77,11 @@ public class UserDBTest {
 	@Test
 	public void getRankingTest() {
 
-		double expected = 0;
+		double expected = 1;
 
 		ArrayList<User> ranking = udb.getRanking();
 
-		double actual = ranking.get(3).getWinRate();
+		double actual = ranking.get(0).getWinRate();
 
 		assertThat(actual, is(expected));
 
@@ -90,7 +91,7 @@ public class UserDBTest {
 	@Test
 	public void getMyRankingTest() {
 
-		int expected = 4;
+		int expected = 1;
 
 		int actual = udb.getMyRanking(id);
 

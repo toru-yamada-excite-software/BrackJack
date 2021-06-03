@@ -18,8 +18,8 @@ import model.User;
 public class DeleteAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = -1368986875981582268L;
 
-	UserDB udb = new UserDB();
-	GameDB gdb = new GameDB();
+	private UserDB udb = new UserDB();
+	private GameDB gdb = new GameDB();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

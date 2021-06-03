@@ -18,14 +18,14 @@ import model.User;
 public class RankingServlet extends HttpServlet {
 	private static final long serialVersionUID = 5947824596754570018L;
 
+	private UserDB udb = new UserDB();
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-
-		UserDB udb = new UserDB();
 
 		ArrayList<User> ranking = udb.getRanking();
 		int myRank = udb.getMyRanking(user.getId());
@@ -36,11 +36,6 @@ public class RankingServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("ranking.jsp");
 		rd.forward(request, response);
 
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 	}
 
 }

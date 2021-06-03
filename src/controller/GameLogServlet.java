@@ -19,7 +19,7 @@ import model.User;
 public class GameLogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1896139184869454421L;
 
-	GameDB gdb = new GameDB();
+	private GameDB gdb = new GameDB();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

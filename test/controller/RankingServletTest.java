@@ -35,9 +35,9 @@ public class RankingServletTest {
 	@Test
 	public void doGetTest() throws Exception {
 
-		String id = "1";
+		String id = "id";
 		String password = "p";
-		String name = "nn";
+		String name = "name";
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -52,10 +52,11 @@ public class RankingServletTest {
 		ranking.add(user);
 
 		doReturn(ranking).when(udb).getRanking();
-		doReturn(1).when(udb).getMyRanking("1");
+		doReturn(1).when(udb).getMyRanking(id);
 
 		rs.doGet(request, response);
 
+		@SuppressWarnings("unchecked")
 		ArrayList<User> getList = (ArrayList<User>) request.getAttribute("ranking");
 		int actualRank = (int) request.getAttribute("myRank");
 		String actualId = getList.get(0).getId();

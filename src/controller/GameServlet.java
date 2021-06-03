@@ -19,8 +19,8 @@ import model.User;
 public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = -359485711102746206L;
 
-	GameManager gm = new GameManager();
-	SetGameData sgd = new SetGameData();
+	private GameManager gm = new GameManager();
+	private SetGameData sgd = new SetGameData();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

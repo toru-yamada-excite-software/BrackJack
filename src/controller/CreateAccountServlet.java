@@ -17,8 +17,8 @@ import model.User;
 public class CreateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 6364871625137530566L;
 
-	UserDB udb = new UserDB();
-	CreateAccountCheck cac = new CreateAccountCheck();
+	private UserDB udb = new UserDB();
+	private CreateAccountCheck cac = new CreateAccountCheck();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

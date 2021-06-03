@@ -19,9 +19,6 @@ public class GameManagerTest {
 	@Mock
 	private HitOrStand hos = new HitOrStand();
 
-	@Mock
-	private ChangeAscore ca = new ChangeAscore();
-
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);

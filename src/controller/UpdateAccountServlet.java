@@ -17,7 +17,7 @@ import model.User;
 public class UpdateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 715640114755191650L;
 
-	UserDB udb = new UserDB();
+	private UserDB udb = new UserDB();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
