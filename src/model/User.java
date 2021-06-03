@@ -78,7 +78,7 @@ public class User implements Serializable {
 			draw++;
 		}
 
-		winRate = win / play;
+		winRate = (double) win / play;
 	}
 
 }
