@@ -8,15 +8,11 @@ public class GameManager {
 	public GameInf GameManagement(GameInf gi, int command) {
 
 		if (command == 0) {
-
 			return hos.doHit(gi);
-
-		} else if (command == 1) {
-
+		} else {
 			return hos.doStand(gi);
 		}
 
-		return null;
 	}
 
 	public GameInf naturalBJ(GameInf gi) {

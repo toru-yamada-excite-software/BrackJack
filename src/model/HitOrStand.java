@@ -3,12 +3,15 @@ package model;
 public class HitOrStand {
 
 	private ChangeAscore ca = new ChangeAscore();
+	Player player;
+	Dealer dealer;
+	Deck deckInf;
 
 	public GameInf doHit(GameInf gi) {
 
-		Player player = gi.getPlayer();
-		Dealer dealer = gi.getDealer();
-		Deck deckInf = gi.getDeck();
+		player = gi.getPlayer();
+		dealer = gi.getDealer();
+		deckInf = gi.getDeck();
 
 		deckInf = player.draw(deckInf);
 
@@ -23,9 +26,9 @@ public class HitOrStand {
 
 	public GameInf doStand(GameInf gi) {
 
-		Player player = gi.getPlayer();
-		Dealer dealer = gi.getDealer();
-		Deck deckInf = gi.getDeck();
+		player = gi.getPlayer();
+		dealer = gi.getDealer();
+		deckInf = gi.getDeck();
 
 		deckInf = dealer.draw(deckInf);
 
