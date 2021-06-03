@@ -3,7 +3,6 @@ package controller;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Matchers.*;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 import javax.servlet.http.HttpSession;
@@ -48,18 +47,18 @@ public class StartGameServletTest {
 		session.setAttribute("user", user);
 		GameInf gi = new GameInf(null, null, null, "Win");
 
-		doReturn(gi).when(gm).naturalBJ();
-		doReturn(user).when(sgd).setData(anyObject(), any());
+		doReturn(gi).when(gm).naturalBJ(anyObject());
+		doReturn(user).when(sgd).setData(anyObject(), anyString());
 
 		sgs.doPost(request, response);
 
 		String expectedId = "id";
 		String expectedMessage = "Win";
 		session = request.getSession();
-		user = (User) session.getAttribute("user");
-		gi = (GameInf) session.getAttribute("gameInf");
-		String actualId = user.getId();
-		String actualMessage = gi.getMessage();
+		User actualUser = (User) session.getAttribute("user");
+		GameInf actualGi = (GameInf) session.getAttribute("gameInf");
+		String actualId = actualUser.getId();
+		String actualMessage = actualGi.getMessage();
 
 		assertThat(actualId, is(expectedId));
 		assertThat(actualMessage, is(expectedMessage));
