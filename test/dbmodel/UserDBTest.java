@@ -25,7 +25,6 @@ public class UserDBTest {
 		user.setId(id);
 		user.setPassword(password);
 		user.setName(name);
-		user.setWinRate(1);
 		udb.insertUser(user);
 
 	}

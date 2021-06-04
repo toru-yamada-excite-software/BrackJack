@@ -10,6 +10,21 @@ public class Deck implements Serializable {
 	private ArrayList<Card> deck = new ArrayList<Card>();
 	private int index = 0;
 
+	public Deck() {
+
+		for (int i = 0; i < 4; i++) {
+
+			for (int j = 1; j <= 13; j++) {
+				Card card = new Card(i, j);
+				deck.add(card);
+			}
+
+		}
+
+		Collections.shuffle(deck);
+
+	}
+
 	public void setDeck(ArrayList<Card> deck) {
 		this.deck = deck;
 	}
@@ -24,21 +39,6 @@ public class Deck implements Serializable {
 
 	public int getIndex() {
 		return index;
-	}
-
-	public void createDeck() {
-
-		for (int i = 0; i < 4; i++) {
-
-			for (int j = 1; j < 14; j++) {
-				Card card = new Card(i, j);
-				deck.add(card);
-			}
-
-		}
-
-		Collections.shuffle(deck);
-
 	}
 
 }

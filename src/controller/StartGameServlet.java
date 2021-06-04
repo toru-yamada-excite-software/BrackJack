@@ -36,7 +36,6 @@ public class StartGameServlet extends HttpServlet {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
 		Deck deckInf = new Deck();
-		deckInf.createDeck();
 
 		deckInf = dealer.firstDraw(deckInf);
 		deckInf = player.firstDraw(deckInf);

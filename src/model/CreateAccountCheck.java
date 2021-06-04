@@ -8,6 +8,7 @@ import dbmodel.UserDB;
 public class CreateAccountCheck {
 
 	private static final Pattern PATTERN = Pattern.compile("^[0-9A-Za-z!-/:-@^_]+$");
+	private UserDB udb = new UserDB();
 
 	public boolean check(String id, String password1, String password2, String name) {
 
@@ -15,8 +16,6 @@ public class CreateAccountCheck {
 		if (!password1.equals(password2)) {
 			return false;
 		}
-
-		UserDB udb = new UserDB();
 
 		//空文字判定、ID重複判定
 		if (id.equals("") || password1.equals("") || name.equals("")) {

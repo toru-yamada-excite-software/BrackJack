@@ -22,7 +22,6 @@ public class DeckTest {
 	@Test
 	public void createDeckTest() {
 
-		d.createDeck();
 		ArrayList<Card> deck = d.getDeck();
 
 		String actualSuite = deck.get(0).getSuite();

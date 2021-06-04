@@ -2,28 +2,35 @@ package model;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import dbmodel.UserDB;
 
 public class CreateAccountCheckTest {
 
+	@InjectMocks
 	private CreateAccountCheck cac = new CreateAccountCheck();;
+
+	@Mock
 	private UserDB udb = new UserDB();
-	private User user;
+
+	private User user = new User();
 	private String id = "test";
 	private String password = "test";
 	private String name = "test";
 
 	@BeforeEach
 	public void setup() {
+		MockitoAnnotations.initMocks(this);
 		user.setId(id);
-		user.setPassword(password);
-		user.setName(name);
-		udb.insertUser(user);
 	}
 
 	@AfterEach
@@ -58,7 +65,7 @@ public class CreateAccountCheckTest {
 	public void passVoidTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("2", "", "", "n2");
+		boolean actual = cac.check(id, "", "", name);
 
 		assertThat(actual, is(expected));
 
@@ -69,7 +76,7 @@ public class CreateAccountCheckTest {
 	public void nameVoidTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("2", "p", "p", "");
+		boolean actual = cac.check(id, password, password, "");
 
 		assertThat(actual, is(expected));
 
@@ -79,8 +86,10 @@ public class CreateAccountCheckTest {
 	@Test
 	public void idDuplicateTest() {
 
+		doReturn(user).when(udb).getUser(anyString());
+
 		boolean expected = false;
-		boolean actual = cac.check("1", "p", "p", "n2");
+		boolean actual = cac.check(id, "pass", "pass", "name");
 
 		assertThat(actual, is(expected));
 
@@ -91,7 +100,7 @@ public class CreateAccountCheckTest {
 	public void idCharCodeTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("あ", "p", "p", "n2");
+		boolean actual = cac.check("あ", "pass", "pass", "name");
 
 		assertThat(actual, is(expected));
 
@@ -102,7 +111,7 @@ public class CreateAccountCheckTest {
 	public void passwordCharCodeTest() {
 
 		boolean expected = false;
-		boolean actual = cac.check("1", "あ", "あ", "n2");
+		boolean actual = cac.check("id", "あ", "あ", "name");
 
 		assertThat(actual, is(expected));
 
@@ -113,7 +122,7 @@ public class CreateAccountCheckTest {
 	public void createSuccessTest() {
 
 		boolean expected = true;
-		boolean actual = cac.check("2", "p", "p", "n2");
+		boolean actual = cac.check("id", password, password, name);
 
 		assertThat(actual, is(expected));
 
