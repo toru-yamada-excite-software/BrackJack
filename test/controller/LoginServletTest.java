@@ -2,8 +2,10 @@ package controller;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +27,12 @@ public class LoginServletTest {
 	@Mock
 	private UserDB udb;
 
+	@Mock
+	private MockHttpServletRequest request;
+
+	@Mock
+	private RequestDispatcher rd;
+
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -36,17 +44,20 @@ public class LoginServletTest {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		HttpSession session = request.getSession();
-		request.setParameter("id", "1");
-		request.setParameter("password", "p");
+		HttpSession session = this.request.getSession();
+		this.request.setParameter("id", "1");
+		this.request.setParameter("password", "p");
 		User user = new User();
 
 		doReturn(user).when(udb).getUser("1", "p");
+		doNothing().when(rd).forward(anyObject(), anyObject());
 
-		login.doPost(request, response);
+		login.doPost(this.request, response);
 
+		//session = request.getSession();
 		User actual = (User) session.getAttribute("user");
 
+		verify(this.request, times(1)).getRequestDispatcher("menu.jsp");
 		assertThat(actual, is(user));
 
 	}
@@ -70,29 +81,5 @@ public class LoginServletTest {
 		assertThat(actual, is(expected));
 
 	}
-
-	//パスワード不一致
-	//	@Test
-	//	public void doPostFailTest2() {
-	//
-	//		MockHttpServletRequest request = new MockHttpServletRequest();
-	//		MockHttpServletResponse response = new MockHttpServletResponse();
-	//		request.setAttribute("id", "1");
-	//		request.setAttribute("password", "d");
-	//
-	//		doReturn(null).when(udb).getUser("1", "a");
-	//
-	//		try {
-	//			login.doPost(request, response);
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//		}
-	//
-	//		String expected = "ログインできませんでした";
-	//		String actual = (String) request.getAttribute("message");
-	//
-	//		assertEquals(expected, actual);
-	//
-	//	}
 
 }

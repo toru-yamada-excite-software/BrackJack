@@ -20,7 +20,7 @@ public class CreateAccountCheck {
 		//空文字判定、ID重複判定
 		if (id.equals("") || password1.equals("") || name.equals("")) {
 			return false;
-		} else if (udb.getUser(id) != null) {
+		} else if (udb.getUser(id)) {
 			return false;
 		}
 

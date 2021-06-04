@@ -53,7 +53,7 @@ public class UserDB {
 	}
 
 	//id重複確認用
-	public User getUser(String id) {
+	public boolean getUser(String id) {
 
 		String sql = "SELECT * FROM user WHERE id = ?";
 
@@ -62,20 +62,7 @@ public class UserDB {
 			ps.setString(1, id);
 
 			try (ResultSet rs = ps.executeQuery();) {
-
-				while (rs.next()) {
-					User u = new User();
-					u.setId(rs.getString("id"));
-					u.setPassword(rs.getString("password"));
-					u.setName(rs.getString("name"));
-					u.setPlay(rs.getInt("play"));
-					u.setWin(rs.getInt("win"));
-					u.setDraw(rs.getInt("draw"));
-					u.setWinRate(rs.getDouble("win_rate"));
-
-					return u;
-				}
-
+				return rs.next();
 			}
 
 		}
@@ -88,7 +75,7 @@ public class UserDB {
 			e.printStackTrace();
 		}
 
-		return null;
+		return false;
 	}
 
 	public ArrayList<User> getRanking() {

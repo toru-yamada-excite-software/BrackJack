@@ -57,18 +57,11 @@ public class UserDBTest {
 	@Test
 	public void getUserTest2() {
 
-		String expectedId = user.getId();
-		String expectedPassword = user.getPassword();
-		String expectedName = user.getName();
+		boolean expected = true;
 
-		User actualuser = udb.getUser(id);
-		String actualId = actualuser.getId();
-		String actualPassword = actualuser.getPassword();
-		String actualName = actualuser.getName();
+		boolean actual = udb.getUser(id);
 
-		assertThat(actualId, is(expectedId));
-		assertThat(actualPassword, is(expectedPassword));
-		assertThat(actualName, is(expectedName));
+		assertThat(actual, is(expected));
 
 	}
 
@@ -108,7 +101,7 @@ public class UserDBTest {
 		setUser.setName("name2");
 
 		udb.updateUserName(setUser);
-		User getUser = udb.getUser(id);
+		User getUser = udb.getUser(id, password);
 
 		String expected = "name2";
 		String actual = getUser.getName();
