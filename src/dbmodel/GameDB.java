@@ -14,7 +14,7 @@ public class GameDB {
 
 	public ArrayList<Game> getGame(String userId) {
 
-		String sql = "SELECT * FROM game WHERE user_id = ? LIMIT 30";
+		String sql = "SELECT * FROM game WHERE user_id = ? ORDER BY id DESC LIMIT 30";
 		ArrayList<Game> gameList = new ArrayList<Game>();
 
 		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
