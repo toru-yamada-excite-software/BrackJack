@@ -1,4 +1,4 @@
-CREATE DATABASE `brackjack`;
+CREATE DATABASE `brackjack` DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `brackjack`.`user` (
   `id` varchar(20) NOT NULL,

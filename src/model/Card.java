@@ -10,10 +10,8 @@ public class Card implements Serializable {
 	private int number;
 
 	public Card(int suite, int number) {
-
 		this.suite = suite;
 		this.number = number;
-
 	}
 
 	public enum Suite {

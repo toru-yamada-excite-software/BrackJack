@@ -45,11 +45,12 @@ public class LoginServletTest {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		HttpSession session = this.request.getSession();
-		this.request.setParameter("id", "1");
-		this.request.setParameter("password", "p");
+		request.setParameter("id", "1");
+		request.setParameter("password", "p");
 		User user = new User();
 
 		doReturn(user).when(udb).getUser("1", "p");
+		doReturn(rd).when(this.request).getRequestDispatcher("menu.jsp");
 		doNothing().when(rd).forward(anyObject(), anyObject());
 
 		login.doPost(this.request, response);

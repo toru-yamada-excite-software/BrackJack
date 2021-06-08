@@ -44,6 +44,18 @@ public abstract class PlayerBase implements Serializable {
 
 	}
 
+	public Deck drawBase(Deck deckInf) {
+
+		ArrayList<Card> deck = deckInf.getDeck();
+		int index = deckInf.getIndex();
+		Card card = deck.get(index);
+		hand.add(card);
+		scoreCalc();
+		deckInf.setIndex(index + 1);
+
+		return deckInf;
+	}
+
 	public void bustJudge() {
 
 		if (score > 21) {
