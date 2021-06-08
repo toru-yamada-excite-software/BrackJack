@@ -1,14 +1,13 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 
 public class Deck implements Serializable {
 	private static final long serialVersionUID = 2335764105033826325L;
 
-	private ArrayList<Card> deck = new ArrayList<Card>();
-	private int index = 0;
+	private LinkedList<Card> deck = new LinkedList<Card>();
 
 	public Deck() {
 
@@ -20,25 +19,15 @@ public class Deck implements Serializable {
 			}
 
 		}
-
 		Collections.shuffle(deck);
-
 	}
 
-	public void setDeck(ArrayList<Card> deck) {
+	public void setDeck(LinkedList<Card> deck) {
 		this.deck = deck;
 	}
 
-	public ArrayList<Card> getDeck() {
+	public LinkedList<Card> getDeck() {
 		return deck;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public int getIndex() {
-		return index;
 	}
 
 }
