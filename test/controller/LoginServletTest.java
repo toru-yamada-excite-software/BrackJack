@@ -44,18 +44,19 @@ public class LoginServletTest {
 
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		HttpSession session = this.request.getSession();
-		request.setParameter("id", "1");
-		request.setParameter("password", "p");
+		HttpSession session = request.getSession();
 		User user = new User();
 
+		doReturn("1").when(this.request).getParameter("id");
+		doReturn("p").when(this.request).getParameter("password");
+		doReturn(session).when(this.request).getSession();
 		doReturn(user).when(udb).getUser("1", "p");
 		doReturn(rd).when(this.request).getRequestDispatcher("menu.jsp");
 		doNothing().when(rd).forward(anyObject(), anyObject());
 
 		login.doPost(this.request, response);
 
-		//session = request.getSession();
+		session = request.getSession();
 		User actual = (User) session.getAttribute("user");
 
 		verify(this.request, times(1)).getRequestDispatcher("menu.jsp");
@@ -67,19 +68,18 @@ public class LoginServletTest {
 	@Test
 	public void doPostFailTest1() throws Exception {
 
-		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		request.setAttribute("id", "2");
-		request.setAttribute("password", "p");
 
+		doReturn("2").when(request).getParameter("id");
+		doReturn("p").when(request).getParameter("password");
 		doReturn(null).when(udb).getUser("2", "p");
+		doReturn(rd).when(request).getRequestDispatcher("login.jsp");
+		doNothing().when(rd).forward(anyObject(), anyObject());
 
-		login.doPost(request, response);
+		login.doPost(this.request, response);
 
-		String expected = "ログインできませんでした";
-		String actual = (String) request.getAttribute("message");
-
-		assertThat(actual, is(expected));
+		verify(this.request, times(1)).setAttribute("message", "ログインできませんでした");
+		verify(this.request, times(1)).getRequestDispatcher("login.jsp");
 
 	}
 
