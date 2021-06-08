@@ -20,7 +20,6 @@
 		<% User user = (User)session.getAttribute("user");
 		   @SuppressWarnings("unchecked")
 		   ArrayList<Game> gameList = (ArrayList<Game>)request.getAttribute("gameList");
-		   Game game;
 		   WinLoseConvert wlc = new WinLoseConvert();
 		   SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd k:mm:ss"); %>
 		<h1><%= user.getName() %>でログイン中</h1>
@@ -32,7 +31,7 @@
 				<th>日付</th>
 			</tr>
 		<% for(int i = 0; i < gameList.size(); i++) {
-			game = gameList.get(i); %>
+			Game game = gameList.get(i); %>
 
 		    <tr>
 		    	<th><%= game.getId() %></th>
