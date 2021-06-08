@@ -23,12 +23,26 @@ public class DeckTest {
 	public void createDeckTest() {
 
 		LinkedList<Card> deck = d.getDeck();
+		boolean[][] cardCheck = new boolean[4][13];
 
-		String actualSuite = deck.get(0).getSuite();
-		int actualNumber = deck.get(0).getNumber();
+		for (int i = 0; i < 52; i++) {
+			Card card = deck.poll();
+			if (card.getSuite().equals("♠")) {
+				cardCheck[0][card.getNumber() - 1] = true;
+			} else if (card.getSuite().equals("♣")) {
+				cardCheck[1][card.getNumber() - 1] = true;
+			} else if (card.getSuite().equals("♢")) {
+				cardCheck[2][card.getNumber() - 1] = true;
+			} else {
+				cardCheck[3][card.getNumber() - 1] = true;
+			}
+		}
 
-		assertThat(actualSuite, not("♠"));
-		assertThat(actualNumber, not(1));
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 13; j++) {
+				assertThat(cardCheck[i][j], is(true));
+			}
+		}
 
 	}
 
