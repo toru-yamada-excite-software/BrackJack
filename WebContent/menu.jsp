@@ -46,7 +46,7 @@
 			<% } %>
 			<h3>スコア：<%= gi.getPlayer().getScore() %></h3>
 
-			<% if(gi.getPlayer().getAscore() != 0) { %>
+			<% if(gi.getPlayer().getAscore() > gi.getPlayer().getScore()) { %>
 				<h3>or</h3>
 				<h3><%= gi.getPlayer().getAscore() %></h3>
 			<% } %>
