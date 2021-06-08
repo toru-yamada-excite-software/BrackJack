@@ -86,7 +86,7 @@ public class CreateAccountCheckTest {
 	@Test
 	public void idDuplicateTest() {
 
-		doReturn(user).when(udb).getUser(anyString());
+		doReturn(true).when(udb).getUser(anyString());
 
 		boolean expected = false;
 		boolean actual = cac.check(id, "pass", "pass", "name");
