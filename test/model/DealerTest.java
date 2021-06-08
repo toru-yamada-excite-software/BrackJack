@@ -38,10 +38,10 @@ public class DealerTest {
 		decks = dealer.draw(decks);
 
 		String expectedSuite = "♠";
-		int expectedNumber = 6;
+		int expectedNumber = 4;
 
-		String actualSuite = dealer.getHand().get(5).getSuite();
-		int actualNumber = dealer.getHand().get(5).getNumber();
+		String actualSuite = dealer.getHand().get(3).getSuite();
+		int actualNumber = dealer.getHand().get(3).getNumber();
 
 		assertThat(actualSuite, is(expectedSuite));
 		assertThat(actualNumber, is(expectedNumber));
@@ -78,11 +78,14 @@ public class DealerTest {
 		decks.setDeck(deck);
 		decks = dealer.draw(decks);
 
-		int expected = 21;
+		int expectedScore = 10;
+		int expectedAscore = 20;
 
-		int actual = dealer.getScore();
+		int actualScore = dealer.getScore();
+		int actualAscore = dealer.getAscore();
 
-		assertThat(actual, is(expected));
+		assertThat(actualScore, is(expectedScore));
+		assertThat(actualAscore, is(expectedAscore));
 
 	}
 
