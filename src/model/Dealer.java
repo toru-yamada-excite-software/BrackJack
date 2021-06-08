@@ -6,21 +6,26 @@ public class Dealer extends PlayerBase {
 	@Override
 	public Deck draw(Deck deckInf) {
 
-		if (Ascore == 0) {
-
-			while (score < 17) {
-				deckInf = drawBase(deckInf);
-				bustJudge();
-			}
-
-		} else {
-
-			while (Ascore < 17 && score < 17) {
-				deckInf = drawBase(deckInf);
-				bustJudge();
-			}
-
+		while (score < 17 && Ascore < 17) {
+			deckInf = drawBase(deckInf);
+			bustJudge();
 		}
+
+		//		if (Ascore == 0) {
+		//
+		//			while (score < 17) {
+		//				deckInf = drawBase(deckInf);
+		//				bustJudge();
+		//			}
+		//
+		//		} else {
+		//
+		//			while (Ascore < 17 && score < 17) {
+		//				deckInf = drawBase(deckInf);
+		//				bustJudge();
+		//			}
+		//
+		//		}
 
 		return deckInf;
 	}

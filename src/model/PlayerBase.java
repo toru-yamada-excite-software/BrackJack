@@ -37,7 +37,7 @@ public abstract class PlayerBase implements Serializable {
 		}
 
 		if (score == Ascore || Ascore > 21) {
-			Ascore = 0;
+			Ascore = score;
 		}
 		//score計算後bust判定
 		bustJudge();
