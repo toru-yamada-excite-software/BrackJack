@@ -3,7 +3,7 @@ package model;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class DeckTest {
 	@Test
 	public void createDeckTest() {
 
-		ArrayList<Card> deck = d.getDeck();
+		LinkedList<Card> deck = d.getDeck();
 
 		String actualSuite = deck.get(0).getSuite();
 		int actualNumber = deck.get(0).getNumber();
