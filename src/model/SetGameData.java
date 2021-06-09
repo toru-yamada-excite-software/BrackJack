@@ -7,18 +7,19 @@ import dbmodel.UserDB;
 
 public class SetGameData {
 
-	private WinLoseConvert wlc = new WinLoseConvert();
+	//private WinLoseConvert wlc = new WinLoseConvert();
 	private GameDB gdb = new GameDB();
 	private UserDB udb = new UserDB();
 
-	public User setData(User user, String judge) {
+	public User setData(User user, String judge, int chip) {
 
 		if (judge != null) {
 
 			Timestamp playTime = new Timestamp(System.currentTimeMillis());
 
-			user.calcGameRecord(judge);
-			Game game = new Game(user.getId(), wlc.strConvert(judge), playTime);
+			user.setChip(chip);
+			user.setPlay(user.getPlay() + 1);
+			Game game = new Game(user.getId(), chip, playTime);
 
 			gdb.insertGame(game);
 			udb.updateUserRecord(user);
