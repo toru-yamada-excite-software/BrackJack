@@ -6,12 +6,13 @@ public class Game {
 
 	private int id;
 	private String userId;
-	private int winLose;
+	private int chip;
+	//	private int winLose;
 	private Timestamp playTime;
 
-	public Game(String userId, int WinLose, Timestamp playTime) {
+	public Game(String userId, int chip, Timestamp playTime) {
 		this.userId = userId;
-		this.winLose = WinLose;
+		this.chip = chip;
 		this.playTime = playTime;
 	}
 
@@ -31,12 +32,12 @@ public class Game {
 		return userId;
 	}
 
-	public void setWinLose(int winLose) {
-		this.winLose = winLose;
+	public void setChip(int chip) {
+		this.chip = chip;
 	}
 
-	public int getWinLose() {
-		return winLose;
+	public int getchip() {
+		return chip;
 	}
 
 	public void setPlayTime(Timestamp playTime) {
