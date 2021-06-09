@@ -45,6 +45,7 @@
 			<% request.setAttribute("player", gi.getPlayer());
 			   request.setAttribute("message", gi.getMessage()); %>
 			<jsp:include page="playerInf.jsp"></jsp:include>
+			<p><%=gi.getChip()%></p>
 		</article>
 
 		<section>

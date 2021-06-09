@@ -1,13 +1,11 @@
-CREATE DATABASE `brackjack` DEFAULT CHARSET=utf8mb4;
+CREATE DATABASE `brackjack_split` DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `brackjack`.`user` (
+CREATE TABLE `brackjack_split`.`user` (
   `id` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `name` text NOT NULL,
   `play` int(11) NOT NULL DEFAULT 0,
-  `win` int(11) NOT NULL DEFAULT 0,
-  `draw` int(11) NOT NULL DEFAULT 0,
-  `win_rate` double NOT NULL DEFAULT 0,
+  `chip` int(11) NOT NULL DEFAULT 100,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
