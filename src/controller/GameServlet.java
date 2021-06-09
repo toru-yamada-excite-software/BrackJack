@@ -34,7 +34,7 @@ public class GameServlet extends HttpServlet {
 
 		gi = gm.GameManagement(gi, command);
 
-		user = sgd.setData(user, gi.getMessage());
+		user = sgd.setData(user, gi.getMessage(), gi.getChip());
 
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
