@@ -33,19 +33,11 @@
 		<jsp:include page="dealerInf.jsp"></jsp:include>
 
 		<h2>Player</h2>
-		<% request.setAttribute("player", gi.getPlayer()); %>
+		<% request.setAttribute("player", gi.getPlayer());
+		   request.setAttribute("message", gi.getMessage());%>
 		<jsp:include page="playerInf.jsp"></jsp:include>
 
-		<% if(gi.getMessage() == null) { %>
-			<form action="GameServlet" method="post">
-				<button type='submit' name='command' value='0'>hit</button>
- 				<button type='submit' name='command' value='1'>stand</button>
-			</form>
-		<% } else { %>
-			<form action="StartGameServlet" method="post">
-				<input type="submit" value="再戦">
-			</form>
-		<% } %>
+		<jsp:include page="gameButton.jsp"></jsp:include>
 
 	<% } else { %>
 		<form action="StartGameServlet" method="post">

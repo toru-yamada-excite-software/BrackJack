@@ -22,6 +22,7 @@
 	<% } else { %>
 		<h3><%= dealer.getHand().get(0).getSuite() %>-<%= dealer.getHand().get(0).getNumber() %></h3>
 	<% } %>
+
 </body>
 
 </html>
