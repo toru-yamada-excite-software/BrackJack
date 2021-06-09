@@ -39,7 +39,7 @@ public class GameServlet extends HttpServlet {
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
 
-		RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
 
 	}

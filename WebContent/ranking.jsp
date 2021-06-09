@@ -50,7 +50,7 @@
 		<h3>自分の順位：<%= myRank %>位</h3>
 		<h3>自分の勝率：<%= user.getWinRate() * 100 %>%</h3>
 
-		<a href="menu.jsp">戻る</a>
+		<a href="mainMenu.jsp">戻る</a>
 
 	</body>
 
