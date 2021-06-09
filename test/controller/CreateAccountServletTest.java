@@ -1,8 +1,9 @@
 package controller;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
+
+import javax.servlet.RequestDispatcher;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,12 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import dbmodel.UserDB;
 import model.CreateAccountCheck;
-import model.User;
 
 public class CreateAccountServletTest {
+
+	String id = "test";
+	String password = "test";
+	String name = "test";
 
 	@InjectMocks
 	private CreateAccountServlet cas = new CreateAccountServlet();
@@ -27,6 +31,12 @@ public class CreateAccountServletTest {
 	@Mock
 	private CreateAccountCheck cac;
 
+	@Mock
+	private MockHttpServletRequest request;
+
+	@Mock
+	private RequestDispatcher rd;
+
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -36,32 +46,22 @@ public class CreateAccountServletTest {
 	@Test
 	public void createSuccessTest() throws Exception {
 
-		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 
-		String id = "1";
-		String password = "p";
-		String name = "nn";
-
-		request.setParameter("id", id);
-		request.setParameter("password1", password);
-		request.setParameter("password2", password);
-		request.setParameter("name", name);
-
-		User user = new User();
-		user.setId(id);
-		user.setPassword(password);
-		user.setName(name);
-
-		doReturn(true).when(cac).check(id, password, password, name);
-		doNothing().when(udb).insertUser(user);
+		doNothing().when(request).setCharacterEncoding(anyString());
+		doReturn(id).when(request).getParameter("id");
+		doReturn(password).when(request).getParameter("password1");
+		doReturn(password).when(request).getParameter("password2");
+		doReturn(name).when(request).getParameter("naem");
+		doReturn(true).when(cac).check(anyString(), anyString(), anyString(), anyString());
+		doNothing().when(udb).insertUser(anyObject());
+		doReturn(rd).when(request).getRequestDispatcher("login.jsp");
+		doNothing().when(rd).forward(anyObject(), anyObject());
 
 		cas.doPost(request, response);
 
-		String expected = "アカウントを作成しました";
-		String actual = (String) request.getAttribute("message");
-
-		assertThat(actual, is(expected));
+		verify(request, times(1)).setAttribute("message", "アカウントを作成しました");
+		verify(request, times(1)).getRequestDispatcher("login.jsp");
 
 	}
 
@@ -69,27 +69,24 @@ public class CreateAccountServletTest {
 	@Test
 	public void createFalseTest() throws Exception {
 
-		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 
-		String id = "1";
-		String password1 = "p";
-		String password2 = "l";
-		String name = "nn";
+		String password2 = "tes";
 
-		request.setParameter("id", id);
-		request.setParameter("password1", password1);
-		request.setParameter("password2", password2);
-		request.setParameter("name", name);
-
-		doReturn(false).when(cac).check(id, password1, password2, name);
+		doNothing().when(request).setCharacterEncoding(anyString());
+		doReturn(id).when(request).getParameter("id");
+		doReturn(password).when(request).getParameter("password1");
+		doReturn(password2).when(request).getParameter("password2");
+		doReturn(name).when(request).getParameter("naem");
+		doReturn(false).when(cac).check(anyString(), anyString(), anyString(), anyString());
+		doNothing().when(udb).insertUser(anyObject());
+		doReturn(rd).when(request).getRequestDispatcher("createaccount.jsp");
+		doNothing().when(rd).forward(anyObject(), anyObject());
 
 		cas.doPost(request, response);
 
-		String expected = "アカウントを作成できませんでした";
-		String actual = (String) request.getAttribute("message");
-
-		assertThat(actual, is(expected));
+		verify(request, times(1)).setAttribute("message", "アカウントを作成できませんでした");
+		verify(request, times(1)).getRequestDispatcher("createaccount.jsp");
 
 	}
 
