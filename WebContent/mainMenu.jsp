@@ -16,42 +16,53 @@
 </head>
 
 <body>
-	<h1>BrackJack</h1>
+
 	<% User user = (User)session.getAttribute("user");
 	   GameInf gi = (GameInf)session.getAttribute("gameInf");%>
-	<h1><%= user.getName() %>でログイン中</h1>
 
-	<% if(gi.getMessage() != null) {%>
-		<h1><%= gi.getMessage() %></h1>
-	<% } %>
+	<header>
+		<h1>BrackJack</h1>
 
+		<h1><%= user.getName() %>でログイン中</h1>
+
+		<% if(gi.getMessage() != null) { %>
+			<h1><%= gi.getMessage() %></h1>
+		<% } %>
+	</header>
+
+	<main>
 	<% if(gi.getPlayer() != null) { %>
 
-		<h2>Dealer</h2>
-		<% request.setAttribute("dealer", gi.getDealer());
-		   request.setAttribute("message", gi.getMessage()); %>
-		<jsp:include page="dealerInf.jsp"></jsp:include>
+		<article>
+			<h2>Dealer</h2>
+			<% request.setAttribute("dealer", gi.getDealer());
+			   request.setAttribute("message", gi.getMessage()); %>
+			<jsp:include page="dealerInf.jsp"></jsp:include>
+		</article>
 
-		<h2>Player</h2>
-		<% request.setAttribute("player", gi.getPlayer());
-		   request.setAttribute("message", gi.getMessage());%>
-		<jsp:include page="playerInf.jsp"></jsp:include>
+		<article>
+			<h2>Player</h2>
+			<% request.setAttribute("player", gi.getPlayer());
+			   request.setAttribute("message", gi.getMessage()); %>
+			<jsp:include page="playerInf.jsp"></jsp:include>
+		</article>
 
-		<jsp:include page="gameButton.jsp"></jsp:include>
+		<section>
+			<jsp:include page="gameButton.jsp"></jsp:include>
+		</section>
 
 	<% } else { %>
-		<form action="StartGameServlet" method="post">
-			<input type="submit" value="start">
-		</form>
+		<section>
+			<form action="StartGameServlet" method="post">
+				<input type="submit" value="start">
+			</form>
+		</section>
 	<% } %>
+	</main>
 
-	<a href="GameLogServlet">戦績表示</a>
-	<a href="RankingServlet">ランキング表示</a>
-	<a href="accountmanagement.jsp">ニックネーム変更</a>
-
-	<form action="LogoutServlet" method="post">
-		<input type="submit" value="ログアウト">
-	</form>
+	<aside>
+		<jsp:include page="menu.jsp"></jsp:include>
+	</aside>
 
 </body>
 
