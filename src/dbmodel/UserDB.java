@@ -30,9 +30,7 @@ public class UserDB {
 					u.setPassword(rs.getString("password"));
 					u.setName(rs.getString("name"));
 					u.setPlay(rs.getInt("play"));
-					u.setWin(rs.getInt("win"));
-					u.setDraw(rs.getInt("draw"));
-					u.setWinRate(rs.getDouble("win_rate"));
+					u.setChip(rs.getInt("chip"));
 
 					return u;
 				}
@@ -93,9 +91,7 @@ public class UserDB {
 				u.setPassword(rs.getString("password"));
 				u.setName(rs.getString("name"));
 				u.setPlay(rs.getInt("play"));
-				u.setWin(rs.getInt("win"));
-				u.setDraw(rs.getInt("draw"));
-				u.setWinRate(rs.getDouble("win_rate"));
+				u.setChip(rs.getInt("chip"));
 				userList.add(u);
 			}
 
@@ -115,7 +111,7 @@ public class UserDB {
 
 	public int getMyRanking(String id) {
 
-		String sql = "SELECT *,(SELECT COUNT(*)+1 FROM user B WHERE B.win_rate > A.win_rate) AS rank FROM user A WHERE id = ?";
+		String sql = "SELECT *,(SELECT COUNT(*)+1 FROM user B WHERE B.chip > A.chip) AS rank FROM user A WHERE id = ?";
 
 		try (Connection con = dbc.connect();
 				PreparedStatement ps = con.prepareStatement(sql);) {
@@ -196,15 +192,13 @@ public class UserDB {
 	//ユーザー戦績更新
 	public void updateUserRecord(User user) {
 
-		String sql = "UPDATE user set play = ?, win = ?, draw = ?, win_rate = ? where id = ?";
+		String sql = "UPDATE user set play = ?, chip = ? where id = ?";
 
 		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setInt(1, user.getPlay());
-			ps.setInt(2, user.getWin());
-			ps.setInt(3, user.getDraw());
-			ps.setDouble(4, user.getWinRate());
-			ps.setString(5, user.getId());
+			ps.setInt(2, user.getChip());
+			ps.setString(3, user.getId());
 
 			ps.executeUpdate();
 
