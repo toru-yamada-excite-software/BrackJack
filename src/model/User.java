@@ -9,9 +9,10 @@ public class User implements Serializable {
 	private String password;
 	private String name;
 	private int play;
-	private int win;
-	private int draw;
-	private double winRate;
+	private int chip;
+	//	private int win;
+	//	private int draw;
+	//	private double winRate;
 
 	public void setId(String id) {
 		this.id = id;
@@ -45,40 +46,48 @@ public class User implements Serializable {
 		return play;
 	}
 
-	public void setWin(int win) {
-		this.win = win;
+	public void setChip(int chip) {
+		this.chip = chip;
 	}
 
-	public int getWin() {
-		return win;
+	public int getChip() {
+		return chip;
 	}
 
-	public void setDraw(int draw) {
-		this.draw = draw;
-	}
-
-	public int getDraw() {
-		return draw;
-	}
-
-	public void setWinRate(double winRate) {
-		this.winRate = winRate;
-	}
-
-	public double getWinRate() {
-		return winRate;
-	}
-
-	public void calcGameRecord(String judge) {
-
-		play++;
-		if (judge.equals("Win")) {
-			win++;
-		} else if (judge.equals("Draw")) {
-			draw++;
-		}
-
-		winRate = (double) win / play;
-	}
+	//	public void setWin(int win) {
+	//		this.win = win;
+	//	}
+	//
+	//	public int getWin() {
+	//		return win;
+	//	}
+	//
+	//	public void setDraw(int draw) {
+	//		this.draw = draw;
+	//	}
+	//
+	//	public int getDraw() {
+	//		return draw;
+	//	}
+	//
+	//	public void setWinRate(double winRate) {
+	//		this.winRate = winRate;
+	//	}
+	//
+	//	public double getWinRate() {
+	//		return winRate;
+	//	}
+	//
+	//	public void calcGameRecord(String judge) {
+	//
+	//		play++;
+	//		if (judge.equals("Win")) {
+	//			win++;
+	//		} else if (judge.equals("Draw")) {
+	//			draw++;
+	//		}
+	//
+	//		winRate = (double) win / play;
+	//	}
 
 }
