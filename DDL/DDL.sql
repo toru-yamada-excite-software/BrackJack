@@ -10,10 +10,10 @@ CREATE TABLE `brackjack_split`.`user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `brackjack`.`game` (
+CREATE TABLE `brackjack_split`.`game` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
-  `win_lose` int(11) NOT NULL,
+  `get_chip` int(11) NOT NULL,
   `play_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_user` (`user_id`),
