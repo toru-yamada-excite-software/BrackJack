@@ -12,6 +12,7 @@ public class GameDB {
 
 	private static final DBConnect dbc = new DBConnect();
 
+	//ゲーム履歴取得
 	public ArrayList<Game> getGame(String userId) {
 
 		String sql = "SELECT * FROM game WHERE user_id = ? ORDER BY id DESC LIMIT 30";
@@ -24,7 +25,7 @@ public class GameDB {
 			try (ResultSet rs = ps.executeQuery()) {
 
 				while (rs.next()) {
-					Game game = new Game(rs.getString("user_id"), rs.getInt("win_lose"), rs.getTimestamp("play_time"));
+					Game game = new Game(rs.getString("user_id"), rs.getInt("get_chip"), rs.getTimestamp("play_time"));
 					game.setId(rs.getInt("id"));
 					gameList.add(game);
 				}
@@ -45,14 +46,15 @@ public class GameDB {
 		return null;
 	}
 
+	//ゲーム記録追加
 	public void insertGame(Game game) {
 
-		String sql = "INSERT INTO game SET user_id = ?, win_lose = ?, play_time = ?";
+		String sql = "INSERT INTO game SET user_id = ?, get_chip = ?, play_time = ?";
 
 		try (Connection con = dbc.connect(); PreparedStatement ps = con.prepareStatement(sql);) {
 
 			ps.setString(1, game.getUserId());
-			ps.setInt(2, game.getWinLose());
+			ps.setInt(2, game.getChip());
 			ps.setTimestamp(3, game.getPlayTime());
 
 			ps.executeUpdate();
@@ -69,6 +71,7 @@ public class GameDB {
 
 	}
 
+	//退会処理
 	public void deleteGame(String userId) {
 
 		String sql = "DELETE FROM game WHERE user_id = ?";

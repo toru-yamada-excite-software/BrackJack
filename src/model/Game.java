@@ -36,7 +36,7 @@ public class Game {
 		this.chip = chip;
 	}
 
-	public int getchip() {
+	public int getChip() {
 		return chip;
 	}
 
