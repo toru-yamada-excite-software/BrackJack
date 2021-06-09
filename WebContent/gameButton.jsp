@@ -20,6 +20,7 @@
 		<% } else { %>
 			<form action="StartGameServlet" method="post">
 				<input class="command" type="submit" value="再戦">
+				<jsp:include page="betTip.jsp"></jsp:include>
 			</form>
 		<% } %>
 

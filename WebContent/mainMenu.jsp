@@ -18,7 +18,7 @@
 <body>
 
 	<% User user = (User)session.getAttribute("user");
-	   GameInf gi = (GameInf)session.getAttribute("gameInf");%>
+	   GameInf gi = (GameInf)session.getAttribute("gameInf"); %>
 
 	<header>
 		<h1>BrackJack</h1>
@@ -55,6 +55,7 @@
 		<section>
 			<form action="StartGameServlet" method="post">
 				<input type="submit" value="start">
+				<jsp:include page="betTip.jsp"></jsp:include>
 			</form>
 		</section>
 	<% } %>
