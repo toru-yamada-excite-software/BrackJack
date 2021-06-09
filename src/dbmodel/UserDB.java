@@ -78,7 +78,7 @@ public class UserDB {
 
 	public ArrayList<User> getRanking() {
 
-		String sql = "SELECT * FROM user ORDER BY win_rate DESC LIMIT 10";
+		String sql = "SELECT * FROM user ORDER BY chip DESC LIMIT 10";
 		ArrayList<User> userList = new ArrayList<User>();
 
 		try (Connection con = dbc.connect();
