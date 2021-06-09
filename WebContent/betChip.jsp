@@ -10,7 +10,7 @@
 
 <body>
 
-	<select required>
+	<select name="betChip" required>
 		<option value="" selected>ベット数を選択してください</option>
 		<option value="1">1</option>
 		<option value="2">2</option>

@@ -55,7 +55,7 @@
 		<section>
 			<form action="StartGameServlet" method="post">
 				<input type="submit" value="start">
-				<jsp:include page="betTip.jsp"></jsp:include>
+				<jsp:include page="betChip.jsp"></jsp:include>
 			</form>
 		</section>
 	<% } %>

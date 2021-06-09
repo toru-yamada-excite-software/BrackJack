@@ -31,16 +31,18 @@ public class StartGameServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
+		int betChip = Integer.parseInt(request.getParameter("betChip"));
+		session.setAttribute("betChip", betChip);
 		session.setAttribute("message", null);
 
 		Player player = new Player();
 		Dealer dealer = new Dealer();
-		Deck deckInf = new Deck();
+		Deck deck = new Deck();
 
-		deckInf = dealer.firstDraw(deckInf);
-		deckInf = player.firstDraw(deckInf);
+		deck = dealer.firstDraw(deck);
+		deck = player.firstDraw(deck);
 
-		GameInf gi = new GameInf(player, dealer, deckInf, null);
+		GameInf gi = new GameInf(player, dealer, deck, null);
 
 		gi = gm.naturalBJ(gi);
 		user = sgd.setData(user, gi.getMessage());
