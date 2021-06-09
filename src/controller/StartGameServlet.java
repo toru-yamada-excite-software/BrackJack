@@ -31,8 +31,7 @@ public class StartGameServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		int betChip = Integer.parseInt(request.getParameter("betChip"));
-		session.setAttribute("betChip", betChip);
+		int chip = Integer.parseInt(request.getParameter("betChip"));
 		session.setAttribute("message", null);
 
 		Player player = new Player();
@@ -42,10 +41,10 @@ public class StartGameServlet extends HttpServlet {
 		deck = dealer.firstDraw(deck);
 		deck = player.firstDraw(deck);
 
-		GameInf gi = new GameInf(player, dealer, deck, null);
+		GameInf gi = new GameInf(player, dealer, deck, chip, null);
 
 		gi = gm.naturalBJ(gi);
-		user = sgd.setData(user, gi.getMessage());
+		user = sgd.setData(user, gi.getMessage(), gi.getChip());
 
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("user", user);
