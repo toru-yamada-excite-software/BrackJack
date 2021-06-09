@@ -4,19 +4,27 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<title>Insert title here</title>
 </head>
 
 <body>
 
-	<a href="GameLogServlet">戦績表示</a>
-	<a href="RankingServlet">ランキング表示</a>
-	<a href="accountmanagement.jsp">ニックネーム変更</a>
+	<form action="GameLogServlet" method="get">
+		<input class="menu" type="submit" value="戦績表示">
+	</form>
+
+	<form action="RankingServlet" method="get">
+		<input class="menu" type="submit" value="ランキング表示">
+	</form>
+
+	<form action="accountmanagement.jsp">
+		<input class="menu" type="submit" value="ニックネーム変更">
+	</form>
 
 	<form action="LogoutServlet" method="post">
-		<input type="submit" value="ログアウト">
+		<input class="menu" type="submit" value="ログアウト">
 	</form>
 
 </body>
