@@ -48,6 +48,7 @@ public class StartGameServlet extends HttpServlet {
 
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("user", user);
+		session.setAttribute("split", player.getSplit());
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
 
