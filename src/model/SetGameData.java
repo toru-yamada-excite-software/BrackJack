@@ -17,7 +17,7 @@ public class SetGameData {
 
 			Timestamp playTime = new Timestamp(System.currentTimeMillis());
 
-			user.setChip(chip);
+			user.setChip(user.getChip() + chip);
 			user.setPlay(user.getPlay() + 1);
 			Game game = new Game(user.getId(), chip, playTime);
 

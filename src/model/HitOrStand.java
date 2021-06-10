@@ -4,21 +4,21 @@ public class HitOrStand {
 
 	Player player;
 	Dealer dealer;
-	Deck deckInf;
+	Deck deck;
 
 	public GameInf doHit(GameInf gi) {
 
 		player = gi.getPlayer();
 		dealer = gi.getDealer();
-		deckInf = gi.getDeck();
+		deck = gi.getDeck();
 		int chip = gi.getChip();
 
-		deckInf = player.draw(deckInf);
+		player.draw(deck);
 
 		if (player.getBust()) {
-			gi = new GameInf(player, dealer, deckInf, -chip, "Lose");
+			gi = new GameInf(player, dealer, deck, -chip, "Lose");
 		} else {
-			gi = new GameInf(player, dealer, deckInf, chip, null);
+			gi = new GameInf(player, dealer, deck, chip, null);
 		}
 
 		return gi;
@@ -28,24 +28,24 @@ public class HitOrStand {
 
 		player = gi.getPlayer();
 		dealer = gi.getDealer();
-		deckInf = gi.getDeck();
+		deck = gi.getDeck();
 		int chip = gi.getChip();
 
-		deckInf = dealer.draw(deckInf);
+		dealer.draw(deck);
 
 		if (dealer.getBust()) {
-			gi = new GameInf(player, dealer, deckInf, chip, "Win");
+			gi = new GameInf(player, dealer, deck, chip, "Win");
 		} else {
 
 			player.changeAscore();
 			dealer.changeAscore();
 
 			if (player.getScore() > dealer.getScore()) {
-				gi = new GameInf(player, dealer, deckInf, chip, "Win");
+				gi = new GameInf(player, dealer, deck, chip, "Win");
 			} else if (player.getScore() == dealer.getScore()) {
-				gi = new GameInf(player, dealer, deckInf, 0, "Draw");
+				gi = new GameInf(player, dealer, deck, 0, "Draw");
 			} else if (player.getScore() < dealer.getScore()) {
-				gi = new GameInf(player, dealer, deckInf, -chip, "Lose");
+				gi = new GameInf(player, dealer, deck, -chip, "Lose");
 			}
 
 		}

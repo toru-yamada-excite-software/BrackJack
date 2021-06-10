@@ -4,23 +4,21 @@ public class Dealer extends PlayerBase {
 	private static final long serialVersionUID = 2004917337820863277L;
 
 	@Override
-	public Deck draw(Deck deckInf) {
+	public void draw(Deck deck) {
 
-		while (score < 17 && Ascore < 17) {
-			deckInf = drawBase(deckInf);
+		while (Ascore < 17) {
+			drawBase(deck);
 			bustJudge();
 		}
 
-		return deckInf;
 	}
 
-	public Deck firstDraw(Deck deckInf) {
+	public void firstDraw(Deck deck) {
 
 		for (int i = 0; i < 2; i++) {
-			deckInf = drawBase(deckInf);
+			drawBase(deck);
 		}
 
-		return deckInf;
 	}
 
 }

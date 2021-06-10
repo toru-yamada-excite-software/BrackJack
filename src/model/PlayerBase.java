@@ -11,7 +11,7 @@ public abstract class PlayerBase implements Serializable {
 	protected int Ascore = 0;
 	private boolean bust = false;
 
-	public abstract Deck draw(Deck deck);
+	public abstract void draw(Deck deck);
 
 	public void scoreCalc() {
 
@@ -44,12 +44,11 @@ public abstract class PlayerBase implements Serializable {
 
 	}
 
-	public Deck drawBase(Deck deck) {
+	public void drawBase(Deck deck) {
 
 		hand.add(deck.getDeck().poll());
 		scoreCalc();
 
-		return deck;
 	}
 
 	public void bustJudge() {

@@ -38,8 +38,8 @@ public class StartGameServlet extends HttpServlet {
 		Dealer dealer = new Dealer();
 		Deck deck = new Deck();
 
-		deck = dealer.firstDraw(deck);
-		deck = player.firstDraw(deck);
+		player.firstDraw(deck);
+		dealer.firstDraw(deck);
 
 		GameInf gi = new GameInf(player, dealer, deck, chip, null);
 
