@@ -18,7 +18,8 @@
 <body>
 
 	<% User user = (User)session.getAttribute("user");
-	   GameInf gi = (GameInf)session.getAttribute("gameInf"); %>
+	   GameInf gi = (GameInf)session.getAttribute("gameInf");
+	   boolean split = (boolean)session.getAttribute("split"); %>
 
 	<header>
 		<h1>BrackJack</h1>
@@ -51,6 +52,14 @@
 		<section>
 			<jsp:include page="gameButton.jsp"></jsp:include>
 		</section>
+
+		<% if(split) { %>
+			<section>
+				<form action="GameServlet" method="post">
+					<button name="split">split</button>
+				</form>
+			</section>
+		<% } %>
 
 	<% } else { %>
 		<section>
