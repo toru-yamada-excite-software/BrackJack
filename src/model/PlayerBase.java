@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public abstract class PlayerBase implements Serializable {
 	private static final long serialVersionUID = 6054095141575886689L;
@@ -12,7 +11,7 @@ public abstract class PlayerBase implements Serializable {
 	protected int Ascore = 0;
 	private boolean bust = false;
 
-	public abstract Deck draw(Deck deckInf);
+	public abstract Deck draw(Deck deck);
 
 	public void scoreCalc() {
 
@@ -45,14 +44,12 @@ public abstract class PlayerBase implements Serializable {
 
 	}
 
-	public Deck drawBase(Deck deckInf) {
+	public Deck drawBase(Deck deck) {
 
-		LinkedList<Card> deck = deckInf.getDeck();
-		Card card = deck.poll();
-		hand.add(card);
+		hand.add(deck.getDeck().poll());
 		scoreCalc();
 
-		return deckInf;
+		return deck;
 	}
 
 	public void bustJudge() {
