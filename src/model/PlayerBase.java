@@ -1,12 +1,12 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public abstract class PlayerBase implements Serializable {
 	private static final long serialVersionUID = 6054095141575886689L;
 
-	public ArrayList<Card> hand = new ArrayList<Card>();
+	public LinkedList<Card> hand = new LinkedList<Card>();
 	protected int score = 0;
 	protected int Ascore = 0;
 	private boolean bust = false;
@@ -90,7 +90,7 @@ public abstract class PlayerBase implements Serializable {
 		return bust;
 	}
 
-	public ArrayList<Card> getHand() {
+	public LinkedList<Card> getHand() {
 		return hand;
 	}
 

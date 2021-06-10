@@ -22,7 +22,7 @@
 	   boolean split = (boolean)session.getAttribute("split"); %>
 
 	<header>
-		<h1>BrackJack</h1>
+		<h1>BlackJack</h1>
 
 		<h1><%= user.getName() %>でログイン中</h1>
 
