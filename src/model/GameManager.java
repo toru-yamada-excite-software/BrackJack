@@ -8,6 +8,8 @@ public class GameManager {
 
 		if (command == 0) {
 			return hos.doHit(gi, chip);
+		} else if (command == 2) {
+			return hos.doHitSplit(gi, chip);
 		} else {
 			return hos.doStand(gi, chip);
 		}
@@ -26,11 +28,11 @@ public class GameManager {
 			dealer.changeAscore();
 
 			if (dealer.getScore() == 21 && player.getScore() == 21) {
-				gi = new GameInf(player, dealer, deckInf, 0);
+				gi = new GameInf(player, null, dealer, deckInf, 0, null);
 			} else if (dealer.getScore() == 21) {
-				gi = new GameInf(player, dealer, deckInf, -chip);
+				gi = new GameInf(player, null, dealer, deckInf, -chip, null);
 			} else {
-				gi = new GameInf(player, dealer, deckInf, (int) (chip * 1.5));
+				gi = new GameInf(player, null, dealer, deckInf, (int) (chip * 1.5), null);
 			}
 
 		}

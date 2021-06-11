@@ -33,8 +33,8 @@ public class SplitServlet extends HttpServlet {
 		splitPlayer.scoreCalc();
 
 		gi.setPlayer(player);
+		gi.setSplitPlayer(splitPlayer);
 		session.setAttribute("gameInf", gi);
-		session.setAttribute("splitPlayer", splitPlayer);
 		session.setAttribute("split", false);
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");

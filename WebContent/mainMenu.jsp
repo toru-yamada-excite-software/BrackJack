@@ -20,7 +20,7 @@
 	<% User user = (User)session.getAttribute("user");
 	   GameInf gi = (GameInf)session.getAttribute("gameInf");
 	   String message = (String)session.getAttribute("message");
-	   Player splitPlayer = (Player)session.getAttribute("splitPlayer");
+	   String message2 = (String)session.getAttribute("message2");
 	   boolean split = (boolean)session.getAttribute("split"); %>
 
 	<header>
@@ -31,6 +31,9 @@
 		<% if(message != null) { %>
 			<h1><%= message %></h1>
 		<% } %>
+		<% if(message2 != null) { %>
+			<h1><%= message2 %></h1>
+		<% } %>
 	</header>
 
 	<main>
@@ -39,6 +42,7 @@
 		<article>
 			<h2>Dealer</h2>
 			<% request.setAttribute("dealer", gi.getDealer());
+			   request.setAttribute("splitPlayer", gi.getSplitPlayer());
 			   request.setAttribute("message", message); %>
 			<jsp:include page="dealerInf.jsp"></jsp:include>
 		</article>
@@ -48,13 +52,14 @@
 			<% request.setAttribute("player", gi.getPlayer());
 			   request.setAttribute("message", message); %>
 			<jsp:include page="playerInf.jsp"></jsp:include>
+			<p><%= gi.getChip() %></p>
 		</article>
 
-		<% if(splitPlayer != null) { %>
-			<% request.setAttribute("splitPlayer", splitPlayer);
-			   request.setAttribute("message", message); %>
+		<% if(gi.getSplitPlayer() != null) { %>
+			<% request.setAttribute("splitPlayer", gi.getSplitPlayer());
+			   request.setAttribute("message2", message2); %>
 			<jsp:include page="splitPlayerInf.jsp"></jsp:include>
-			<jsp:include page="gameButton.jsp"></jsp:include>
+			<p><%= gi.getSplitChip() %></p>
 		<% } %>
 
 		<section>

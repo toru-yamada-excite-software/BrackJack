@@ -35,6 +35,7 @@ public class StartGameServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		int chip = Integer.parseInt(request.getParameter("betChip"));
 		session.setAttribute("message", null);
+		session.setAttribute("message2", null);
 		session.setAttribute("split", false);
 		session.setAttribute("splitPlayer", null);
 
@@ -45,7 +46,7 @@ public class StartGameServlet extends HttpServlet {
 		player.firstDraw(deck);
 		dealer.firstDraw(deck);
 
-		GameInf gi = new GameInf(player, dealer, deck, null);
+		GameInf gi = new GameInf(player, null, dealer, deck, null, null);
 
 		gi = gm.naturalBJ(gi, chip);
 		String message = wlc.numConvert(gi.getChip());

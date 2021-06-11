@@ -37,12 +37,17 @@ public class GameServlet extends HttpServlet {
 
 		gi = gm.GameManagement(gi, command, chip);
 		String message = wlc.numConvert(gi.getChip());
+		String message2 = wlc.numConvert(gi.getSplitChip());
 
-		user = sgd.setData(user, gi.getChip());
-
+		if (gi.getSplitChip() == null) {
+			user = sgd.setData(user, gi.getChip());
+		} else if (gi.getChip() != null && gi.getSplitChip() != null) {
+			user = sgd.setData(user, gi.getChip() + gi.getSplitChip());
+		}
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("message", message);
+		session.setAttribute("message2", message2);
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
