@@ -33,6 +33,8 @@ public class StartGameServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		int chip = Integer.parseInt(request.getParameter("betChip"));
 		session.setAttribute("message", null);
+		session.setAttribute("split", false);
+		session.setAttribute("splitPlayer", null);
 
 		Player player = new Player();
 		Dealer dealer = new Dealer();
