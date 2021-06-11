@@ -26,12 +26,18 @@ public class Player extends PlayerBase {
 
 		if (hand.get(0).getNumber() == hand.get(1).getNumber()) {
 			split = true;
+		} else if (hand.get(0).getNumber() >= 10 && hand.get(1).getNumber() >= 10) {
+			split = true;
 		}
 
 	}
 
 	public boolean getSplit() {
 		return split;
+	}
+
+	public void setHand(Card card) {
+		hand.add(card);
 	}
 
 }
