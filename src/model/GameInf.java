@@ -8,16 +8,14 @@ public class GameInf implements Serializable {
 	private Player player;
 	private Dealer dealer;
 	private Deck deck;
-	private int chip;
-	private String message;
+	private Integer chip;
 
-	public GameInf(Player player, Dealer dealer, Deck deck, int betChip, String message) {
+	public GameInf(Player player, Dealer dealer, Deck deck, Integer betChip) {
 
 		this.player = player;
 		this.dealer = dealer;
 		this.deck = deck;
 		this.chip = betChip;
-		this.message = message;
 
 	}
 
@@ -45,20 +43,12 @@ public class GameInf implements Serializable {
 		return deck;
 	}
 
-	public void setChip(int betChip) {
+	public void setChip(Integer betChip) {
 		this.chip = betChip;
 	}
 
-	public int getChip() {
+	public Integer getChip() {
 		return chip;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 
 }

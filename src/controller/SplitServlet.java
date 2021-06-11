@@ -28,8 +28,6 @@ public class SplitServlet extends HttpServlet {
 		Player splitPlayer = new Player();
 
 		Card card = player.getHand().poll();
-		System.out.println(card.getNumber());
-		System.out.println(player.getHand().get(0).getNumber());
 		splitPlayer.setHand(card);
 		player.scoreCalc();
 		splitPlayer.scoreCalc();

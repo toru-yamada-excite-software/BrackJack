@@ -2,14 +2,18 @@ package model;
 
 public class WinLoseConvert {
 
-	public String numConvert(int winLose) {
+	public String numConvert(Integer chip) {
 
-		if (winLose == 0) {
-			return "勝ち";
-		} else if (winLose == 1) {
-			return "引き分け";
+		if (chip == null) {
+			return null;
+		}
+
+		if (chip > 0) {
+			return "Win";
+		} else if (chip == 0) {
+			return "Draw";
 		} else {
-			return "負け";
+			return "Lose";
 		}
 
 	}

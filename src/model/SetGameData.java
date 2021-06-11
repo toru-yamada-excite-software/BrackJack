@@ -11,9 +11,9 @@ public class SetGameData {
 	private GameDB gdb = new GameDB();
 	private UserDB udb = new UserDB();
 
-	public User setData(User user, String judge, int chip) {
+	public User setData(User user, Integer chip) {
 
-		if (judge != null) {
+		if (chip != null) {
 
 			Timestamp playTime = new Timestamp(System.currentTimeMillis());
 
