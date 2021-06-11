@@ -19,6 +19,7 @@
 
 	<% User user = (User)session.getAttribute("user");
 	   GameInf gi = (GameInf)session.getAttribute("gameInf");
+	   Player splitPlayer = (Player)session.getAttribute("splitPlayer");
 	   boolean split = (boolean)session.getAttribute("split"); %>
 
 	<header>
@@ -46,8 +47,13 @@
 			<% request.setAttribute("player", gi.getPlayer());
 			   request.setAttribute("message", gi.getMessage()); %>
 			<jsp:include page="playerInf.jsp"></jsp:include>
-			<p><%=gi.getChip()%></p>
 		</article>
+
+		<% if(splitPlayer != null) { %>
+			<% request.setAttribute("splitPlayer", splitPlayer);
+			   request.setAttribute("message", gi.getMessage()); %>
+			<jsp:include page="splitPlayerInf.jsp"></jsp:include>
+		<% } %>
 
 		<section>
 			<jsp:include page="gameButton.jsp"></jsp:include>
@@ -55,7 +61,7 @@
 
 		<% if(split) { %>
 			<section>
-				<form action="GameServlet" method="post">
+				<form action="SplitServlet" method="post">
 					<button name="split">split</button>
 				</form>
 			</section>
