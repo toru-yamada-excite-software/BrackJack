@@ -3,43 +3,22 @@ package model;
 public class HitOrStand {
 
 	Player player;
-	Player splitPlayer;
 	Dealer dealer;
 	Deck deck;
 
-	public GameInf doHit(GameInf gi, int betChip) {
+	public GameInf doHit(GameInf gi, int betChip, int command) {
 
 		player = gi.getPlayer();
-		splitPlayer = gi.getSplitPlayer();
 		dealer = gi.getDealer();
 		deck = gi.getDeck();
-		Integer splitChip = gi.getSplitChip();
 
-		player.draw(deck);
+		player.draw(deck, command);
 
-		if (player.getBust()) {
-			gi = new GameInf(player, splitPlayer, dealer, deck, -betChip, splitChip);
+		if (player.getBust(command)) {
+			player.setChip(-betChip, command);
+			gi = new GameInf(player, dealer, deck);
 		} else {
-			gi = new GameInf(player, splitPlayer, dealer, deck, null, splitChip);
-		}
-
-		return gi;
-	}
-
-	public GameInf doHitSplit(GameInf gi, int betChip) {
-
-		player = gi.getPlayer();
-		splitPlayer = gi.getSplitPlayer();
-		dealer = gi.getDealer();
-		deck = gi.getDeck();
-		Integer chip = gi.getChip();
-
-		splitPlayer.draw(deck);
-
-		if (splitPlayer.getBust()) {
-			gi = new GameInf(player, splitPlayer, dealer, deck, chip, -betChip);
-		} else {
-			gi = new GameInf(player, splitPlayer, dealer, deck, chip, null);
+			gi = new GameInf(player, dealer, deck);
 		}
 
 		return gi;
@@ -48,43 +27,50 @@ public class HitOrStand {
 	public GameInf doStand(GameInf gi, int betChip) {
 
 		player = gi.getPlayer();
-		splitPlayer = gi.getSplitPlayer();
 		dealer = gi.getDealer();
 		deck = gi.getDeck();
-		Integer chip = gi.getSplitChip();
 
 		dealer.draw(deck);
 
 		if (dealer.getBust()) {
-			if (splitPlayer != null) {
-				gi = new GameInf(player, splitPlayer, dealer, deck, betChip, betChip);
+			if (player.getHandList().size() != 1) {
+				player.setChip(betChip, 0);
+				gi = new GameInf(player, dealer, deck);
 			} else {
-				gi = new GameInf(player, splitPlayer, dealer, deck, betChip, chip);
+				player.setChip(betChip, 0);
+				player.setChip(betChip, 1);
+				gi = new GameInf(player, dealer, deck);
 			}
 		} else {
 
-			player.changeAscore();
-			dealer.changeAscore();
+			player.getHand(0).changeAscore();
+			dealer.getHand().changeAscore();
 
-			if (!player.getBust()) {
-				if (player.getScore() > dealer.getScore()) {
-					gi = new GameInf(player, splitPlayer, dealer, deck, betChip, chip);
-				} else if (player.getScore() == dealer.getScore()) {
-					gi = new GameInf(player, splitPlayer, dealer, deck, 0, chip);
-				} else if (player.getScore() < dealer.getScore()) {
-					gi = new GameInf(player, splitPlayer, dealer, deck, -betChip, chip);
+			if (!player.getBust(0)) {
+				if (player.getScore(0) > dealer.getScore()) {
+					player.setChip(betChip, 0);
+					gi = new GameInf(player, dealer, deck);
+				} else if (player.getScore(0) == dealer.getScore()) {
+					player.setChip(0, 0);
+					gi = new GameInf(player, dealer, deck);
+				} else if (player.getScore(0) < dealer.getScore()) {
+					player.setChip(-betChip, 0);
+					gi = new GameInf(player, dealer, deck);
 				}
 			}
 
-			if (splitPlayer != null && !splitPlayer.getBust()) {
-				splitPlayer.changeAscore();
+			if (player.getHandList().size() == 2 && !player.getBust(1)) {
+				player.getHand(1).changeAscore();
 
-				if (splitPlayer.getScore() > dealer.getScore()) {
-					gi.setSplitChip(betChip);
-				} else if (splitPlayer.getScore() == dealer.getScore()) {
-					gi.setSplitChip(0);
-				} else if (splitPlayer.getScore() < dealer.getScore()) {
-					gi.setSplitChip(-betChip);
+				if (player.getScore(1) > dealer.getScore()) {
+					player.setChip(betChip, 1);
+					gi = new GameInf(player, dealer, deck);
+				} else if (player.getScore(1) == dealer.getScore()) {
+					player.setChip(0, 1);
+					gi = new GameInf(player, dealer, deck);
+				} else if (player.getScore(1) < dealer.getScore()) {
+					player.setChip(-betChip, 1);
+					gi = new GameInf(player, dealer, deck);
 				}
 
 			}

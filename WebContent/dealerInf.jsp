@@ -21,14 +21,14 @@
 		<% if(splitPlayer == null) { %>
 			<% if(message == null) { %>
 				<div>
-					<h3 id="suite"><%= dealer.getHand().get(0).getSuite() %></h3>
-					<h3 id="number"><%= dealer.getHand().get(0).getNumber() %></h3>
+					<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
+					<h3 id="number"><%= dealer.getHand().getHand().get(0).getNumber() %></h3>
 				</div>
 			<% } else { %>
-				<% for(int i = 0; i < dealer.getHand().size(); i++) {%>
+				<% for(int i = 0; i < dealer.getHand().getHand().size(); i++) {%>
 					<div>
-						<h3 id="suite"><%= dealer.getHand().get(i).getSuite() %></h3>
-						<h3 id="number"><%= dealer.getHand().get(i).getNumber() %></h3>
+						<h3 id="suite"><%= dealer.getHand().getHand().get(i).getSuite() %></h3>
+						<h3 id="number"><%= dealer.getHand().getHand().get(i).getNumber() %></h3>
 					</div>
 				<% } %>
 
@@ -38,14 +38,14 @@
 		<% } else { %>
 			<% if(message == null || message2 == null) { %>
 				<div>
-					<h3 id="suite"><%= dealer.getHand().get(0).getSuite() %></h3>
-					<h3 id="number"><%= dealer.getHand().get(0).getNumber() %></h3>
+					<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
+					<h3 id="number"><%= dealer.getHand().getHand().get(0).getNumber() %></h3>
 				</div>
 			<% } else { %>
-				<% for(int i = 0; i < dealer.getHand().size(); i++) {%>
+				<% for(int i = 0; i < dealer.getHand().getHand().size(); i++) {%>
 					<div>
-						<h3 id="suite"><%= dealer.getHand().get(i).getSuite() %></h3>
-						<h3 id="number"><%= dealer.getHand().get(i).getNumber() %></h3>
+						<h3 id="suite"><%= dealer.getHand().getHand().get(i).getSuite() %></h3>
+						<h3 id="number"><%= dealer.getHand().getHand().get(i).getNumber() %></h3>
 					</div>
 				<% } %>
 

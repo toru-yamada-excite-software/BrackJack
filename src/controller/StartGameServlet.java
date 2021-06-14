@@ -46,11 +46,11 @@ public class StartGameServlet extends HttpServlet {
 		player.firstDraw(deck);
 		dealer.firstDraw(deck);
 
-		GameInf gi = new GameInf(player, null, dealer, deck, null, null);
+		GameInf gi = new GameInf(player, dealer, deck);
 
 		gi = gm.naturalBJ(gi, chip);
-		String message = wlc.numConvert(gi.getChip());
-		user = sgd.setData(user, gi.getChip());
+		String message = wlc.numConvert(gi.getPlayer().getChip(0));
+		user = sgd.setData(user, gi.getPlayer().getChip(0));
 
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("user", user);

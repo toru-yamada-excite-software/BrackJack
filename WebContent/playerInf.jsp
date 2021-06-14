@@ -14,26 +14,26 @@
 
 	<% Player player = (Player)request.getAttribute("player");
 	   String message = (String)request.getAttribute("message"); %>
-	<% for(int i = 0; i < player.getHand().size(); i++) { %>
+	<% for(int i = 0; i < player.getHand(0).getHand().size(); i++) { %>
 	<div>
-	<h3 id="suite"><%= player.getHand().get(i).getSuite() %></h3>
-	<h3 id="number"><%= player.getHand().get(i).getNumber() %></h3>
+	<h3 id="suite"><%= player.getHand(0).getHand().get(i).getSuite() %></h3>
+	<h3 id="number"><%= player.getHand(0).getHand().get(i).getNumber() %></h3>
 	</div>
 	<% } %>
 
 	<% if(message == null) { %>
-		<% if(player.getAscore() > player.getScore()) { %>
-			<h3 class="score">スコア：<%= player.getScore() %> or <%= player.getAscore() %></h3>
+		<% if(player.getAscore(0) > player.getScore(0)) { %>
+			<h3 class="score">スコア：<%= player.getScore(0) %> or <%= player.getAscore(0) %></h3>
 		<% } else {%>
-			<h3 class="score">スコア：<%= player.getScore() %></h3>
+			<h3 class="score">スコア：<%= player.getScore(0) %></h3>
 		<% } %>
 
 	<% } else { %>
 
-		<% if(player.getAscore() > player.getScore()) { %>
-			<h3 class="score">スコア：<%= player.getAscore() %></h3>
+		<% if(player.getAscore(0) > player.getScore(0)) { %>
+			<h3 class="score">スコア：<%= player.getAscore(0) %></h3>
 		<% } else { %>
-			<h3 class="score">スコア：<%= player.getScore() %></h3>
+			<h3 class="score">スコア：<%= player.getScore(0) %></h3>
 		<% } %>
 
 	<% } %>

@@ -36,18 +36,24 @@ public class GameServlet extends HttpServlet {
 		int chip = (int) session.getAttribute("chip");
 
 		gi = gm.GameManagement(gi, command, chip);
-		String message = wlc.numConvert(gi.getChip());
-		String message2 = wlc.numConvert(gi.getSplitChip());
 
-		if (gi.getSplitChip() == null) {
-			user = sgd.setData(user, gi.getChip());
-		} else if (gi.getChip() != null && gi.getSplitChip() != null) {
-			user = sgd.setData(user, gi.getChip() + gi.getSplitChip());
+		if (gi.getPlayer().getHandList().size() == 1) {
+			String message = wlc.numConvert(gi.getPlayer().getChip(0));
+			session.setAttribute("message", message);
+		} else {
+			String message = wlc.numConvert(gi.getPlayer().getChip(0));
+			String message2 = wlc.numConvert(gi.getPlayer().getChip(1));
+			session.setAttribute("message", message);
+			session.setAttribute("message2", message2);
+		}
+
+		if (gi.getPlayer().getHandList().size() == 1) {
+			user = sgd.setData(user, gi.getPlayer().getChip(0));
+		} else if (gi.getPlayer().getChip(0) != null && gi.getPlayer().getChip(1) != null) {
+			user = sgd.setData(user, gi.getPlayer().getChip(0) + gi.getPlayer().getChip(1));
 		}
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
-		session.setAttribute("message", message);
-		session.setAttribute("message2", message2);
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);

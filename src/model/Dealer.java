@@ -1,14 +1,14 @@
 package model;
 
-public class Dealer extends PlayerBase {
-	private static final long serialVersionUID = 2004917337820863277L;
+public class Dealer {
 
-	@Override
+	private Hand hand = new Hand();
+
 	public void draw(Deck deck) {
 
-		while (Ascore < 17) {
-			drawBase(deck);
-			bustJudge();
+		while (hand.getAscore() < 17) {
+			hand.drawBase(deck);
+			hand.bustJudge();
 		}
 
 	}
@@ -16,9 +16,25 @@ public class Dealer extends PlayerBase {
 	public void firstDraw(Deck deck) {
 
 		for (int i = 0; i < 2; i++) {
-			drawBase(deck);
+			hand.drawBase(deck);
 		}
 
+	}
+
+	public Hand getHand() {
+		return hand;
+	}
+
+	public boolean getBust() {
+		return hand.getBust();
+	}
+
+	public int getScore() {
+		return hand.getScore();
+	}
+
+	public int getAscore() {
+		return hand.getAscore();
 	}
 
 }

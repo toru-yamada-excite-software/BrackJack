@@ -42,7 +42,7 @@
 		<article>
 			<h2>Dealer</h2>
 			<% request.setAttribute("dealer", gi.getDealer());
-			   request.setAttribute("splitPlayer", gi.getSplitPlayer());
+			   request.setAttribute("playerr", gi.getPlayer());
 			   request.setAttribute("message", message); %>
 			<jsp:include page="dealerInf.jsp"></jsp:include>
 		</article>
@@ -52,21 +52,21 @@
 			<% request.setAttribute("player", gi.getPlayer());
 			   request.setAttribute("message", message); %>
 			<jsp:include page="playerInf.jsp"></jsp:include>
-			<p><%= gi.getChip() %></p>
+			<p><%= gi.getPlayer().getChip(0) %></p>
 		</article>
 
-		<% if(gi.getSplitPlayer() != null) { %>
-			<% request.setAttribute("splitPlayer", gi.getSplitPlayer());
+		<% if(gi.getPlayer().getHandList().size() != 1) { %>
+			<% request.setAttribute("player", gi.getPlayer());
 			   request.setAttribute("message2", message2); %>
 			<jsp:include page="splitPlayerInf.jsp"></jsp:include>
-			<p><%= gi.getSplitChip() %></p>
+			<p><%= gi.getPlayer().getChip(1) %></p>
 		<% } %>
 
 		<section>
 			<jsp:include page="gameButton.jsp"></jsp:include>
 		</section>
 
-		<% if(split) { %>
+		<% if(split && gi.getPlayer().getHandList().size() == 1){ %>
 			<section>
 				<form action="SplitServlet" method="post">
 					<button name="split">split</button>

@@ -19,8 +19,8 @@
 			<% if(message == null) { %>
 				<form action="GameServlet" method="post">
 					<button class="command" type='submit' name='command' value='0'>hit</button>
-					<button class="command" type='submit' name='command' value='2'>hit</button>
-	 				<button class="command" type='submit' name='command' value='1'>stand</button>
+					<button class="command" type='submit' name='command' value='1'>hit</button>
+	 				<button class="command" type='submit' name='command' value='2'>stand</button>
 				</form>
 			<% } else { %>
 				<form action="StartGameServlet" method="post">
@@ -32,8 +32,8 @@
 			<% if(message == null || message2 == null) { %>
 				<form action="GameServlet" method="post">
 					<button class="command" type='submit' name='command' value='0'>hit</button>
-					<button class="command" type='submit' name='command' value='2'>hit</button>
-	 				<button class="command" type='submit' name='command' value='1'>stand</button>
+					<button class="command" type='submit' name='command' value='1'>hit</button>
+	 				<button class="command" type='submit' name='command' value='2'>stand</button>
 				</form>
 			<% } else { %>
 				<form action="StartGameServlet" method="post">

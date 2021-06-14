@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Card;
 import model.GameInf;
+import model.Hand;
 import model.Player;
 
 @WebServlet("/SplitServlet")
@@ -25,17 +26,16 @@ public class SplitServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 		Player player = gi.getPlayer();
-		Player splitPlayer = new Player();
 
-		Card card = player.getHand().poll();
-		splitPlayer.setHand(card);
-		player.scoreCalc();
-		splitPlayer.scoreCalc();
+		Card card = player.getHand(0).getHand().poll();
+		Hand hand = new Hand();
+		hand.setHand(card);
+		player.setHand(hand);
+		player.getHand(0).scoreCalc();
+		player.getHand(1).scoreCalc();
 
 		gi.setPlayer(player);
-		gi.setSplitPlayer(splitPlayer);
 		session.setAttribute("gameInf", gi);
-		session.setAttribute("split", false);
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
