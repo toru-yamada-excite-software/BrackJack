@@ -72,22 +72,6 @@ public class DealerTest {
 
 	}
 
-	//	@Test
-	//	public void scoreCalcTest() {
-	//
-	//		decks.setDeck(deck);
-	//		decks = dealer.draw(decks);
-	//
-	//		int expectedScore = 10;
-	//		int expectedAscore = 20;
-	//
-	//		int actualScore = dealer.getScore();
-	//		int actualAscore = dealer.getAscore();
-	//
-	//		assertThat(actualScore, is(expectedScore));
-	//		assertThat(actualAscore, is(expectedAscore));
-	//
-	//	}
 	//
 	//	@Test
 	//	public void bustJudgeTest() {

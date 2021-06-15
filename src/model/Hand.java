@@ -50,6 +50,25 @@ public class Hand {
 
 	}
 
+	public void bustJudge() {
+
+		if (score > 21) {
+			bust = true;
+		} else {
+			bust = false;
+		}
+
+	}
+
+	public void changeAscore() {
+
+		if (Ascore > score) {
+			score = Ascore;
+			Ascore = 0;
+		}
+
+	}
+
 	public void setHand(Card card) {
 		hand.add(card);
 	}
@@ -92,25 +111,6 @@ public class Hand {
 
 	public Integer getChip() {
 		return chip;
-	}
-
-	public void bustJudge() {
-
-		if (score > 21) {
-			bust = true;
-		} else {
-			bust = false;
-		}
-
-	}
-
-	public void changeAscore() {
-
-		if (Ascore > score) {
-			score = Ascore;
-			Ascore = 0;
-		}
-
 	}
 
 }
