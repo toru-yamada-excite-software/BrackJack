@@ -12,13 +12,15 @@ public class PlayerTest {
 
 	private Deck decks;
 	private Player player;
+	private int chip = 100;
+	private int index = 0;
 	private LinkedList<Card> deck = new LinkedList<Card>();
 
 	@BeforeEach
 	public void setup() {
 
 		decks = new Deck();
-		player = new Player();
+		player = new Player(chip);
 
 		for (int i = 0; i < 4; i++) {
 
@@ -30,40 +32,42 @@ public class PlayerTest {
 		}
 
 		decks.setDeck(deck);
-		decks = player.draw(decks);
+		player.draw(decks, index);
 
 	}
 
+	//drawテスト
 	@Test
 	public void drawTest() {
 
 		String expectedSuite = "♠";
 		int expectedNumber = 1;
 
-		String actualSuite = player.getHand().get(0).getSuite();
-		int actualNumber = player.getHand().get(0).getNumber();
+		String actualSuite = player.getHand(index).getHand().get(0).getSuite();
+		int actualNumber = player.getHand(index).getHand().get(0).getNumber();
 
 		assertThat(actualSuite, is(expectedSuite));
 		assertThat(actualNumber, is(expectedNumber));
 
 	}
 
+	//fistDrawテスト
 	@Test
 	public void firstDrawTest() {
 
 		decks.setDeck(deck);
-		decks = player.firstDraw(decks);
+		player.firstDraw(decks);
 
 		String expectedSuite = "♠";
 		int expectedNumber = 1;
 		String expectedSuite2 = "♠";
 		int expectedNumber2 = 2;
 
-		String actualSuite = player.getHand().get(0).getSuite();
-		int actualNumber = player.getHand().get(0).getNumber();
+		String actualSuite = player.getHand(index).getHand().get(0).getSuite();
+		int actualNumber = player.getHand(index).getHand().get(0).getNumber();
 
-		String actualSuite2 = player.getHand().get(1).getSuite();
-		int actualNumber2 = player.getHand().get(1).getNumber();
+		String actualSuite2 = player.getHand(index).getHand().get(1).getSuite();
+		int actualNumber2 = player.getHand(index).getHand().get(1).getNumber();
 
 		assertThat(actualSuite, is(expectedSuite));
 		assertThat(actualNumber, is(expectedNumber));
@@ -72,25 +76,27 @@ public class PlayerTest {
 
 	}
 
+	//	@Test
+	//	public void scoreCalcTest() {
+	//
+	//		int expected = 1;
+	//
+	//		int actual = player.getScore(index);
+	//
+	//		assertThat(actual, is(expected));
+	//
+	//	}
+
+	//judgeSplitテスト
 	@Test
-	public void scoreCalcTest() {
+	public void judgeSplitTest() {
 
-		int expected = 1;
-
-		int actual = player.getScore();
-
-		assertThat(actual, is(expected));
-
-	}
-
-	@Test
-	public void bustJudgeTest() {
-
-		player.bustJudge();
+		player.draw(decks, index);
+		player.judgeSplit();
 
 		boolean expected = false;
 
-		boolean actual = player.getBust();
+		boolean actual = player.getSplit();
 
 		assertThat(actual, is(expected));
 
