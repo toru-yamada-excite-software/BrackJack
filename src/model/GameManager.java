@@ -4,35 +4,38 @@ public class GameManager {
 
 	private HitOrStand hos = new HitOrStand();
 
-	public GameInf GameManagement(GameInf gi, int command, int chip) {
+	public GameInf GameManagement(GameInf gi, int command) {
 
 		if (command == 0 || command == 1) {
-			return hos.doHit(gi, chip, command);
+			return hos.doHit(gi, command);
 		} else {
-			return hos.doStand(gi, chip);
+			return hos.doStand(gi);
 		}
 
 	}
 
-	public GameInf naturalBJ(GameInf gi, int chip) {
+	public GameInf naturalBJ(GameInf gi) {
 
 		Player player = gi.getPlayer();
 		Dealer dealer = gi.getDealer();
 		Deck deckInf = gi.getDeck();
 
-		if (dealer.getHand().getAscore() == 21 || player.getHand(0).getAscore() == 21) {
+		if (dealer.getAscore() == 21 || player.getAscore(0) == 21) {
 
 			player.getHand(0).changeAscore();
 			dealer.getHand().changeAscore();
 
-			if (dealer.getHand().getScore() == 21 && player.getHand(0).getScore() == 21) {
-				player.getHand(0).setChip(0);
+			if (dealer.getScore() == 21 && player.getScore(0) == 21) {
+				player.calcChip(0);
+				player.setResult("Draw", 0);
 				gi = new GameInf(player, dealer, deckInf);
-			} else if (dealer.getHand().getScore() == 21) {
-				player.getHand(0).setChip(-chip);
+			} else if (dealer.getScore() == 21) {
+				player.calcChip(-player.getBetChip(0));
+				player.setResult("Lose", 0);
 				gi = new GameInf(player, dealer, deckInf);
 			} else {
-				player.getHand(0).setChip((int) (chip * 1.5));
+				player.calcChip((int) (player.getBetChip(0) * 1.5));
+				player.setResult("Win", 0);
 				gi = new GameInf(player, dealer, deckInf);
 			}
 

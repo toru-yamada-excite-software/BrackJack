@@ -16,9 +16,9 @@
 	<% Dealer dealer = (Dealer)request.getAttribute("dealer");
 	   String message = (String)request.getAttribute("message");
 	   String message2 = (String)request.getAttribute("message2");
-	   Player splitPlayer = (Player)request.getAttribute("splitPlayer"); %>
+	   Player player = (Player)request.getAttribute("player"); %>
 
-		<% if(splitPlayer == null) { %>
+		<% if(player.getHandList().size() == 1) { %>
 			<% if(message == null) { %>
 				<div>
 					<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>

@@ -33,29 +33,29 @@ public class StartGameServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		int chip = Integer.parseInt(request.getParameter("betChip"));
+		int betChip = Integer.parseInt(request.getParameter("betChip"));
 		session.setAttribute("message", null);
 		session.setAttribute("message2", null);
 		session.setAttribute("split", false);
 		session.setAttribute("splitPlayer", null);
 
-		Player player = new Player();
+		Player player = new Player(user.getChip());
 		Dealer dealer = new Dealer();
 		Deck deck = new Deck();
+		player.setChip(betChip, 0);
 
 		player.firstDraw(deck);
 		dealer.firstDraw(deck);
 
 		GameInf gi = new GameInf(player, dealer, deck);
 
-		gi = gm.naturalBJ(gi, chip);
-		String message = wlc.numConvert(gi.getPlayer().getChip(0));
-		user = sgd.setData(user, gi.getPlayer().getChip(0));
+		gi = gm.naturalBJ(gi);
+		String message = gi.getPlayer().getResult(0);
+		user = sgd.setData(user, gi.getPlayer());
 
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("user", user);
 		session.setAttribute("split", player.getSplit());
-		session.setAttribute("chip", chip);
 		session.setAttribute("message", message);
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);

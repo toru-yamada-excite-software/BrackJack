@@ -6,7 +6,7 @@ public class HitOrStand {
 	Dealer dealer;
 	Deck deck;
 
-	public GameInf doHit(GameInf gi, int betChip, int command) {
+	public GameInf doHit(GameInf gi, int command) {
 
 		player = gi.getPlayer();
 		dealer = gi.getDealer();
@@ -15,7 +15,8 @@ public class HitOrStand {
 		player.draw(deck, command);
 
 		if (player.getBust(command)) {
-			player.setChip(-betChip, command);
+			player.calcChip(-player.getBetChip(command));
+			player.setResult("Lose", command);
 			gi = new GameInf(player, dealer, deck);
 		} else {
 			gi = new GameInf(player, dealer, deck);
@@ -24,7 +25,7 @@ public class HitOrStand {
 		return gi;
 	}
 
-	public GameInf doStand(GameInf gi, int betChip) {
+	public GameInf doStand(GameInf gi) {
 
 		player = gi.getPlayer();
 		dealer = gi.getDealer();
@@ -32,48 +33,32 @@ public class HitOrStand {
 
 		dealer.draw(deck);
 
-		if (dealer.getBust()) {
-			if (player.getHandList().size() != 1) {
-				player.setChip(betChip, 0);
-				gi = new GameInf(player, dealer, deck);
-			} else {
-				player.setChip(betChip, 0);
-				player.setChip(betChip, 1);
-				gi = new GameInf(player, dealer, deck);
-			}
-		} else {
+		for (int i = 0; i < player.getHandList().size(); i++) {
 
-			player.getHand(0).changeAscore();
-			dealer.getHand().changeAscore();
-
-			if (!player.getBust(0)) {
-				if (player.getScore(0) > dealer.getScore()) {
-					player.setChip(betChip, 0);
+			if (player.getResult(i) == null) {
+				if (dealer.getBust()) {
+					player.calcChip(player.getBetChip(i));
+					player.setResult("Win", i);
 					gi = new GameInf(player, dealer, deck);
-				} else if (player.getScore(0) == dealer.getScore()) {
-					player.setChip(0, 0);
-					gi = new GameInf(player, dealer, deck);
-				} else if (player.getScore(0) < dealer.getScore()) {
-					player.setChip(-betChip, 0);
-					gi = new GameInf(player, dealer, deck);
+				} else {
+					player.getHand(i).changeAscore();
+					dealer.getHand().changeAscore();
+					if (player.getScore(i) > dealer.getScore()) {
+						player.calcChip(player.getBetChip(i));
+						player.setResult("Win", i);
+						gi = new GameInf(player, dealer, deck);
+					} else if (player.getScore(i) == dealer.getScore()) {
+						player.calcChip(0);
+						player.setResult("Draw", i);
+						gi = new GameInf(player, dealer, deck);
+					} else if (player.getScore(i) < dealer.getScore()) {
+						player.calcChip(-player.getBetChip(i));
+						player.setResult("Lose", i);
+						gi = new GameInf(player, dealer, deck);
+					}
 				}
 			}
 
-			if (player.getHandList().size() == 2 && !player.getBust(1)) {
-				player.getHand(1).changeAscore();
-
-				if (player.getScore(1) > dealer.getScore()) {
-					player.setChip(betChip, 1);
-					gi = new GameInf(player, dealer, deck);
-				} else if (player.getScore(1) == dealer.getScore()) {
-					player.setChip(0, 1);
-					gi = new GameInf(player, dealer, deck);
-				} else if (player.getScore(1) < dealer.getScore()) {
-					player.setChip(-betChip, 1);
-					gi = new GameInf(player, dealer, deck);
-				}
-
-			}
 		}
 
 		return gi;

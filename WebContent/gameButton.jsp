@@ -14,8 +14,8 @@
 
 		<% String message = (String)request.getAttribute("message");
 		   String message2 = (String)request.getAttribute("message2");
-		   Player splitPlayer = (Player)request.getAttribute("splitPlayer");%>
-		<% if(splitPlayer == null) { %>
+		   Player player = (Player)request.getAttribute("player");%>
+		<% if(player.getHandList().size() == 1) { %>
 			<% if(message == null) { %>
 				<form action="GameServlet" method="post">
 					<button class="command" type='submit' name='command' value='0'>hit</button>

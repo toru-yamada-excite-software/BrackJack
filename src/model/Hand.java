@@ -9,6 +9,7 @@ public class Hand {
 	private int score = 0;
 	private int Ascore = 0;
 	private boolean bust = false;
+	private String result = null;
 
 	public void scoreCalc() {
 
@@ -75,6 +76,14 @@ public class Hand {
 
 	public boolean getBust() {
 		return bust;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getResult() {
+		return result;
 	}
 
 	public void setChip(Integer betChip) {

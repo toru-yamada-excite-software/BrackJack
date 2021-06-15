@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Player {
 
 	private ArrayList<Hand> handList = new ArrayList<Hand>();
+	private int chip;
 	private boolean split = false;
 
-	public Player() {
+	public Player(int chip) {
 		handList.add(new Hand());
+		this.chip = chip;
 	}
 
 	public void draw(Deck deck, int index) {
@@ -46,7 +48,7 @@ public class Player {
 		handList.get(index).setChip(betChip);
 	}
 
-	public Integer getChip(int index) {
+	public Integer getBetChip(int index) {
 		return handList.get(index).getChip();
 	}
 
@@ -56,6 +58,14 @@ public class Player {
 
 	public int getAscore(int index) {
 		return handList.get(index).getAscore();
+	}
+
+	public void setResult(String result, int index) {
+		handList.get(index).setResult(result);
+	}
+
+	public String getResult(int index) {
+		return handList.get(index).getResult();
 	}
 
 	public boolean getSplit() {
@@ -72,6 +82,14 @@ public class Player {
 
 	public ArrayList<Hand> getHandList() {
 		return handList;
+	}
+
+	public void calcChip(int getChip) {
+		chip += getChip;
+	}
+
+	public int getChip() {
+		return chip;
 	}
 
 }

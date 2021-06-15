@@ -31,6 +31,7 @@ public class SplitServlet extends HttpServlet {
 		Hand hand = new Hand();
 		hand.setHand(card);
 		player.setHand(hand);
+		player.setChip(player.getBetChip(0), 1);
 		player.getHand(0).scoreCalc();
 		player.getHand(1).scoreCalc();
 

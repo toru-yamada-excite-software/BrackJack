@@ -33,25 +33,17 @@ public class GameServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 		int command = Integer.parseInt(request.getParameter("command"));
-		int chip = (int) session.getAttribute("chip");
 
-		gi = gm.GameManagement(gi, command, chip);
+		gi = gm.GameManagement(gi, command);
 
 		if (gi.getPlayer().getHandList().size() == 1) {
-			String message = wlc.numConvert(gi.getPlayer().getChip(0));
-			session.setAttribute("message", message);
+			session.setAttribute("message", gi.getPlayer().getResult(0));
 		} else {
-			String message = wlc.numConvert(gi.getPlayer().getChip(0));
-			String message2 = wlc.numConvert(gi.getPlayer().getChip(1));
-			session.setAttribute("message", message);
-			session.setAttribute("message2", message2);
+			session.setAttribute("message", gi.getPlayer().getResult(0));
+			session.setAttribute("message2", gi.getPlayer().getResult(1));
 		}
 
-		if (gi.getPlayer().getHandList().size() == 1) {
-			user = sgd.setData(user, gi.getPlayer().getChip(0));
-		} else if (gi.getPlayer().getChip(0) != null && gi.getPlayer().getChip(1) != null) {
-			user = sgd.setData(user, gi.getPlayer().getChip(0) + gi.getPlayer().getChip(1));
-		}
+		user = sgd.setData(user, gi.getPlayer());
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
 
