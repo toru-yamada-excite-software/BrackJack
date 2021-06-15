@@ -20,7 +20,7 @@ public class GameDBTest {
 	private Game game;
 	private User user;
 	private String userId = "test";
-	private int winLose = 0;
+	private int chip = 0;
 	private Timestamp playTime = new Timestamp(System.currentTimeMillis());
 
 	@BeforeEach
@@ -30,7 +30,7 @@ public class GameDBTest {
 		user.setPassword("test");
 		user.setName("test");
 		playTime.setNanos(0);
-		game = new Game(userId, winLose, playTime);
+		game = new Game(userId, chip, playTime);
 		udb.insertUser(user);
 		gdb.insertGame(game);
 	}
@@ -46,16 +46,16 @@ public class GameDBTest {
 	public void getGameTest() throws Exception {
 
 		String expectedUserId = userId;
-		int expectedWinLose = winLose;
+		int expectedChip = chip;
 		Timestamp expectedPlayTime = playTime;
 
 		ArrayList<Game> gameList = (ArrayList<Game>) gdb.getGame(userId);
 		String actualUserId = gameList.get(0).getUserId();
-		int actualWinLose = gameList.get(0).getWinLose();
+		int actualChip = gameList.get(0).getChip();
 		Timestamp actualPlayTime = gameList.get(0).getPlayTime();
 
 		assertThat(actualUserId, is(expectedUserId));
-		assertThat(actualWinLose, is(expectedWinLose));
+		assertThat(actualChip, is(expectedChip));
 		assertThat(actualPlayTime, is(expectedPlayTime));
 
 	}
