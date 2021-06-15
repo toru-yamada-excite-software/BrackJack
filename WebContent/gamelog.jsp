@@ -15,33 +15,28 @@
 	</head>
 
 	<body>
-		<h1>BrackJack</h1>
+		<h1>BlackJack</h1>
 		<h1>戦績</h1>
 		<% User user = (User)session.getAttribute("user");
 		   @SuppressWarnings("unchecked")
 		   ArrayList<Game> gameList = (ArrayList<Game>)request.getAttribute("gameList");
-		   WinLoseConvert wlc = new WinLoseConvert();
 		   SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd k:mm:ss"); %>
 		<h1><%= user.getName() %>でログイン中</h1>
 
 		<table>
 		    <tr>
-		    	<th>ID</th>
-				<th>勝敗</th>
+				<th>獲得チップ</th>
 				<th>日付</th>
 			</tr>
 		<% for(int i = 0; i < gameList.size(); i++) {
 			Game game = gameList.get(i); %>
 
 		    <tr>
-		    	<th><%= game.getId() %></th>
-				<th><%= wlc.numConvert(game.getWinLose()) %></th>
+				<th><%= game.getChip() %></th>
 				<th><%= sdf.format(game.getPlayTime()) %></th>
 			</tr>
 		<% } %>
 		</table>
-
-		<h3>勝率：<%= user.getWinRate() * 100 %>%</h3>
 
 		<a href="mainMenu.jsp">戻る</a>
 

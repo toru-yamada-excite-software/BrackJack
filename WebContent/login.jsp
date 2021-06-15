@@ -11,7 +11,7 @@
 
 	<body>
 
-		<h1>BrackJack</h1>
+		<h1>BlackJack</h1>
 		<h1>ログイン</h1>
 		<% String message = (String)request.getAttribute("message");
 		   if(message != null) {%>
