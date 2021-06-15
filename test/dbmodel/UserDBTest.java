@@ -69,11 +69,11 @@ public class UserDBTest {
 	@Test
 	public void getRankingTest() {
 
-		double expected = 1;
+		double expected = 100;
 
 		ArrayList<User> ranking = udb.getRanking();
 
-		double actual = ranking.get(0).getWinRate();
+		double actual = ranking.get(0).getChip();
 
 		assertThat(actual, is(expected));
 
