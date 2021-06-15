@@ -14,7 +14,6 @@ import model.GameInf;
 import model.GameManager;
 import model.SetGameData;
 import model.User;
-import model.WinLoseConvert;
 
 @WebServlet("/GameServlet")
 public class GameServlet extends HttpServlet {
@@ -22,7 +21,6 @@ public class GameServlet extends HttpServlet {
 
 	private GameManager gm = new GameManager();
 	private SetGameData sgd = new SetGameData();
-	private WinLoseConvert wlc = new WinLoseConvert();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

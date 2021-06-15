@@ -18,7 +18,8 @@
 		   @SuppressWarnings("unchecked")
 		   ArrayList<User> ranking = (ArrayList<User>)request.getAttribute("ranking");
 		   int myRank = (int)request.getAttribute("myRank");
-%>
+		%>
+
 		<table>
 		    <tr>
 		    	<th>順位</th>
