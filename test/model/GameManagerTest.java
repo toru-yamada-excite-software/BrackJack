@@ -27,7 +27,7 @@ public class GameManagerTest {
 	@Test
 	public void GameManagement0Test() {
 
-		GameInf gi = new GameInf(null, null, null, "Win");
+		GameInf gi = new GameInf(null, null, null);
 
 		doReturn(gi).when(hos).doHit(anyObject());
 
@@ -43,7 +43,7 @@ public class GameManagerTest {
 	@Test
 	public void GameManagement1Test() {
 
-		GameInf gi = new GameInf(null, null, null, "Lose");
+		GameInf gi = new GameInf(null, null, null);
 
 		doReturn(gi).when(hos).doStand(anyObject());
 
@@ -64,7 +64,7 @@ public class GameManagerTest {
 		player.setAscore(21);
 		dealer.setAscore(21);
 
-		GameInf gi = new GameInf(player, dealer, null, null);
+		GameInf gi = new GameInf(player, dealer, null);
 		GameInf actualGi = gm.naturalBJ(gi);
 
 		String expected = "Draw";
@@ -82,7 +82,7 @@ public class GameManagerTest {
 		player.setAscore(20);
 		dealer.setAscore(21);
 
-		GameInf gi = new GameInf(player, dealer, null, null);
+		GameInf gi = new GameInf(player, dealer, null);
 		GameInf actualGi = gm.naturalBJ(gi);
 
 		String expected = "Lose";
@@ -100,7 +100,7 @@ public class GameManagerTest {
 		player.setAscore(21);
 		dealer.setAscore(20);
 
-		GameInf gi = new GameInf(player, dealer, null, null);
+		GameInf gi = new GameInf(player, dealer, null);
 		GameInf actualGi = gm.naturalBJ(gi);
 
 		String expected = "Win";
@@ -118,7 +118,7 @@ public class GameManagerTest {
 		player.setAscore(20);
 		dealer.setAscore(20);
 
-		GameInf gi = new GameInf(player, dealer, null, "null");
+		GameInf gi = new GameInf(player, dealer, null);
 		GameInf actualGi = gm.naturalBJ(gi);
 
 		String expected = "null";

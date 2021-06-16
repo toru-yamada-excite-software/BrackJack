@@ -4,11 +4,10 @@
 <!DOCTYPE html>
 <html>
 
-	<% String message = (String)request.getAttribute("message");
-	   String message2 = (String)request.getAttribute("message2");
-	   Player player = (Player)request.getAttribute("player");%>
+	<% Player player = (Player)request.getAttribute("player"); %>
+
 	<% if(player.getHandList().size() == 1) { %>
-		<% if(message == null) { %>
+		<% if(player.getHand(0).getResult() == null) { %>
 			<form action="GameServlet" method="post">
 				<button class="command" type='submit' name='command' value='0'>hit</button>
  				<button class="command" type='submit' name='command' value='2'>stand</button>
@@ -20,18 +19,18 @@
 			</form>
 		<% } %>
 	<% } else { %>
-		<% if (message == null && message2 == null) { %>
+		<% if (player.getHand(0).getResult() == null && player.getHand(1).getResult() == null) { %>
 			<form action="GameServlet" method="post">
 				<button class="command" type='submit' name='command' value='0'>hit</button>
 				<button class="command" type='submit' name='command' value='1'>hit</button>
  				<button class="command" type='submit' name='command' value='2'>stand</button>
 			</form>
-		<% } else if(message == null) { %>
+		<% } else if(player.getHand(0).getResult() == null) { %>
 			<form action="GameServlet" method="post">
 				<button class="command" type='submit' name='command' value='0'>hit</button>
  				<button class="command" type='submit' name='command' value='2'>stand</button>
 			</form>
-		<% } else if(message2 == null) { %>
+		<% } else if(player.getHand(1).getResult() == null) { %>
 			<form action="GameServlet" method="post">
 				<button class="command" type='submit' name='command' value='1'>hit</button>
  				<button class="command" type='submit' name='command' value='2'>stand</button>

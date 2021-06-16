@@ -16,7 +16,6 @@ public class Player {
 	public void draw(Deck deck, int index) {
 
 		handList.get(index).drawBase(deck);
-		handList.get(index).bustJudge();
 
 	}
 
@@ -26,18 +25,16 @@ public class Player {
 			handList.get(0).drawBase(deck);
 		}
 
-		judgeSplit();
+		split = handList.get(0).judgeSplit();
 	}
 
-	public void judgeSplit() {
+	public boolean permitSplit() {
 
-		if (handList.get(0).getHand().get(0).getNumber() == handList.get(0).getHand().get(1).getNumber()) {
-			split = true;
-		} else if (handList.get(0).getHand().get(0).getNumber() >= 10
-				&& handList.get(0).getHand().get(1).getNumber() >= 10) {
-			split = true;
+		if (handList.size() >= 2 || getHand(0).getHand().size() >= 3) {
+			split = false;
 		}
 
+		return split;
 	}
 
 	public boolean getBust(int index) {

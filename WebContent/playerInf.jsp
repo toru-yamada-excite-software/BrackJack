@@ -18,11 +18,13 @@
 		<% } %>
 
 		<% if(player.getHand(i).getResult() == null) { %>
+
 			<% if(player.getAscore(i) > player.getScore(i)) { %>
 				<h3 class="score">スコア：<%= player.getScore(i) %> or <%= player.getAscore(i) %></h3>
 			<% } else {%>
 				<h3 class="score">スコア：<%= player.getScore(i) %></h3>
 			<% } %>
+			<h3>ベット：<%= player.getHand(i).getChip() %></h3>
 
 		<% } else { %>
 
