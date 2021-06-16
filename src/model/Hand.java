@@ -11,7 +11,7 @@ public class Hand {
 	private boolean bust = false;
 	private String result = null;
 
-	public void scoreCalc() {
+	private void scoreCalc() {
 
 		int j = 0;
 		score = 0; //scoreリセット後再計算
@@ -50,7 +50,7 @@ public class Hand {
 
 	}
 
-	public void bustJudge() {
+	private void bustJudge() {
 
 		if (score > 21) {
 			bust = true;
@@ -58,6 +58,18 @@ public class Hand {
 			bust = false;
 		}
 
+	}
+
+	public boolean judgeSplit() {
+
+		if (hand.get(0).getNumber() == hand.get(1).getNumber()) {
+			return true;
+		} else if (hand.get(0).getNumber() >= 10
+				&& hand.get(1).getNumber() >= 10) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void changeAscore() {
