@@ -1,5 +1,4 @@
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="model.WinLoseConvert"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.User"%>
 <%@page import="model.Game"%>
