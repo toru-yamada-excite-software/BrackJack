@@ -24,6 +24,10 @@
 					<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
 					<h3 id="number"><%= dealer.getHand().getHand().get(0).getNumber() %></h3>
 				</div>
+				<div>
+					<h3 id="suite">　</h3>
+					<h3 id="number">　</h3>
+				</div>
 			<% } else { %>
 				<% for(int i = 0; i < dealer.getHand().getHand().size(); i++) {%>
 					<div>
