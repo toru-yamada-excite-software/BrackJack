@@ -17,6 +17,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import model.GameInf;
 import model.GameManager;
+import model.Player;
 import model.SetGameData;
 import model.User;
 
@@ -42,26 +43,24 @@ public class StartGameServletTest {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		HttpSession session = request.getSession();
+		request.setParameter("betChip", "1");
 		User user = new User();
 		user.setId("id");
 		session.setAttribute("user", user);
-		GameInf gi = new GameInf(null, null, null, "Win");
+		Player player = new Player(0);
+		GameInf gi = new GameInf(player, null, null);
 
 		doReturn(gi).when(gm).naturalBJ(anyObject());
-		doReturn(user).when(sgd).setData(anyObject(), anyString());
+		doReturn(user).when(sgd).setData(anyObject(), anyObject());
 
 		sgs.doPost(request, response);
 
 		String expectedId = "id";
-		String expectedMessage = "Win";
 		session = request.getSession();
 		User actualUser = (User) session.getAttribute("user");
-		GameInf actualGi = (GameInf) session.getAttribute("gameInf");
 		String actualId = actualUser.getId();
-		String actualMessage = actualGi.getMessage();
 
 		assertThat(actualId, is(expectedId));
-		assertThat(actualMessage, is(expectedMessage));
 
 	}
 
