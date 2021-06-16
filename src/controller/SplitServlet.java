@@ -32,11 +32,12 @@ public class SplitServlet extends HttpServlet {
 		hand.setHand(card);
 		player.setHand(hand);
 		player.setChip(player.getBetChip(0), 1);
-		player.getHand(0).scoreCalc();
-		player.getHand(1).scoreCalc();
+		player.draw(gi.getDeck(), 0);
+		player.draw(gi.getDeck(), 1);
 
 		gi.setPlayer(player);
 		session.setAttribute("gameInf", gi);
+		session.setAttribute("split", player.permitSplit());
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
