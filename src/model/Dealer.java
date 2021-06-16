@@ -8,7 +8,6 @@ public class Dealer {
 
 		while (hand.getAscore() < 17) {
 			hand.drawBase(deck);
-			hand.bustJudge();
 		}
 
 	}
