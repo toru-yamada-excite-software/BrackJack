@@ -3,6 +3,7 @@ package model;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -29,13 +30,13 @@ public class HandTest {
 
 		}
 
+		decks.setDeck(deck);
 	}
 
 	//scoreCalcテスト
 	@Test
 	public void scoreCalcTest() {
 
-		decks.setDeck(deck);
 		hand.drawBase(decks);
 
 		int expectedScore = 1;
@@ -53,7 +54,6 @@ public class HandTest {
 	@Test
 	public void drawBaseTest() {
 
-		decks.setDeck(deck);
 		hand.drawBase(decks);
 
 		String expectedSuite = "♠";
@@ -69,14 +69,15 @@ public class HandTest {
 
 	//bustJudgeテスト
 	@Test
-	public void bustJudgeTest() {
+	public void bustJudgeTest() throws Exception {
 
-		decks.setDeck(deck);
 		for (int i = 0; i < 7; i++) {
 			hand.drawBase(decks);
 		}
 
-		hand.bustJudge();
+		Method method = Hand.class.getDeclaredMethod("bustJudge");
+		method.setAccessible(true);
+		method.invoke(hand);
 
 		boolean expected = true;
 
@@ -86,11 +87,59 @@ public class HandTest {
 
 	}
 
+	//judgeSplitテスト
+	@Test
+	public void judgeSplitTestFalse() {
+
+		hand.drawBase(decks);
+		hand.drawBase(decks);
+
+		boolean expected = false;
+
+		boolean actual = hand.judgeSplit();
+
+		assertThat(actual, is(expected));
+
+	}
+
+	@Test
+	public void judgeSplitTestTrue() {
+
+		hand.drawBase(decks);
+		for (int i = 0; i < 12; i++) {
+			decks.getDeck().poll();
+		}
+		hand.drawBase(decks);
+
+		boolean expected = true;
+
+		boolean actual = hand.judgeSplit();
+
+		assertThat(actual, is(expected));
+
+	}
+
+	@Test
+	public void judgeSplitTestTrue10heigher() {
+
+		for (int i = 0; i < 10; i++) {
+			decks.getDeck().poll();
+		}
+		hand.drawBase(decks);
+		hand.drawBase(decks);
+
+		boolean expected = true;
+
+		boolean actual = hand.judgeSplit();
+
+		assertThat(actual, is(expected));
+
+	}
+
 	//changeAscoreテスト
 	@Test
 	public void changeAscoreTest() {
 
-		decks.setDeck(deck);
 		hand.drawBase(decks);
 
 		hand.changeAscore();
