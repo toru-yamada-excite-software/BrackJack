@@ -51,7 +51,7 @@ public class LoginServletTest {
 		doReturn("p").when(this.request).getParameter("password");
 		doReturn(session).when(this.request).getSession();
 		doReturn(user).when(udb).getUser("1", "p");
-		doReturn(rd).when(this.request).getRequestDispatcher("menu.jsp");
+		doReturn(rd).when(this.request).getRequestDispatcher("mainMenu.jsp");
 		doNothing().when(rd).forward(anyObject(), anyObject());
 
 		login.doPost(this.request, response);
@@ -59,7 +59,7 @@ public class LoginServletTest {
 		session = request.getSession();
 		User actual = (User) session.getAttribute("user");
 
-		verify(this.request, times(1)).getRequestDispatcher("menu.jsp");
+		verify(this.request, times(1)).getRequestDispatcher("mainMenu.jsp");
 		assertThat(actual, is(user));
 
 	}
