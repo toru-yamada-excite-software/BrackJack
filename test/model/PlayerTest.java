@@ -76,23 +76,12 @@ public class PlayerTest {
 
 	}
 
-	//	@Test
-	//	public void scoreCalcTest() {
-	//
-	//		int expected = 1;
-	//
-	//		int actual = player.getScore(index);
-	//
-	//		assertThat(actual, is(expected));
-	//
-	//	}
-
-	//judgeSplitテスト
+	//permitSplitテスト
 	@Test
-	public void judgeSplitTest() {
+	public void permitSplitTest() {
 
 		player.draw(decks, index);
-		player.judgeSplit();
+		player.permitSplit();
 
 		boolean expected = false;
 
