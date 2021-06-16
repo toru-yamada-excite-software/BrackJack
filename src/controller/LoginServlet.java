@@ -46,8 +46,6 @@ public class LoginServlet extends HttpServlet {
 			GameInf gi = new GameInf(null, null, null);
 			session.setAttribute("user", user);
 			session.setAttribute("gameInf", gi);
-			session.setAttribute("message", null);
-			session.setAttribute("message2", null);
 			session.setAttribute("split", false);
 			RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 			rd.forward(request, response);

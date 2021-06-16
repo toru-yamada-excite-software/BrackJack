@@ -34,13 +34,6 @@ public class GameServlet extends HttpServlet {
 
 		gi = gm.GameManagement(gi, command);
 
-		if (gi.getPlayer().getHandList().size() == 1) {
-			session.setAttribute("message", gi.getPlayer().getResult(0));
-		} else {
-			session.setAttribute("message", gi.getPlayer().getResult(0));
-			session.setAttribute("message2", gi.getPlayer().getResult(1));
-		}
-
 		user = sgd.setData(user, gi.getPlayer());
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);

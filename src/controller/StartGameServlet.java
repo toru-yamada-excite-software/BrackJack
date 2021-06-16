@@ -32,8 +32,6 @@ public class StartGameServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		int betChip = Integer.parseInt(request.getParameter("betChip"));
-		session.setAttribute("message", null);
-		session.setAttribute("message2", null);
 		session.setAttribute("split", false);
 		session.setAttribute("splitPlayer", null);
 
@@ -48,13 +46,11 @@ public class StartGameServlet extends HttpServlet {
 		GameInf gi = new GameInf(player, dealer, deck);
 
 		gi = gm.naturalBJ(gi);
-		String message = gi.getPlayer().getResult(0);
 		user = sgd.setData(user, gi.getPlayer());
 
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("user", user);
 		session.setAttribute("split", player.getSplit());
-		session.setAttribute("message", message);
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
 

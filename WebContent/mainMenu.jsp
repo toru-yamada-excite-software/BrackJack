@@ -19,21 +19,26 @@
 
 	<% User user = (User)session.getAttribute("user");
 	   GameInf gi = (GameInf)session.getAttribute("gameInf");
-	   String message = (String)session.getAttribute("message");
-	   String message2 = (String)session.getAttribute("message2");
-	   boolean split = (boolean)session.getAttribute("split"); %>
+	   boolean split = (boolean)session.getAttribute("split");
+	   Player player = gi.getPlayer();
+	   Dealer dealer = gi.getDealer();
+	   request.setAttribute("player", player);
+	   request.setAttribute("dealer", dealer); %>
 
 	<header>
 		<h1>BlackJack</h1>
 
 		<h1><%= user.getName() %>でログイン中</h1>
+		<h2>所持チップ：<%= user.getChip() %></h2>
 
-		<% if(message != null) { %>
-			<h1><%= message %></h1>
+		<% if(player != null) { %>
+			<% for(int i = 0; i < player.getHandList().size(); i ++) { %>
+				<% if(player.getHand(i).getResult() != null) { %>
+					<h1><%= player.getHand(i).getResult() %></h1>
+				<% } %>
+			<% } %>
 		<% } %>
-		<% if(message2 != null) { %>
-			<h1><%= message2 %></h1>
-		<% } %>
+
 	</header>
 
 	<main>
@@ -41,37 +46,22 @@
 
 		<article>
 			<h2>Dealer</h2>
-			<% request.setAttribute("dealer", gi.getDealer());
-			   request.setAttribute("player", gi.getPlayer());
-			   request.setAttribute("message", message);
-			   request.setAttribute("message2", message2); %>
-			<jsp:include page="dealerInf.jsp"></jsp:include>
+			<jsp:include page="dealerInf.jsp">
+				<jsp:param value="<%= dealer %>" name="dealer"/>
+				<jsp:param value="<%= player %>" name="player"/>
+			</jsp:include>
 		</article>
 
 		<article>
 			<h2>Player</h2>
-			<% request.setAttribute("player", gi.getPlayer());
-			   request.setAttribute("message", message); %>
 			<jsp:include page="playerInf.jsp"></jsp:include>
-			<p><%=gi.getPlayer().getBetChip(0)%></p>
 		</article>
 
-		<% if(gi.getPlayer().getHandList().size() != 1) { %>
-			<% request.setAttribute("player", gi.getPlayer());
-			   request.setAttribute("message", message);
-			   request.setAttribute("message2", message2); %>
-			<jsp:include page="splitPlayerInf.jsp"></jsp:include>
-			<p><%=gi.getPlayer().getBetChip(1)%></p>
-		<% } %>
-
-		<% request.setAttribute("player", gi.getPlayer());
-		   request.setAttribute("message", message);
-		   request.setAttribute("message2", message2); %>
 		<section>
 			<jsp:include page="gameButton.jsp"></jsp:include>
 		</section>
 
-		<% if(split && gi.getPlayer().getHandList().size() == 1 && message == null){ %>
+		<% if(split && player.getHand(0).getResult() == null){ %>
 			<section>
 				<form action="SplitServlet" method="post">
 					<button name="split">split</button>

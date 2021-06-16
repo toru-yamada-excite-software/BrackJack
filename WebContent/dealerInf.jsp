@@ -6,12 +6,10 @@
 <html lang="ja">
 
 	<% Dealer dealer = (Dealer)request.getAttribute("dealer");
-	   String message = (String)request.getAttribute("message");
-	   String message2 = (String)request.getAttribute("message2");
 	   Player player = (Player)request.getAttribute("player"); %>
 
 		<% if(player.getHandList().size() == 1) { %>
-			<% if(message == null) { %>
+			<% if(player.getHand(0).getResult() == null) { %>
 				<div>
 					<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
 					<h3 id="number"><%= dealer.getHand().getHand().get(0).getNumber() %></h3>
@@ -32,7 +30,7 @@
 			<% } %>
 
 		<% } else { %>
-			<% if(message == null || message2 == null) { %>
+			<% if(player.getHand(0).getResult() == null || player.getHand(1).getResult() == null) { %>
 				<div>
 					<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
 					<h3 id="number"><%= dealer.getHand().getHand().get(0).getNumber() %></h3>
