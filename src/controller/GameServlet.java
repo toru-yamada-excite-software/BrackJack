@@ -44,6 +44,7 @@ public class GameServlet extends HttpServlet {
 		user = sgd.setData(user, gi.getPlayer());
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
+		session.setAttribute("split", gi.getPlayer().permitSplit());
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
