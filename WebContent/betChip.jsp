@@ -3,13 +3,6 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-</head>
-
-<body>
-
 	<select name="betChip" required>
 		<option value="" selected>ベット数を選択してください</option>
 		<option value="1">1</option>
@@ -23,7 +16,5 @@
 		<option value="9">9</option>
 		<option value="10">10</option>
 	</select>
-
-</body>
 
 </html>

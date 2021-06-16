@@ -4,14 +4,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<title>Document</title>
-</head>
-
-<body>
-
 	<% Player player = (Player)request.getAttribute("player");
 	   String message = (String)request.getAttribute("message"); %>
 	<% for(int i = 0; i < player.getHand(1).getHand().size(); i++) { %>
@@ -37,7 +29,5 @@
 		<% } %>
 
 	<% } %>
-
-</body>
 
 </html>

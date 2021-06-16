@@ -5,14 +5,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<title>Document</title>
-</head>
-
-<body>
-
 	<% Dealer dealer = (Dealer)request.getAttribute("dealer");
 	   String message = (String)request.getAttribute("message");
 	   String message2 = (String)request.getAttribute("message2");
@@ -56,8 +48,5 @@
 				<h3 class="score">スコア：<%= dealer.getScore() %></h3>
 			<% } %>
 		<% } %>
-
-
-</body>
 
 </html>
