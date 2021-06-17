@@ -21,23 +21,13 @@
 	   GameInf gi = (GameInf)session.getAttribute("gameInf");
 	   boolean split = (boolean)session.getAttribute("split");
 	   Player player = gi.getPlayer();
-	   Dealer dealer = gi.getDealer();
-	   request.setAttribute("player", player);
-	   request.setAttribute("dealer", dealer); %>
+	   Dealer dealer = gi.getDealer(); %>
 
 	<header>
 		<h1>BlackJack</h1>
 
-		<h1><%= user.getName() %>でログイン中</h1>
+		<h1 class="user"><%= user.getName() %>でログイン中</h1>
 		<h2>所持チップ：<%= user.getChip() %></h2>
-
-		<% if(player != null) { %>
-			<% for(int i = 0; i < player.getHandList().size(); i ++) { %>
-				<% if(player.getHand(i).getResult() != null) { %>
-					<h1><%= player.getHand(i).getResult() %></h1>
-				<% } %>
-			<% } %>
-		<% } %>
 
 	</header>
 
@@ -46,10 +36,7 @@
 
 		<article>
 			<h2>Dealer</h2>
-			<jsp:include page="dealerInf.jsp">
-				<jsp:param value="<%= dealer %>" name="dealer"/>
-				<jsp:param value="<%= player %>" name="player"/>
-			</jsp:include>
+			<jsp:include page="dealerInf.jsp"></jsp:include>
 		</article>
 
 		<article>
@@ -64,7 +51,7 @@
 		<% if(split && player.getHand(0).getResult() == null){ %>
 			<section>
 				<form action="SplitServlet" method="post">
-					<button name="split">split</button>
+					<button class="command" name="split">split</button>
 				</form>
 			</section>
 		<% } %>

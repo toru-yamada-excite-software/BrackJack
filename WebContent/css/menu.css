@@ -8,27 +8,45 @@ div {
   text-align: center;
 }
 
+.user {
+	float: right;
+}
+
 #suite, #number {
-  margin: 5px;
+	margin: 5px;
 }
 
 .score, h2 {
-  clear: left;
+	clear: left;
 }
 
-.ascore {
-  float: left;
-}
+
 
 .menu {
-  height: 30px;
-  width: 110px;
-  float: left;
-  margin: 30px 5px;
+	height: 30px;
+	width: 110px;
+	float: left;
+	margin: 30px 5px;
 }
 
 .command {
-  height: 30px;
-  width: 110px;
-  margin: 30px 5px;
+	height: 30px;
+	width: 110px;
+ 	margin: 30px 5px;
+	float: left;
+}
+
+.hit {
+	height: 30px;
+	width: 110px;
+	margin-left: 5px;
+}
+
+select {
+	clear: left;
+	margin-top: 35px;
+}
+
+aside {
+	clear: left;
 }
