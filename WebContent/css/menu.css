@@ -8,6 +8,10 @@ div {
   text-align: center;
 }
 
+#player {
+	float: left;
+}
+
 #suite, #number {
 	margin: 5px;
 }
@@ -19,8 +23,6 @@ div {
 .score, h2 {
 	clear: left;
 }
-
-
 
 .menu {
 	height: 30px;

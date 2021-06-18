@@ -11,7 +11,7 @@
 	<% for(int j = 0; j < player.getHand(i).getHand().size(); j++) { %>
 		<div>
 			<h3 id="suite"><%= player.getHand(i).getHand().get(j).getSuite() %></h3>
-			<h3 id="number"><%= player.getHand(i).getHand().get(j).getNumber() %></h3>
+			<h3 id="number"><%= player.getHand(i).getHand().get(j).getFaceCard() %></h3>
 		</div>
 	<% } %>
 

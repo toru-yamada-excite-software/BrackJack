@@ -21,7 +21,7 @@
 	<% for(int i = 0; i < dealer.getHand().getHand().size(); i++) {%>
 		<div>
 			<h3 id="suite"><%= dealer.getHand().getHand().get(i).getSuite() %></h3>
-			<h3 id="number"><%= dealer.getHand().getHand().get(i).getNumber() %></h3>
+			<h3 id="number"><%= dealer.getHand().getHand().get(i).getFaceCard() %></h3>
 		</div>
 	<% } %>
 
@@ -29,7 +29,7 @@
 <% } else { %>
 	<div>
 		<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
-		<h3 id="number"><%= dealer.getHand().getHand().get(0).getNumber() %></h3>
+		<h3 id="number"><%= dealer.getHand().getHand().get(0).getFaceCard() %></h3>
 	</div>
 	<div id="hole">
 		<h3 id="suite">　</h3>

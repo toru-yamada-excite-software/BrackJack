@@ -45,6 +45,27 @@ public class Card implements Serializable {
 		}
 	}
 
+	public String getFaceCard() {
+
+		switch (number) {
+		case 1:
+			return "A";
+
+		case 11:
+			return "J";
+
+		case 12:
+			return "Q";
+
+		case 13:
+			return "K";
+
+		default:
+			return Integer.toString(number);
+		}
+
+	}
+
 	public int getNumber() {
 		return number;
 	}
