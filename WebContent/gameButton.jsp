@@ -8,7 +8,7 @@
    int judgeEnd = 0; %>
 
 <% for(int i = 0; i < player.getHandList().size(); i++) { %>
-	<% if(player.getHand(i).getResult() != null) { %>
+	<% if(player.getHandList().get(i).getResult() != null) { %>
 		<% judgeEnd++; %>
 	<% } %>
 <% } %>
@@ -20,7 +20,7 @@
 		</form>
 
 <% } else { %>
-	<form action="GameServlet" method="post">
-		<button class="command" type='submit' name='command' value='2'>stand</button>
+	<form action="StandServlet" method="post">
+		<button class="command" type='submit' name='command'>stand</button>
 	</form>
 <% } %>

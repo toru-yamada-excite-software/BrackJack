@@ -48,7 +48,7 @@
 			<jsp:include page="gameButton.jsp"></jsp:include>
 		</section>
 
-		<% if(split && player.getHand(0).getResult() == null){ %>
+		<% if(split && player.getHandList().get(0).getResult() == null){ %>
 			<section>
 				<form action="SplitServlet" method="post">
 					<button class="command" name="split">split</button>
@@ -59,7 +59,7 @@
 	<% } else { %>
 		<section>
 			<form action="StartGameServlet" method="post">
-				<input type="submit" value="start">
+				<input type="submit" value="start" class="command">
 				<jsp:include page="betChip.jsp"></jsp:include>
 			</form>
 		</section>
