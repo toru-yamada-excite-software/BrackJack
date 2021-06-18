@@ -16,7 +16,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import model.GameInf;
-import model.GameManager;
+import model.JudgeNaturalBJ;
 import model.Player;
 import model.SetGameData;
 import model.User;
@@ -27,7 +27,7 @@ public class StartGameServletTest {
 	private StartGameServlet sgs = new StartGameServlet();
 
 	@Mock
-	private GameManager gm;
+	private JudgeNaturalBJ gm;
 
 	@Mock
 	private SetGameData sgd;
@@ -50,7 +50,7 @@ public class StartGameServletTest {
 		Player player = new Player(0);
 		GameInf gi = new GameInf(player, null, null);
 
-		doReturn(gi).when(gm).naturalBJ(anyObject());
+		doReturn(gi).when(gm).judge(anyObject());
 		doReturn(user).when(sgd).setData(anyObject(), anyObject());
 
 		sgs.doPost(request, response);

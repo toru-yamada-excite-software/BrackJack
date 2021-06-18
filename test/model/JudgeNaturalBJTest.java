@@ -11,10 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class GameManagerTest {
+public class JudgeNaturalBJTest {
 
 	@InjectMocks
-	private GameManager gm = new GameManager();
+	private JudgeNaturalBJ gm = new JudgeNaturalBJ();
 
 	@Mock
 	private HitOrStand hos = new HitOrStand();
@@ -65,7 +65,7 @@ public class GameManagerTest {
 		dealer.setAscore(21);
 
 		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.naturalBJ(gi);
+		GameInf actualGi = gm.judge(gi);
 
 		String expected = "Draw";
 		String actual = actualGi.getMessage();
@@ -83,7 +83,7 @@ public class GameManagerTest {
 		dealer.setAscore(21);
 
 		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.naturalBJ(gi);
+		GameInf actualGi = gm.judge(gi);
 
 		String expected = "Lose";
 		String actual = actualGi.getMessage();
@@ -101,7 +101,7 @@ public class GameManagerTest {
 		dealer.setAscore(20);
 
 		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.naturalBJ(gi);
+		GameInf actualGi = gm.judge(gi);
 
 		String expected = "Win";
 		String actual = actualGi.getMessage();
@@ -119,7 +119,7 @@ public class GameManagerTest {
 		dealer.setAscore(20);
 
 		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.naturalBJ(gi);
+		GameInf actualGi = gm.judge(gi);
 
 		String expected = "null";
 		String actual = actualGi.getMessage();

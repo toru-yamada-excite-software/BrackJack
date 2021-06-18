@@ -27,11 +27,11 @@ public class SplitServlet extends HttpServlet {
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 		Player player = gi.getPlayer();
 
-		Card card = player.getHand(0).getHand().poll();
+		Card card = player.getHandList().get(0).getHand().poll();
 		Hand hand = new Hand();
 		hand.setHand(card);
+		hand.setChip(player.getHandList().get(0).getChip());
 		player.setHand(hand);
-		player.setChip(player.getBetChip(0), 1);
 		player.draw(gi.getDeck(), 0);
 		player.draw(gi.getDeck(), 1);
 

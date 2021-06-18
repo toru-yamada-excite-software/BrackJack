@@ -12,8 +12,15 @@ public class SetGameData {
 
 	public User setData(User user, Player player) {
 
-		if ((player.getHandList().size() == 1 && player.getResult(0) != null)
-				|| (player.getHandList().size() == 2 && player.getResult(0) != null && player.getResult(1) != null)) {
+		int judgeEnd = 0;
+
+		for (int i = 0; i < player.getHandList().size(); i++) {
+			if (player.getHandList().get(i).getResult() != null) {
+				judgeEnd++;
+			}
+		}
+
+		if (judgeEnd == player.getHandList().size()) {
 
 			Timestamp playTime = new Timestamp(System.currentTimeMillis());
 

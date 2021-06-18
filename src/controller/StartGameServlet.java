@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import model.Dealer;
 import model.Deck;
 import model.GameInf;
-import model.GameManager;
+import model.JudgeNaturalBJ;
 import model.Player;
 import model.SetGameData;
 import model.User;
@@ -22,7 +22,7 @@ import model.User;
 public class StartGameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1880424086018231879L;
 
-	private GameManager gm = new GameManager();
+	private JudgeNaturalBJ gm = new JudgeNaturalBJ();
 	private SetGameData sgd = new SetGameData();
 
 	@Override
@@ -38,14 +38,13 @@ public class StartGameServlet extends HttpServlet {
 		Player player = new Player(user.getChip());
 		Dealer dealer = new Dealer();
 		Deck deck = new Deck();
-		player.setChip(betChip, 0);
 
-		player.firstDraw(deck);
+		player.firstDraw(deck, betChip);
 		dealer.firstDraw(deck);
 
 		GameInf gi = new GameInf(player, dealer, deck);
 
-		gi = gm.naturalBJ(gi);
+		gi = gm.judge(gi);
 		user = sgd.setData(user, gi.getPlayer());
 
 		session.setAttribute("gameInf", gi);

@@ -1,42 +1,31 @@
 package model;
 
-public class GameManager {
+public class JudgeNaturalBJ {
 
-	private HitOrStand hos = new HitOrStand();
-
-	public GameInf gameManagement(GameInf gi, int command) {
-
-		if (command == 0 || command == 1) {
-			return hos.doHit(gi, command);
-		} else {
-			return hos.doStand(gi);
-		}
-
-	}
-
-	public GameInf naturalBJ(GameInf gi) {
+	public GameInf judge(GameInf gi) {
 
 		Player player = gi.getPlayer();
 		Dealer dealer = gi.getDealer();
-		Deck deckInf = gi.getDeck();
+		Deck deck = gi.getDeck();
+		Hand hand = player.getHandList().get(0);
 
-		if (dealer.getAscore() == 21 || player.getAscore(0) == 21) {
+		if (dealer.getAscore() == 21 || hand.getAscore() == 21) {
 
-			player.getHand(0).changeAscore();
+			hand.changeAscore();
 			dealer.getHand().changeAscore();
 
-			if (dealer.getScore() == 21 && player.getScore(0) == 21) {
+			if (dealer.getScore() == 21 && hand.getScore() == 21) {
 				player.calcChip(0);
-				player.setResult("Draw", 0);
-				gi = new GameInf(player, dealer, deckInf);
+				hand.setResult("Draw");
+				gi = new GameInf(player, dealer, deck);
 			} else if (dealer.getScore() == 21) {
-				player.calcChip(-player.getBetChip(0));
-				player.setResult("Lose", 0);
-				gi = new GameInf(player, dealer, deckInf);
+				player.calcChip(-hand.getChip());
+				hand.setResult("Lose");
+				gi = new GameInf(player, dealer, deck);
 			} else {
-				player.calcChip((int) (player.getBetChip(0) * 1.5));
-				player.setResult("Win", 0);
-				gi = new GameInf(player, dealer, deckInf);
+				player.calcChip((int) (hand.getChip() * 1.5));
+				hand.setResult("Win");
+				gi = new GameInf(player, dealer, deck);
 			}
 
 		}

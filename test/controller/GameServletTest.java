@@ -16,7 +16,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import model.GameInf;
-import model.GameManager;
+import model.JudgeNaturalBJ;
 import model.Player;
 import model.SetGameData;
 import model.User;
@@ -27,7 +27,7 @@ public class GameServletTest {
 	private GameServlet gs = new GameServlet();
 
 	@Mock
-	private GameManager gm;
+	private JudgeNaturalBJ gm;
 
 	@Mock
 	private SetGameData sgd;
