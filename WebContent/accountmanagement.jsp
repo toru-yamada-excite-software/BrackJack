@@ -11,7 +11,7 @@
 	</head>
 
 	<body>
-		<h1>BrackJack</h1>
+		<h1>BlackJack</h1>
 		<% User user = (User)session.getAttribute("user");
 		   String message = (String)request.getAttribute("message");%>
 		<h1><%= user.getName() %>でログイン中</h1>

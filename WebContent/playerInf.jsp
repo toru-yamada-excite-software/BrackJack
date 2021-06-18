@@ -6,7 +6,6 @@
 <% GameInf gi = (GameInf)session.getAttribute("gameInf");
    Player player = gi.getPlayer(); %>
 
-
 <% for(int i = 0; i < player.getHandList().size(); i++) { %>
 
 	<% for(int j = 0; j < player.getHand(i).getHand().size(); j++) { %>

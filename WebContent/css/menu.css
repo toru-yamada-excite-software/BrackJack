@@ -8,12 +8,12 @@ div {
   text-align: center;
 }
 
-.user {
-	float: right;
-}
-
 #suite, #number {
 	margin: 5px;
+}
+
+#hole {
+	background-image: url(../image/tramp.jpg);
 }
 
 .score, h2 {

@@ -31,7 +31,7 @@
 		<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
 		<h3 id="number"><%= dealer.getHand().getHand().get(0).getNumber() %></h3>
 	</div>
-	<div>
+	<div id="hole">
 		<h3 id="suite">　</h3>
 		<h3 id="number">　</h3>
 	</div>
