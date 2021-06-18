@@ -51,7 +51,7 @@ public class GameServletTest {
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
 
-		doReturn(gi).when(gm).GameManagement(anyObject(), anyInt());
+		doReturn(gi).when(gm).gameManagement(anyObject(), anyInt());
 		doReturn(user).when(sgd).setData(anyObject(), anyObject());
 
 		gs.doPost(request, response);

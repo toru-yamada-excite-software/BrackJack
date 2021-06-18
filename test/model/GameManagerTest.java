@@ -31,7 +31,7 @@ public class GameManagerTest {
 
 		doReturn(gi).when(hos).doHit(anyObject());
 
-		GameInf actualGi = gm.GameManagement(gi, 0);
+		GameInf actualGi = gm.gameManagement(gi, 0);
 
 		String expected = "Win";
 		String actual = actualGi.getMessage();
@@ -47,7 +47,7 @@ public class GameManagerTest {
 
 		doReturn(gi).when(hos).doStand(anyObject());
 
-		GameInf actualGi = gm.GameManagement(gi, 1);
+		GameInf actualGi = gm.gameManagement(gi, 1);
 
 		String expected = "Lose";
 		String actual = actualGi.getMessage();

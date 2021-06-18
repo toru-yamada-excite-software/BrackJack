@@ -4,7 +4,7 @@ public class GameManager {
 
 	private HitOrStand hos = new HitOrStand();
 
-	public GameInf GameManagement(GameInf gi, int command) {
+	public GameInf gameManagement(GameInf gi, int command) {
 
 		if (command == 0 || command == 1) {
 			return hos.doHit(gi, command);

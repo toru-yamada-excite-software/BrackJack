@@ -32,7 +32,7 @@ public class GameServlet extends HttpServlet {
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 		int command = Integer.parseInt(request.getParameter("command"));
 
-		gi = gm.GameManagement(gi, command);
+		gi = gm.gameManagement(gi, command);
 
 		user = sgd.setData(user, gi.getPlayer());
 		session.setAttribute("user", user);
