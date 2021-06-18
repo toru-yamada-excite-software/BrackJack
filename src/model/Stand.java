@@ -22,9 +22,11 @@ public class Stand {
 					player.calcChip(hand.getChip());
 					hand.setResult("Win");
 					gi = new GameInf(player, dealer, deck);
+
 				} else {
 					hand.changeAscore();
 					dealer.getHand().changeAscore();
+
 					if (hand.getScore() > dealer.getScore()) {
 						player.calcChip(hand.getChip());
 						hand.setResult("Win");
