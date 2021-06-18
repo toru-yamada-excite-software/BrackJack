@@ -11,18 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.GameInf;
-import model.GameManager;
 import model.SetGameData;
+import model.Stand;
 import model.User;
 
-@WebServlet("/GameServlet")
-public class GameServlet extends HttpServlet {
-	private static final long serialVersionUID = -359485711102746206L;
+@WebServlet("/StandServlet")
+public class StandServlet extends HttpServlet {
+	private static final long serialVersionUID = 9202680001240561666L;
 
-	private GameManager gm = new GameManager();
+	private Stand stand = new Stand();
 	private SetGameData sgd = new SetGameData();
 
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -30,14 +29,12 @@ public class GameServlet extends HttpServlet {
 
 		User user = (User) session.getAttribute("user");
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
-		int command = Integer.parseInt(request.getParameter("command"));
 
-		gi = gm.gameManagement(gi, command);
+		gi = stand.doStand(gi);
 
 		user = sgd.setData(user, gi.getPlayer());
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
-		session.setAttribute("split", gi.getPlayer().permitSplit());
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
