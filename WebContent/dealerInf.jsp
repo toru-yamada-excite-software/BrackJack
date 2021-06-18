@@ -1,3 +1,4 @@
+<%@page import="model.JudgeGameEnd"%>
 <%@page import="model.GameInf"%>
 <%@page import="model.Player"%>
 <%@page import="model.Dealer"%>
@@ -6,16 +7,9 @@
 
 <% GameInf gi = (GameInf)session.getAttribute("gameInf");
    Dealer dealer = gi.getDealer();
-   Player player = gi.getPlayer();
-   int judgeEnd = 0; %>
+   Player player = gi.getPlayer(); %>
 
-<% for(int i = 0; i < player.getHandList().size(); i++) { %>
-	<% if(player.getHandList().get(i).getResult() != null) { %>
-		<% judgeEnd++; %>
-	<% } %>
-<% } %>
-
-<% if(judgeEnd == player.getHandList().size()) { %>
+<% if(JudgeGameEnd.judge(player) == player.getHandList().size()) { %>
 	<% for(int i = 0; i < dealer.getHand().getHand().size(); i++) {%>
 		<div>
 			<h3 id="suite"><%= dealer.getHand().getHand().get(i).getSuite() %></h3>
