@@ -1,6 +1,9 @@
 package model;
 
-public class Dealer {
+import java.io.Serializable;
+
+public class Dealer implements Serializable {
+	private static final long serialVersionUID = 3272354239289678846L;
 
 	private Hand hand = new Hand();
 

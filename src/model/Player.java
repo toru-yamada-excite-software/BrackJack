@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Serializable {
+	private static final long serialVersionUID = 192316065824662635L;
 
 	private ArrayList<Hand> handList = new ArrayList<Hand>();
 	private int chip;
