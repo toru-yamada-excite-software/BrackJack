@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Hand {
+public class Hand implements Serializable {
+	private static final long serialVersionUID = -8769769700554333412L;
 
 	private LinkedList<Card> hand = new LinkedList<Card>();
 	private Integer chip = null;
@@ -89,16 +91,8 @@ public class Hand {
 		return hand;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
-	}
-
 	public int getScore() {
 		return score;
-	}
-
-	public void setAscore(int Ascore) {
-		this.Ascore = Ascore;
 	}
 
 	public int getAscore() {
