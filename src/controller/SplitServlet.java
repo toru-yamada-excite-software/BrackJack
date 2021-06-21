@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Card;
 import model.GameInf;
-import model.Hand;
-import model.Player;
+import model.Split;
 
 @WebServlet("/SplitServlet")
 public class SplitServlet extends HttpServlet {
 	private static final long serialVersionUID = -7841258715078384688L;
+
+	private Split split = new Split();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -25,19 +25,11 @@ public class SplitServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
-		Player player = gi.getPlayer();
 
-		Card card = player.getHandList().get(0).getHand().poll();
-		Hand hand = new Hand();
-		hand.setHand(card);
-		hand.setChip(player.getHandList().get(0).getChip());
-		player.setHand(hand);
-		player.draw(gi.getDeck(), 0);
-		player.draw(gi.getDeck(), 1);
+		gi = split.doSplit(gi);
 
-		gi.setPlayer(player);
 		session.setAttribute("gameInf", gi);
-		session.setAttribute("split", player.permitSplit());
+		session.setAttribute("split", gi.getPlayer().permitSplit());
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
