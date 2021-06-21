@@ -76,7 +76,7 @@ public class DealerTest {
 	//	@Test
 	//	public void bustJudgeTest() {
 	//
-	//		decks.setDeck(deck);
+	//		decks.setDeck(decks);
 	//		decks = dealer.draw(decks);
 	//
 	//		dealer.bustJudge();
