@@ -43,8 +43,8 @@ public class PlayerTest {
 		String expectedSuite = "♠";
 		int expectedNumber = 1;
 
-		String actualSuite = player.getHand(index).getHand().get(0).getSuite();
-		int actualNumber = player.getHand(index).getHand().get(0).getNumber();
+		String actualSuite = player.getHandList().get(index).getHand().get(0).getSuite();
+		int actualNumber = player.getHandList().get(index).getHand().get(0).getNumber();
 
 		assertThat(actualSuite, is(expectedSuite));
 		assertThat(actualNumber, is(expectedNumber));
@@ -56,18 +56,18 @@ public class PlayerTest {
 	public void firstDrawTest() {
 
 		decks.setDeck(deck);
-		player.firstDraw(decks);
+		player.firstDraw(decks, 1);
 
 		String expectedSuite = "♠";
 		int expectedNumber = 1;
 		String expectedSuite2 = "♠";
 		int expectedNumber2 = 2;
 
-		String actualSuite = player.getHand(index).getHand().get(0).getSuite();
-		int actualNumber = player.getHand(index).getHand().get(0).getNumber();
+		String actualSuite = player.getHandList().get(index).getHand().get(0).getSuite();
+		int actualNumber = player.getHandList().get(index).getHand().get(0).getNumber();
 
-		String actualSuite2 = player.getHand(index).getHand().get(1).getSuite();
-		int actualNumber2 = player.getHand(index).getHand().get(1).getNumber();
+		String actualSuite2 = player.getHandList().get(index).getHand().get(1).getSuite();
+		int actualNumber2 = player.getHandList().get(index).getHand().get(1).getNumber();
 
 		assertThat(actualSuite, is(expectedSuite));
 		assertThat(actualNumber, is(expectedNumber));
