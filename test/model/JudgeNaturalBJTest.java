@@ -16,7 +16,6 @@ public class JudgeNaturalBJTest {
 	private LinkedList<Card> deck = new LinkedList<Card>();
 	private GameInf gi;
 	private JudgeNaturalBJ jnbj;
-	private Hit hit;
 
 	@BeforeEach
 	public void setup() {
@@ -42,7 +41,6 @@ public class JudgeNaturalBJTest {
 
 		gi = new GameInf(player, dealer, decks);
 		jnbj = new JudgeNaturalBJ();
-		hit = new Hit();
 	}
 
 	@Test
