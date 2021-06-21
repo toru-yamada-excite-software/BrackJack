@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.LinkedList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,8 +18,12 @@ import dbmodel.UserDB;
 public class SetGameDataTest {
 
 	private User user;
-	private String judge;
+	private Player player;
 	private Game game;
+	private Deck decks;
+	private LinkedList<Card> deck = new LinkedList<Card>();
+	private GameInf gi;
+	private Hit hit;
 
 	@InjectMocks
 	private SetGameData sgd = new SetGameData();
@@ -36,61 +42,66 @@ public class SetGameDataTest {
 		user.setId("1");
 		user.setPassword("p");
 		user.setName("n");
-		user.setPlay(9);
-		user.setWin(9);
-		user.setDraw(0);
-		user.setWinRate(1);
+		user.setPlay(0);
+		user.setChip(10);
 		game = new Game("1", 1, null);
+		player = new Player(10);
+		decks = new Deck();
+		hit = new Hit();
+
+		for (int j = 1; j <= 13; j++) {
+
+			for (int i = 0; i < 4; i++) {
+
+				Card card = new Card(i, j);
+				deck.add(card);
+			}
+
+		}
+
+		decks.setDeck(deck);
+		player.firstDraw(decks, 1);
+		gi = new GameInf(player, null, decks);
 
 	}
 
 	@Test
 	public void setDateTestNull() {
 
-		judge = null;
-		user = sgd.setData(user, judge);
+		user = sgd.setData(user, player);
 
-		int expectedPlay = 9;
-		int expectedWin = 9;
-		int expectedDraw = 0;
-		double expectedWinRate = 1;
+		int expectedPlay = 0;
+		int expectedChip = 10;
 
 		int actualPlay = user.getPlay();
-		int actualWin = user.getWin();
-		int actualDraw = user.getDraw();
-		double actualWinRate = user.getWinRate();
+		int actualChip = user.getChip();
 
 		assertThat(actualPlay, is(expectedPlay));
-		assertThat(actualWin, is(expectedWin));
-		assertThat(actualDraw, is(expectedDraw));
-		assertThat(actualWinRate, is(expectedWinRate));
+		assertThat(actualChip, is(expectedChip));
 
 	}
 
 	@Test
 	public void setDateTest() {
 
-		judge = "Win";
+		for (int i = 0; i < 11; i++) {
+			gi = hit.doHit(gi, 0);
+		}
 
 		doNothing().when(gdb).insertGame(game);
 		doNothing().when(udb).updateUserRecord(user);
 
-		user = sgd.setData(user, judge);
+		player.calcChip(player.getHandList().get(0).getChip());
+		user = sgd.setData(user, player);
 
-		int expectedPlay = 10;
-		int expectedWin = 10;
-		int expectedDraw = 0;
-		double expectedWinRate = 1;
+		int expectedPlay = 1;
+		int expectedChip = 9;
 
 		int actualPlay = user.getPlay();
-		int actualWin = user.getWin();
-		int actualDraw = user.getDraw();
-		double actualWinRate = user.getWinRate();
+		int actualChip = player.getChip();
 
 		assertThat(actualPlay, is(expectedPlay));
-		assertThat(actualWin, is(expectedWin));
-		assertThat(actualDraw, is(expectedDraw));
-		assertThat(actualWinRate, is(expectedWinRate));
+		assertThat(actualChip, is(expectedChip));
 
 	}
 
