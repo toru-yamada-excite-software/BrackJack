@@ -2,109 +2,94 @@ package model;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+
+import java.util.LinkedList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 public class JudgeNaturalBJTest {
 
-	@InjectMocks
-	private JudgeNaturalBJ gm = new JudgeNaturalBJ();
-
-	@Mock
-	private HitOrStand hos = new HitOrStand();
+	private Player player;
+	private Dealer dealer;
+	private Deck decks;
+	private LinkedList<Card> deck = new LinkedList<Card>();
+	private GameInf gi;
+	private JudgeNaturalBJ jnbj;
+	private Hit hit;
 
 	@BeforeEach
 	public void setup() {
-		MockitoAnnotations.initMocks(this);
-	}
 
-	@Test
-	public void GameManagement0Test() {
+		player = new Player(100);
+		dealer = new Dealer();
+		decks = new Deck();
 
-		GameInf gi = new GameInf(null, null, null);
+		Card card = new Card(0, 8);
+		deck.add(card);
+		card = new Card(0, 1);
+		deck.add(card);
+		card = new Card(0, 13);
+		deck.add(card);
+		card = new Card(1, 8);
+		deck.add(card);
+		card = new Card(1, 1);
+		deck.add(card);
+		card = new Card(1, 13);
+		deck.add(card);
 
-		doReturn(gi).when(hos).doHit(anyObject());
+		decks.setDeck(deck);
 
-		GameInf actualGi = gm.gameManagement(gi, 0);
-
-		String expected = "Win";
-		String actual = actualGi.getMessage();
-
-		assertThat(actual, is(expected));
-
-	}
-
-	@Test
-	public void GameManagement1Test() {
-
-		GameInf gi = new GameInf(null, null, null);
-
-		doReturn(gi).when(hos).doStand(anyObject());
-
-		GameInf actualGi = gm.gameManagement(gi, 1);
-
-		String expected = "Lose";
-		String actual = actualGi.getMessage();
-
-		assertThat(actual, is(expected));
-
+		gi = new GameInf(player, dealer, decks);
+		jnbj = new JudgeNaturalBJ();
+		hit = new Hit();
 	}
 
 	@Test
 	public void naturalBJdrawTest() {
 
-		Player player = new Player();
-		Dealer dealer = new Dealer();
-		player.setAscore(21);
-		dealer.setAscore(21);
+		decks.getDeck().poll();
+		player.firstDraw(decks, 1);
+		decks.getDeck().poll();
+		dealer.firstDraw(decks);
 
-		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.judge(gi);
+		gi = jnbj.judge(gi);
 
 		String expected = "Draw";
-		String actual = actualGi.getMessage();
+		String actual = gi.getPlayer().getHandList().get(0).getResult();
 
 		assertThat(actual, is(expected));
 
 	}
 
 	@Test
-	public void naturalBloseTest() {
+	public void naturalBJloseTest() {
 
-		Player player = new Player();
-		Dealer dealer = new Dealer();
-		player.setAscore(20);
-		dealer.setAscore(21);
+		player.firstDraw(decks, 1);
+		decks.getDeck().poll();
+		decks.getDeck().poll();
+		dealer.firstDraw(decks);
 
-		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.judge(gi);
+		gi = jnbj.judge(gi);
 
 		String expected = "Lose";
-		String actual = actualGi.getMessage();
+		String actual = gi.getPlayer().getHandList().get(0).getResult();
 
 		assertThat(actual, is(expected));
 
 	}
 
 	@Test
-	public void naturalBwinTest() {
+	public void naturalBJwinTest() {
 
-		Player player = new Player();
-		Dealer dealer = new Dealer();
-		player.setAscore(21);
-		dealer.setAscore(20);
+		decks.getDeck().poll();
+		player.firstDraw(decks, 1);
+		dealer.firstDraw(decks);
 
-		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.judge(gi);
+		gi = jnbj.judge(gi);
 
 		String expected = "Win";
-		String actual = actualGi.getMessage();
+		String actual = gi.getPlayer().getHandList().get(0).getResult();
 
 		assertThat(actual, is(expected));
 
@@ -113,16 +98,14 @@ public class JudgeNaturalBJTest {
 	@Test
 	public void nonNaturalBJTest() {
 
-		Player player = new Player();
-		Dealer dealer = new Dealer();
-		player.setAscore(20);
-		dealer.setAscore(20);
+		player.firstDraw(decks, 1);
+		decks.getDeck().poll();
+		dealer.firstDraw(decks);
 
-		GameInf gi = new GameInf(player, dealer, null);
-		GameInf actualGi = gm.judge(gi);
+		gi = jnbj.judge(gi);
 
-		String expected = "null";
-		String actual = actualGi.getMessage();
+		String expected = null;
+		String actual = gi.getPlayer().getHandList().get(0).getResult();
 
 		assertThat(actual, is(expected));
 
