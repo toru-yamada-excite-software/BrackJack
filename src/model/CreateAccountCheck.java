@@ -7,8 +7,8 @@ import dbmodel.UserDB;
 
 public class CreateAccountCheck {
 
-	private static final Pattern ID_PATTERN = Pattern.compile("^[0-9A-Za-z!-/:-@^_]{1,32}$");
-	private static final Pattern PASS_PATTERN = Pattern.compile("^[0-9A-Za-z!-/:-@^_]{6,32}$");
+	private static final Pattern ID_PATTERN = Pattern.compile("^[0-9A-Za-z!-/:-@^_]{1,20}$");
+	private static final Pattern PASS_PATTERN = Pattern.compile("^[0-9A-Za-z!-/:-@^_]{6,20}$");
 	private UserDB udb = new UserDB();
 
 	public boolean check(String id, String password1, String password2, String name) {
