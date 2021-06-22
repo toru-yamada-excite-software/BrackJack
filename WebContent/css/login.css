@@ -9,3 +9,13 @@ form dl dt{
 form dl dd{
   padding:10px 0;
 }
+
+.button {
+	height: 30px;
+	width: 110px;
+ 	margin: 20px 5px;
+}
+
+table {
+	margin: 20px
+}

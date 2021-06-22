@@ -7,7 +7,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="login.css">
+		<link rel="stylesheet" type="text/css" href="css/login.css">
 		<title>ランキング</title>
 	</head>
 
@@ -20,7 +20,7 @@
 		   int myRank = (int)request.getAttribute("myRank");
 		%>
 
-		<table>
+		<table border="1">
 		    <tr>
 		    	<th>順位</th>
 		    	<th>ニックネーム</th>

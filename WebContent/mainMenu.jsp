@@ -26,8 +26,8 @@
 	<header>
 		<h1>BlackJack</h1>
 
-		<h1 class="user"><%= user.getName() %>でログイン中</h1>
-		<h2>所持チップ：<%= user.getChip() %></h2>
+		<h3 class="user"><%= user.getName() %>でログイン中</h3>
+		<h3>所持チップ：<%= user.getChip() %></h3>
 
 	</header>
 

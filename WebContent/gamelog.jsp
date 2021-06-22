@@ -9,7 +9,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="login.css">
+		<link rel="stylesheet" type="text/css" href="css/login.css">
 		<title>メニュー</title>
 	</head>
 
@@ -22,7 +22,7 @@
 		   SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd k:mm:ss"); %>
 		<h1><%= user.getName() %>でログイン中</h1>
 
-		<table>
+		<table border="1">
 		    <tr>
 				<th>獲得チップ</th>
 				<th>日付</th>

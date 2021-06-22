@@ -34,7 +34,7 @@ div {
 .command {
 	height: 30px;
 	width: 110px;
- 	margin: 30px 5px;
+ 	margin: 20px 5px;
 	float: left;
 }
 
@@ -47,7 +47,7 @@ div {
 
 select {
 	clear: left;
-	margin-top: 35px;
+	margin-top: 30px;
 }
 
 aside {
