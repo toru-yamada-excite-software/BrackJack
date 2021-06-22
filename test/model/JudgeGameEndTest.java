@@ -24,7 +24,7 @@ public class JudgeGameEndTest {
 		decks = new Deck();
 		hit = new Hit();
 
-		for (int j = 1; j <= 13; j++) {
+		for (int j = 2; j <= 13; j++) {
 
 			for (int i = 0; i < 4; i++) {
 

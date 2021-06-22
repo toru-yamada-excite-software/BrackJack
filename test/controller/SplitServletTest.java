@@ -2,6 +2,8 @@ package controller;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.LinkedList;
 
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
@@ -16,17 +21,29 @@ import model.Card;
 import model.Deck;
 import model.GameInf;
 import model.Player;
+import model.SetGameData;
+import model.Split;
+import model.User;
 
 public class SplitServletTest {
 
-	private SplitServlet ss;
 	private Deck decks;
 	private LinkedList<Card> deck = new LinkedList<Card>();
+
+	@InjectMocks
+	private SplitServlet ss = new SplitServlet();
+
+	@Mock
+	private SetGameData sgd;
+
+	@Mock
+	private Split split;
 
 	@BeforeEach
 	public void setup() {
 
-		ss = new SplitServlet();
+		MockitoAnnotations.initMocks(this);
+
 		decks = new Deck();
 
 		for (int j = 1; j < 14; j++) {
@@ -52,14 +69,18 @@ public class SplitServletTest {
 		Player player = new Player(100);
 		player.firstDraw(decks, 0);
 		GameInf gi = new GameInf(player, null, decks);
+		User user = new User();
 
 		session.setAttribute("gameInf", gi);
+
+		doReturn(gi).when(split).doSplit(anyObject());
+		doReturn(user).when(sgd).setData(anyObject(), anyObject());
 
 		ss.doPost(request, response);
 
 		session = request.getSession();
 
-		boolean expected = false;
+		boolean expected = true;
 		boolean actual = (boolean) session.getAttribute("split");
 
 		assertThat(actual, is(expected));

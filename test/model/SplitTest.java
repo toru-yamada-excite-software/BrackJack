@@ -2,11 +2,16 @@ package model;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.LinkedList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class SplitTest {
 
@@ -14,12 +19,18 @@ public class SplitTest {
 	private Deck decks;
 	private LinkedList<Card> deck = new LinkedList<Card>();
 	private GameInf gi;
-	private Split split;
+
+	@InjectMocks
+	private Split split = new Split();
+
+	@Mock
+	private Stand stand;
 
 	@BeforeEach
 	public void setup() {
 
-		split = new Split();
+		MockitoAnnotations.initMocks(this);
+
 		player = new Player(100);
 		decks = new Deck();
 
@@ -41,6 +52,8 @@ public class SplitTest {
 
 	@Test
 	public void doSplitTest() {
+
+		doReturn(gi).when(stand).doStand(anyObject());
 
 		gi = split.doSplit(gi);
 
