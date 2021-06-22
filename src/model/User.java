@@ -10,9 +10,7 @@ public class User implements Serializable {
 	private String name;
 	private int play;
 	private int chip;
-	//	private int win;
-	//	private int draw;
-	//	private double winRate;
+	private int differenceChip = 0;
 
 	public void setId(String id) {
 		this.id = id;
@@ -54,40 +52,12 @@ public class User implements Serializable {
 		return chip;
 	}
 
-	//	public void setWin(int win) {
-	//		this.win = win;
-	//	}
-	//
-	//	public int getWin() {
-	//		return win;
-	//	}
-	//
-	//	public void setDraw(int draw) {
-	//		this.draw = draw;
-	//	}
-	//
-	//	public int getDraw() {
-	//		return draw;
-	//	}
-	//
-	//	public void setWinRate(double winRate) {
-	//		this.winRate = winRate;
-	//	}
-	//
-	//	public double getWinRate() {
-	//		return winRate;
-	//	}
-	//
-	//	public void calcGameRecord(String judge) {
-	//
-	//		play++;
-	//		if (judge.equals("Win")) {
-	//			win++;
-	//		} else if (judge.equals("Draw")) {
-	//			draw++;
-	//		}
-	//
-	//		winRate = (double) win / play;
-	//	}
+	public void setDifferenceChip(int getChip) {
+		differenceChip = getChip;
+	}
+
+	public int getDifferenceChip() {
+		return differenceChip;
+	}
 
 }
