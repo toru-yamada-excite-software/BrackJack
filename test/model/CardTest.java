@@ -32,4 +32,33 @@ public class CardTest {
 
 	}
 
+	@Test
+	public void getFaceCardTest() {
+
+		Card cardA = new Card(0, 1);
+		Card cardJ = new Card(0, 11);
+		Card cardQ = new Card(0, 12);
+		Card cardK = new Card(0, 13);
+		Card cardNum = new Card(0, 2);
+
+		String expectedA = "A";
+		String expectedJ = "J";
+		String expectedQ = "Q";
+		String expectedK = "K";
+		String expectedNum = "2";
+
+		String actualA = cardA.getFaceCard();
+		String actualJ = cardJ.getFaceCard();
+		String actualQ = cardQ.getFaceCard();
+		String actualK = cardK.getFaceCard();
+		String actualNum = cardNum.getFaceCard();
+
+		assertThat(actualA, is(expectedA));
+		assertThat(actualJ, is(expectedJ));
+		assertThat(actualQ, is(expectedQ));
+		assertThat(actualK, is(expectedK));
+		assertThat(actualNum, is(expectedNum));
+
+	}
+
 }
