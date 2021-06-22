@@ -20,12 +20,12 @@
 		<form action="./" method="post">
 			<dl>
 				<dt>ID：</dt>
-				<dd><input type="text" name="id" value="1" pattern="^[0-9A-Za-z!-/:-@^_]+$" title="半角英数字記号"></dd>
+				<dd><input type="text" name="id" value="1" pattern="^[0-9A-Za-z!-/:-@^_]{1,32}$" title="半角英数字記号"></dd>
 				<dt>パスワード：</dt>
-				<dd><input type="password" name="password" value="p" pattern="^[0-9A-Za-z!-/:-@^_]+$" title="半角英数字記号"></dd>
+				<dd><input type="password" name="password" value="p" pattern="^[0-9A-Za-z!-/:-@^_]{6,32}$" title="半角英数字記号"></dd>
 			</dl>
 
-			<button type="submit" name="start" value="1">ログイン</button>
+			<button type="submit" name="start" class="button">ログイン</button>
 		</form>
 
 		<a href="createaccount.jsp">新規登録</a>

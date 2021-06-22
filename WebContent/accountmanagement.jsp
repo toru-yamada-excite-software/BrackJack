@@ -6,7 +6,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="login.css">
+		<link rel="stylesheet" type="text/css" href="css/login.css">
 		<title>メニュー</title>
 	</head>
 
@@ -23,22 +23,22 @@
 		<form action="UpdateAccountServlet" method="post">
 			<dl>
 				<dt>新しいニックネーム：</dt>
-				<dd><input type="text" name="name"></dd>
+				<dd><input type="text" name="name" pattern="^[0-9A-Za-z!-/:-@^_]{1,32}$" title="半角英数字記号"></dd>
 			</dl>
-			<input type="submit" value="変更">
+			<input type="submit" value="変更" class="button">
 		</form>
 
 		<h2>退会</h2>
 		<form action="DeleteAccountServlet" method="post">
-			<input type="submit" value="退会">
+			<input type="submit" value="退会" class="button">
 		</form>
-
-		<a href="mainMenu.jsp">戻る</a>
 
 		<h2>ログアウト</h2>
 		<form action="LogoutServlet" method="post">
-			<input type="submit" value="ログアウト">
+			<input type="submit" value="ログアウト" class="button">
 		</form>
+
+		<a href="mainMenu.jsp">戻る</a>
 
 	</body>
 
