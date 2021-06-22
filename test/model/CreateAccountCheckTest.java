@@ -24,7 +24,7 @@ public class CreateAccountCheckTest {
 
 	private User user = new User();
 	private String id = "test";
-	private String password = "test";
+	private String password = "testpass";
 	private String name = "test";
 
 	@BeforeEach
