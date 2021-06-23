@@ -1,6 +1,6 @@
-CREATE DATABASE `brackjack_split` DEFAULT CHARSET=utf8mb4;
+CREATE DATABASE `blackjack_split` DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `brackjack_split`.`user` (
+CREATE TABLE `blackjack_split`.`user` (
   `id` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `name` text NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `brackjack_split`.`user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `brackjack_split`.`game` (
+CREATE TABLE `blackjack_split`.`game` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
   `get_chip` int(11) NOT NULL,
