@@ -13,7 +13,7 @@ public class UserDB {
 	private static final DBConnect dbc = new DBConnect();
 
 	//ログイン時ユーザー検索
-	public User getUser(String id, String password) {
+	public User getUser(String id, String password) throws SQLException {
 
 		String sql = "SELECT * FROM user WHERE id = ? AND password = ?";
 
@@ -40,10 +40,6 @@ public class UserDB {
 		}
 
 		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		catch (SQLException e) {
 			e.printStackTrace();
 		}
 

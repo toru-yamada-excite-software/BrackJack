@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,9 +37,14 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
+		User user = null;
 
 		//userテーブル検索
-		User user = udb.getUser(id, password);
+		try {
+			user = udb.getUser(id, password);
+		} catch (SQLException e) {
+			throw new ServletException(e);
+		}
 
 		//ログイン成功
 		if (user != null) {
