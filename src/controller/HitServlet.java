@@ -30,9 +30,9 @@ public class HitServlet extends HttpServlet {
 
 		User user = (User) session.getAttribute("user");
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
-		int command = Integer.parseInt(request.getParameter("command"));
+		int index = Integer.parseInt(request.getParameter("index"));
 
-		gi = hit.doHit(gi, command);
+		gi = hit.doHit(gi, index);
 
 		user = sgd.setData(user, gi.getPlayer());
 		session.setAttribute("split", gi.getPlayer().permitSplit());

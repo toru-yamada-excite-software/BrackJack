@@ -29,7 +29,7 @@
 		<h3>ベット：<%= hand.getChip() %></h3>
 
 		<form action="HitServlet" method="post">
-			<button class="hit" type='submit' name='command' value=<%= i %>>hit</button>
+			<button class="hit" type='submit' name='index' value=<%= i %>>hit</button>
 		</form>
 
 	<% } else { %>
