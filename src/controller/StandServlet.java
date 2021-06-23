@@ -22,6 +22,7 @@ public class StandServlet extends HttpServlet {
 	private Stand stand = new Stand();
 	private SetGameData sgd = new SetGameData();
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
