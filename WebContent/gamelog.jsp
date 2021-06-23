@@ -20,7 +20,7 @@
 		   @SuppressWarnings("unchecked")
 		   ArrayList<Game> gameList = (ArrayList<Game>)request.getAttribute("gameList");
 		   SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd k:mm:ss"); %>
-		<h1><%= user.getName() %>でログイン中</h1>
+		<h3><%= user.getName() %>でログイン中</h3>
 
 		<table border="1">
 		    <tr>

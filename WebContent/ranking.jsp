@@ -19,6 +19,7 @@
 		   ArrayList<User> ranking = (ArrayList<User>)request.getAttribute("ranking");
 		   int myRank = (int)request.getAttribute("myRank");
 		%>
+		<h3><%= user.getName() %>でログイン中</h3>
 
 		<table border="1">
 		    <tr>
