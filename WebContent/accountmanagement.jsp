@@ -14,7 +14,7 @@
 		<h1>BlackJack</h1>
 		<% User user = (User)session.getAttribute("user");
 		   String message = (String)request.getAttribute("message");%>
-		<h1><%= user.getName() %>でログイン中</h1>
+		<h3><%= user.getName() %>でログイン中</h3>
 		<% if(message != null) {  %>
 			<h2><%= message %></h2>
 		<% } %>
