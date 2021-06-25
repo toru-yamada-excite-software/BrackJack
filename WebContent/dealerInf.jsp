@@ -17,7 +17,7 @@
 		</div>
 	<% } %>
 
-	<h3 class="score">スコア：<%= dealer.getScore() %></h3>
+	<h3 class="score">スコア：<%= dealer.getHighScore() %></h3>
 <% } else { %>
 	<div>
 		<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>

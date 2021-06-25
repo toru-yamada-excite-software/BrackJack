@@ -8,79 +8,21 @@ public class Hand implements Serializable {
 
 	private LinkedList<Card> hand = new LinkedList<Card>();
 	private Integer chip = null;
-	private int score = 0;
-	private int Ascore = 0;
-	private boolean bust = false;
 	private String result = null;
-
-	private void scoreCalc() {
-
-		int j = 0;
-		score = 0; //scoreリセット後再計算
-		Ascore = 0;
-		for (int i = 0; i < hand.size(); i++) {
-			int number = hand.get(i).getNumber();
-
-			//11以上は10に
-			if (number > 10) {
-				number = 10;
-			}
-
-			Ascore += number;
-
-			if (number == 1 && j == 0) {
-				Ascore += 10;
-				j++;
-			}
-
-			score += number;
-		}
-
-		if (score == Ascore || Ascore > 21) {
-			Ascore = score;
-		}
-
-		//score計算後bust判定
-		bustJudge();
-
-	}
 
 	public void drawBase(Deck deck) {
 
 		hand.add(deck.getDeck().poll());
-		scoreCalc();
-
-	}
-
-	private void bustJudge() {
-
-		if (score > 21) {
-			bust = true;
-		} else {
-			bust = false;
-		}
 
 	}
 
 	public boolean judgeSplit() {
 
-		if (hand.get(0).getNumber() == hand.get(1).getNumber()) {
-			return true;
-		} else if (hand.get(0).getNumber() >= 10
-				&& hand.get(1).getNumber() >= 10) {
+		if (hand.size() == 2 && comparisonHand()) {
 			return true;
 		}
 
 		return false;
-	}
-
-	public void changeAscore() {
-
-		if (Ascore > score) {
-			score = Ascore;
-			Ascore = 0;
-		}
-
 	}
 
 	public void setHand(Card card) {
@@ -92,15 +34,59 @@ public class Hand implements Serializable {
 	}
 
 	public int getScore() {
+
+		int score = 0;
+
+		for (int i = 0; i < hand.size(); i++) {
+			score += hand.get(i).getCardScore();
+		}
+
 		return score;
 	}
 
 	public int getAscore() {
+
+		int Ascore = 0;
+
+		for (int i = 0; i < hand.size(); i++) {
+			Ascore += hand.get(i).getAcardScore();
+		}
+
+		if (Ascore > 21) {
+			Ascore -= 10;
+		}
+
 		return Ascore;
 	}
 
+	public int getHighScore() {
+
+		int score = getScore();
+		int Ascore = getAscore();
+
+		if (Ascore > score) {
+			return Ascore;
+		}
+
+		return score;
+	}
+
 	public boolean getBust() {
-		return bust;
+
+		if (getScore() > 21) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean comparisonHand() {
+
+		if (hand.get(0).getCardScore() == hand.get(1).getCardScore()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void setResult(String result) {

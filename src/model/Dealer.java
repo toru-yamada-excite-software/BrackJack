@@ -9,7 +9,7 @@ public class Dealer implements Serializable {
 
 	public void draw(Deck deck) {
 
-		while (hand.getAscore() < 17) {
+		while (getHighScore() < 17) {
 			hand.drawBase(deck);
 		}
 
@@ -31,12 +31,8 @@ public class Dealer implements Serializable {
 		return hand.getBust();
 	}
 
-	public int getScore() {
-		return hand.getScore();
-	}
-
-	public int getAscore() {
-		return hand.getAscore();
+	public int getHighScore() {
+		return hand.getHighScore();
 	}
 
 }
