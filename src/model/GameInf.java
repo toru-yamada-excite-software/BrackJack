@@ -17,25 +17,25 @@ public class GameInf implements Serializable {
 
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+	//	public void setPlayer(Player player) {
+	//		this.player = player;
+	//	}
 
 	public Player getPlayer() {
 		return player;
 	}
 
-	public void setDealer(Dealer dealer) {
-		this.dealer = dealer;
-	}
+	//	public void setDealer(Dealer dealer) {
+	//		this.dealer = dealer;
+	//	}
 
 	public Dealer getDealer() {
 		return dealer;
 	}
 
-	public void setDeck(Deck deck) {
-		this.deck = deck;
-	}
+	//	public void setDeck(Deck deck) {
+	//		this.deck = deck;
+	//	}
 
 	public Deck getDeck() {
 		return deck;
