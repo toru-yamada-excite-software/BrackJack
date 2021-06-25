@@ -36,9 +36,9 @@ public class Card implements Serializable {
 
 		public static Suite getById(int id) {
 
-			for (Suite flt : Suite.values()) {
-				if (flt.getId() == id) {
-					return flt;
+			for (Suite suite : Suite.values()) {
+				if (suite.getId() == id) {
+					return suite;
 				}
 			}
 			return null;
@@ -70,8 +70,26 @@ public class Card implements Serializable {
 		return number;
 	}
 
+	public int getCardScore() {
+
+		if (number > 10) {
+			return 10;
+		}
+
+		return number;
+	}
+
+	public int getAcardScore() {
+
+		if (number == 1) {
+			return 11;
+		}
+
+		return getCardScore();
+	}
+
 	public String getSuite() {
-		Suite flt = Suite.getById(suite);
-		return flt.getLabel();
+		Suite suite = Suite.getById(this.suite);
+		return suite.getLabel();
 	}
 }
