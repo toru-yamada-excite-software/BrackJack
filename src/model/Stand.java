@@ -15,30 +15,24 @@ public class Stand {
 
 		for (int i = 0; i < handList.size(); i++) {
 
-			Hand hand = handList.get(i);
+			Hand playerHand = handList.get(i);
 
-			if (hand.getResult() == null) {
+			if (playerHand.getResult() == null) {
 				if (dealer.getBust()) {
-					player.calcChip(hand.getChip());
-					hand.setResult("Win");
-					gi = new GameInf(player, dealer, deck);
+					player.calcChip(playerHand.getChip());
+					playerHand.setResult("Win");
 
 				} else {
-					hand.changeAscore();
-					dealer.getHand().changeAscore();
 
-					if (hand.getScore() > dealer.getScore()) {
-						player.calcChip(hand.getChip());
-						hand.setResult("Win");
-						gi = new GameInf(player, dealer, deck);
-					} else if (hand.getScore() == dealer.getScore()) {
+					if (playerHand.getHighScore() > dealer.getHighScore()) {
+						player.calcChip(playerHand.getChip());
+						playerHand.setResult("Win");
+					} else if (playerHand.getHighScore() == dealer.getHighScore()) {
 						player.calcChip(0);
-						hand.setResult("Draw");
-						gi = new GameInf(player, dealer, deck);
-					} else if (hand.getScore() < dealer.getScore()) {
-						player.calcChip(-hand.getChip());
-						hand.setResult("Lose");
-						gi = new GameInf(player, dealer, deck);
+						playerHand.setResult("Draw");
+					} else if (playerHand.getHighScore() < dealer.getHighScore()) {
+						player.calcChip(-playerHand.getChip());
+						playerHand.setResult("Lose");
 					}
 				}
 			}
