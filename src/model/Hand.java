@@ -7,7 +7,8 @@ public class Hand implements Serializable {
 	private static final long serialVersionUID = -8769769700554333412L;
 
 	private LinkedList<Card> hand = new LinkedList<Card>();
-	private Integer chip = null;
+	private int betChip = 0;
+	private int getChip = 0;
 	private String result = null;
 
 	public void drawBase(Deck deck) {
@@ -98,11 +99,19 @@ public class Hand implements Serializable {
 	}
 
 	public void setChip(Integer betChip) {
-		this.chip = betChip;
+		this.betChip = betChip;
 	}
 
-	public Integer getChip() {
-		return chip;
+	public int getChip() {
+		return betChip;
+	}
+
+	public void setGetChip(double coefficient) {
+		getChip = (int) (betChip * coefficient);
+	}
+
+	public int getGetChip() {
+		return getChip;
 	}
 
 }

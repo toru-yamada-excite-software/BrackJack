@@ -60,4 +60,15 @@ public class Player implements Serializable {
 		return chip;
 	}
 
+	public int getGetChip() {
+
+		int chip = 0;
+
+		for (int i = 0; i < handList.size(); i++) {
+			chip += handList.get(i).getGetChip();
+		}
+
+		return chip;
+	}
+
 }

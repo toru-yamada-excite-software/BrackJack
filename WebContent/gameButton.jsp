@@ -11,7 +11,7 @@
 
 <% if(JudgeGameEnd.judge(player) == player.getHandList().size()) { %>
 
-		<h3>獲得チップ：<%= user.getDifferenceChip() %></h3>
+		<h3>獲得チップ：<%= player.getGetChip() %></h3>
 
 		<form action="StartGameServlet" method="post">
 			<input class="command" type="submit" value="再戦">

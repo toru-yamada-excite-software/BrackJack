@@ -10,7 +10,6 @@ public class User implements Serializable {
 	private String name;
 	private int play;
 	private int chip;
-	private int differenceChip = 0;
 
 	public void setId(String id) {
 		this.id = id;
@@ -50,14 +49,6 @@ public class User implements Serializable {
 
 	public int getChip() {
 		return chip;
-	}
-
-	public void setDifferenceChip(int getChip) {
-		differenceChip = getChip;
-	}
-
-	public int getDifferenceChip() {
-		return differenceChip;
 	}
 
 }
