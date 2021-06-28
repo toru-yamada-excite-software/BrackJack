@@ -16,11 +16,10 @@ public class SetGameData {
 
 			Timestamp playTime = new Timestamp(System.currentTimeMillis());
 
-			user.setDifferenceChip((player.getChip() - user.getChip()));
 			user.setChip(player.getChip());
 			user.setPlay(user.getPlay() + 1);
 
-			Game game = new Game(user.getId(), user.getDifferenceChip(), playTime);
+			Game game = new Game(user.getId(), player.getGetChip(), playTime);
 
 			gdb.insertGame(game);
 			udb.updateUserRecord(user);

@@ -2,32 +2,34 @@ package model;
 
 public enum Result {
 
-	WIN("Win", 0), DRAW("Draw", 1), LOSE("Lose", 2);
+	WIN("Win", 1), DRAW("Draw", 0), LOSE("Lose", -1), NB_WIN("Win(NB)", 1.5);
 
-	private String label;
-	private int id;
+	private String result;
+	private double coefficient;
 
-	private Result(String label, int id) {
-		this.label = label;
-		this.id = id;
+	private Result(String result, double coefficient) {
+		this.result = result;
+		this.coefficient = coefficient;
 	}
 
-	public String getLabel() {
-		return label;
+	public String getResult() {
+		return result;
 	}
 
-	public int getId() {
-		return id;
+	public double getCoefficient() {
+		return coefficient;
 	}
 
-	public static Result getById(int id) {
+	public static Result getByResult(String resultId) {
 
 		for (Result result : Result.values()) {
-			if (result.getId() == id) {
+			if (result.getResult() == resultId) {
 				return result;
 			}
 		}
+
 		return null;
+
 	}
 
 }
