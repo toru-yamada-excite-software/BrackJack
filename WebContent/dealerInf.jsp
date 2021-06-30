@@ -1,7 +1,7 @@
-<%@page import="model.JudgeGameEnd"%>
 <%@page import="model.GameInf"%>
-<%@page import="model.Player"%>
-<%@page import="model.Dealer"%>
+<%@page import="model.actor.Player"%>
+<%@page import="model.actor.Dealer"%>
+<%@page import="model.card.Card"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -9,19 +9,26 @@
    Dealer dealer = gi.getDealer();
    Player player = gi.getPlayer(); %>
 
-<% if(JudgeGameEnd.judge(player) == player.getHandList().size()) { %>
-	<% for(int i = 0; i < dealer.getHand().getHand().size(); i++) {%>
+<%
+if(player.isGameEnd()) {
+%>
+	<% for(Card card : dealer.getHand().getCards()) {%>
 		<div>
-			<h3 id="suite"><%= dealer.getHand().getHand().get(i).getSuite() %></h3>
-			<h3 id="number"><%= dealer.getHand().getHand().get(i).getFaceCard() %></h3>
+			<h3 id="suite"><%=card.getSuitMark()%></h3>
+			<h3 id="number"><%=card.getFaceCard()%></h3>
 		</div>
-	<% } %>
+	<%
+	}
+	%>
 
-	<h3 class="score">スコア：<%= dealer.getHighScore() %></h3>
-<% } else { %>
+	<h3 class="score">スコア：<%=dealer.getHand().getMaxScore()%></h3>
+<%
+} else {
+	Card card = dealer.getHand().getCards().get(0);
+%>
 	<div>
-		<h3 id="suite"><%= dealer.getHand().getHand().get(0).getSuite() %></h3>
-		<h3 id="number"><%= dealer.getHand().getHand().get(0).getFaceCard() %></h3>
+		<h3 id="suite"><%= card.getSuitMark()%></h3>
+		<h3 id="number"><%= card.getFaceCard() %></h3>
 	</div>
 	<div id="hole">
 		<h3 id="suite">　</h3>

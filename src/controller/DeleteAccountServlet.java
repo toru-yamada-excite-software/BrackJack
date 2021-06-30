@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dbmodel.GameDB;
 import dbmodel.UserDB;
-import model.User;
+import entity.User;
 
 @WebServlet("/DeleteAccountServlet")
 public class DeleteAccountServlet extends HttpServlet {

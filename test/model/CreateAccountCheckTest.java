@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import dbmodel.UserDB;
+import entity.User;
 
 public class CreateAccountCheckTest {
 

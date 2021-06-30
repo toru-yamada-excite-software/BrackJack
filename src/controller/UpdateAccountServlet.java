@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dbmodel.UserDB;
-import model.User;
+import entity.User;
 
 @WebServlet("/UpdateAccountServlet")
 public class UpdateAccountServlet extends HttpServlet {

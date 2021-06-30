@@ -1,7 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.User"%>
-<%@page import="model.Game"%>
+<%@page import="entity.User"%>
+<%@page import="entity.Game"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

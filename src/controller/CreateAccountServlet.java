@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dbmodel.UserDB;
+import entity.User;
 import model.CreateAccountCheck;
-import model.User;
 
 @WebServlet("/CreateAccountServlet")
 public class CreateAccountServlet extends HttpServlet {

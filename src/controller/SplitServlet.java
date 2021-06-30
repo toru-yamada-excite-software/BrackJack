@@ -10,16 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entity.User;
 import model.GameInf;
 import model.SetGameData;
-import model.Split;
-import model.User;
 
 @WebServlet("/SplitServlet")
 public class SplitServlet extends HttpServlet {
 	private static final long serialVersionUID = -7841258715078384688L;
 
-	private Split split = new Split();
 	private SetGameData sgd = new SetGameData();
 
 	@Override
@@ -30,11 +28,10 @@ public class SplitServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 
-		gi = split.doSplit(gi);
+		gi.split();
 		user = sgd.setData(user, gi.getPlayer());
 
 		session.setAttribute("gameInf", gi);
-		session.setAttribute("split", gi.getPlayer().permitSplit());
 
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dbmodel.UserDB;
-import model.User;
+import entity.User;
 
 @WebServlet("/RankingServlet")
 public class RankingServlet extends HttpServlet {

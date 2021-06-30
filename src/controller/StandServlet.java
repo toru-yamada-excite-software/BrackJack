@@ -10,16 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entity.User;
 import model.GameInf;
 import model.SetGameData;
-import model.Stand;
-import model.User;
 
 @WebServlet("/StandServlet")
 public class StandServlet extends HttpServlet {
 	private static final long serialVersionUID = 9202680001240561666L;
 
-	private Stand stand = new Stand();
 	private SetGameData sgd = new SetGameData();
 
 	@Override
@@ -31,7 +29,7 @@ public class StandServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 
-		gi = stand.doStand(gi);
+		gi.stand();
 
 		user = sgd.setData(user, gi.getPlayer());
 		session.setAttribute("user", user);

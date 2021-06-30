@@ -1,9 +1,9 @@
 <%@page import="model.GameInf"%>
-<%@page import="model.Card"%>
+<%@page import="model.card.Card"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.Player"%>
-<%@page import="model.Dealer"%>
-<%@page import="model.User"%>
+<%@page import="model.actor.Player"%>
+<%@page import="model.actor.Dealer"%>
+<%@page import="entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +19,6 @@
 
 	<% User user = (User)session.getAttribute("user");
 	   GameInf gi = (GameInf)session.getAttribute("gameInf");
-	   boolean split = (boolean)session.getAttribute("split");
 	   Player player = gi.getPlayer();
 	   Dealer dealer = gi.getDealer(); %>
 
@@ -48,7 +47,9 @@
 			<jsp:include page="gameButton.jsp"></jsp:include>
 		</section>
 
-		<% if(split && player.getHandList().get(0).getResult() == null){ %>
+		<%
+		if(player.canSplit() && player.getPrimaryBettingBox().getResult() == null){
+		%>
 			<section>
 				<form action="SplitServlet" method="post">
 					<button class="command" name="split">split</button>

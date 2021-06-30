@@ -10,19 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Dealer;
-import model.Deck;
+import entity.User;
 import model.GameInf;
-import model.JudgeNaturalBJ;
-import model.Player;
 import model.SetGameData;
-import model.User;
+import model.actor.Dealer;
+import model.actor.Player;
+import model.card.Deck;
 
 @WebServlet("/StartGameServlet")
 public class StartGameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1880424086018231879L;
 
-	private JudgeNaturalBJ gm = new JudgeNaturalBJ();
 	private SetGameData sgd = new SetGameData();
 
 	@Override
@@ -32,24 +30,18 @@ public class StartGameServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		int betChip = Integer.parseInt(request.getParameter("betChip"));
-		session.setAttribute("split", false);
-		session.setAttribute("splitPlayer", null);
 
-		Player player = new Player(user.getChip());
-		Dealer dealer = new Dealer();
 		Deck deck = new Deck();
-
-		player.firstDraw(deck, betChip);
-		dealer.firstDraw(deck);
+		Player player = new Player(deck, betChip);
+		Dealer dealer = new Dealer(deck);
 
 		GameInf gi = new GameInf(player, dealer, deck);
+		gi.setResultNaturalBlackjack();
 
-		gi = gm.judge(gi);
 		user = sgd.setData(user, gi.getPlayer());
 
 		session.setAttribute("gameInf", gi);
 		session.setAttribute("user", user);
-		session.setAttribute("split", player.getSplit());
 		RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 		rd.forward(request, response);
 

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dbmodel.GameDB;
-import model.Game;
-import model.User;
+import entity.Game;
+import entity.User;
 
 @WebServlet("/GameLogServlet")
 public class GameLogServlet extends HttpServlet {
@@ -27,9 +27,8 @@ public class GameLogServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		String id = user.getId();
 
-		ArrayList<Game> gameList = gdb.getGame(id);
+		ArrayList<Game> gameList = gdb.getGame(user);
 
 		request.setAttribute("gameList", gameList);
 

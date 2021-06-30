@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dbmodel.UserDB;
+import entity.User;
 import model.GameInf;
-import model.User;
 
 @WebServlet("")
 public class LoginServlet extends HttpServlet {
@@ -52,7 +52,6 @@ public class LoginServlet extends HttpServlet {
 			GameInf gi = new GameInf(null, null, null);
 			session.setAttribute("user", user);
 			session.setAttribute("gameInf", gi);
-			session.setAttribute("split", false);
 			RequestDispatcher rd = request.getRequestDispatcher("mainMenu.jsp");
 			rd.forward(request, response);
 

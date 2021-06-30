@@ -10,16 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entity.User;
 import model.GameInf;
-import model.Hit;
 import model.SetGameData;
-import model.User;
 
 @WebServlet("/HitServlet")
 public class HitServlet extends HttpServlet {
 	private static final long serialVersionUID = -5302452550169259195L;
 
-	private Hit hit = new Hit();
 	private SetGameData sgd = new SetGameData();
 
 	@Override
@@ -32,10 +30,9 @@ public class HitServlet extends HttpServlet {
 		GameInf gi = (GameInf) session.getAttribute("gameInf");
 		int index = Integer.parseInt(request.getParameter("index"));
 
-		gi = hit.doHit(gi, index);
+		gi.hit(index);
 
 		user = sgd.setData(user, gi.getPlayer());
-		session.setAttribute("split", gi.getPlayer().permitSplit());
 		session.setAttribute("user", user);
 		session.setAttribute("gameInf", gi);
 

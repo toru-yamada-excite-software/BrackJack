@@ -1,7 +1,6 @@
-<%@page import="model.User"%>
-<%@page import="model.JudgeGameEnd"%>
+<%@page import="entity.User"%>
 <%@page import="model.GameInf"%>
-<%@page import="model.Player"%>
+<%@page import="model.actor.Player"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -9,9 +8,11 @@
    User user = (User)session.getAttribute("user");
    Player player = gi.getPlayer(); %>
 
-<% if(JudgeGameEnd.judge(player) == player.getHandList().size()) { %>
+<%
+if(player.isGameEnd()) {
+%>
 
-		<h3>獲得チップ：<%= player.getGetChip() %></h3>
+		<h3>獲得チップ：<%=player.getWinChip()%></h3>
 
 		<form action="StartGameServlet" method="post">
 			<input class="command" type="submit" value="再戦">

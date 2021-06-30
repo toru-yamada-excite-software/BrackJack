@@ -12,7 +12,7 @@ public class DBConnect {
 
 		Class.forName("org.mariadb.jdbc.Driver");
 
-		String url = "jdbc:mariadb://localhost/bLackjack_split";
+		String url = "jdbc:mariadb://localhost/blackjack_split";
 		String user = "root";
 		String password = "";
 
